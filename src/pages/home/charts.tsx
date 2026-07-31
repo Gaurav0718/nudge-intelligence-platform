@@ -201,7 +201,7 @@ export function SlopeGraph({ momentum, evidenceById, openEvidence }: {
               <text x={rightX + 10} y={(rightLabelY.get(m.accountId) ?? y2) + 4} fontSize={12.5} fontWeight={800} fill="var(--text-1)" opacity={active || hover === null ? 1: 0.3}>
                 {m.currentPct}%
                 {m.deltaPct !== null && (
-                  <tspan fill={m.deltaPct >= 0 ? 'var(--gold-muted)': 'var(--text-3)'} fontWeight={700} fontSize={10.5}> ({m.deltaPct >= 0 ? '+': ''}{m.deltaPct}pp)</tspan>
+                  <tspan fill={m.deltaPct >= 0 ? 'var(--gold-muted)': 'var(--text-3)'} fontWeight={700} fontSize={10.5}> ({m.deltaPct >= 0 ? '+': ''}{m.deltaPct}%)</tspan>
                 )}
               </text>
             </g>
@@ -216,7 +216,7 @@ export function SlopeGraph({ momentum, evidenceById, openEvidence }: {
           <Tooltip x="50%" y={16}>
             <strong>{m.accountName}</strong>
             <div>{m.priorLabel}: {m.priorPct}% → {m.currentLabel}: {m.currentPct}%</div>
-            {m.deltaPct !== null && <div>QoQ delta: {m.deltaPct >= 0 ? '+': ''}{m.deltaPct}pp</div>}
+            {m.deltaPct !== null && <div>QoQ delta: {m.deltaPct >= 0 ? '+': ''}{m.deltaPct}%</div>}
           </Tooltip>
         )
       })()}

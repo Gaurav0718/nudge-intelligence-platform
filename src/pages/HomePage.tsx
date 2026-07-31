@@ -110,7 +110,10 @@ const ACCOUNTS: Account[] = [
 const ACC = (k: string) => ACCOUNTS.find(a => a.key === k)!
 
 const TOTALS = { criticalThreats: 3, revenueAtRisk: 12.4, riskDeltaPct: 18, opportunities: 4, opportunityValue: 8.7, execActions: 2, portfolioThreat: 81, currentRevenue: 58.2, netExposure: -3.7 }
-const HEADLINE = 'Portfolio remains growth-rich, but client-side AI adoption, portfolio restructuring and aggressive R&D investment are changing where services demand will emerge. Company flags immediate expansion around AI-enabled R&D, commercialization and launch support, while surfacing where internal client capability may reduce traditional outsourcing demand.'
+const HEADLINE = [
+  'Portfolio remains growth-rich, but client-side AI adoption, portfolio restructuring and aggressive R&D investment are changing where services demand will emerge.',
+  'Company flags immediate expansion around AI-enabled R&D, commercialization and launch support, while surfacing where internal client capability may reduce traditional outsourcing demand.'
+]
 
 const RADAR = [
   { axis: 'Competition', v: 88 }, { axis: 'AI Disruption', v: 82 }, { axis: 'Client Insourcing', v: 78 },
@@ -327,7 +330,14 @@ export default function HomePage() {
           <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', gap: 18, alignItems: 'flex-start' }}>
             <div>
               <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.78)', marginBottom: 8 }}>Executive headline</div>
-              <div style={{ fontSize: 15, lineHeight: 1.58, color: 'rgba(255,255,255,0.94)', maxWidth: 1020 }}>{HEADLINE}</div>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 7, maxWidth: 1020 }}>
+                {HEADLINE.map((h, i) => (
+                  <li key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', fontSize: 15, lineHeight: 1.58, color: 'rgba(255,255,255,0.94)' }}>
+                    <span aria-hidden style={{ flexShrink: 0, width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)', marginTop: 9 }} />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -460,7 +470,7 @@ export default function HomePage() {
       </div>
       <div className="hg-3" style={{ marginBottom: 40 }}>
         <Panel title="Threat Radar" foot="Hover a dot for threat detail"><Radar onDot={(axis, v, tone) => open('Portfolio', axis, [chartEv(null, `${axis} · portfolio threat`, tone, radarPopup(axis, v))])} /></Panel>
-        <Panel title="Client Growth vs Our Growth" foot="View the gap analysis" onOpen={() => scrollTo('det-clientgrowth')}><ClientVsOur onDot={a => { const gap = gapOf(a); open(a.name, `${a.name}: growth gap`, [chartEv(a.key, `${a.name} growth gap`, gap >= 5 ? 'red' : gap >= 2 ? 'amber' : 'green', clientGapPopup(a), { factBlock: [{ label: 'Client YoY', value: `+${a.clientGrowth}%` }, { label: 'Our YoY', value: `+${a.ourGrowth}%` }, { label: 'Gap', value: `${gap}pp` }] })]) }} /></Panel>
+        <Panel title="Client Growth vs Our Growth" foot="View the gap analysis" onOpen={() => scrollTo('det-clientgrowth')}><ClientVsOur onDot={a => { const gap = gapOf(a); open(a.name, `${a.name}: growth gap`, [chartEv(a.key, `${a.name} growth gap`, gap >= 5 ? 'red' : gap >= 2 ? 'amber' : 'green', clientGapPopup(a), { factBlock: [{ label: 'Client YoY', value: `+${a.clientGrowth}%` }, { label: 'Our YoY', value: `+${a.ourGrowth}%` }, { label: 'Gap', value: `${gap}%` }] })]) }} /></Panel>
         <Panel title="Revenue Concentration" foot="View concentration risk" onOpen={() => scrollTo('det-concentration')}><Concentration onRow={a => { const pct = CONCENTRATION.find(c => c.acc === a.key)!.pct; open(a.name, `${a.name} concentration`, [chartEv(a.key, `${a.name}: ${pct}% of portfolio`, pct >= 25 ? 'red' : 'amber', concentrationPopup(a, pct), { factBlock: [{ label: 'Share of portfolio', value: `${pct}%` }, { label: 'Combined AZ + GSK', value: '62%' }] })]) }} /></Panel>
         <Panel title="Growth × Whitespace Matrix" foot="Explore opportunities" onOpen={() => scrollTo('det-whitespace')}><Battlefield onBubble={a => open(a.name, `${a.name}: ${a.strat}`, [chartEv(a.key, `${a.name}: ${a.strat}`, a.color, battlefieldPopup(a), { factBlock: [{ label: 'Penetration', value: `${a.pen}%` }, { label: 'Opportunity score', value: `${a.opp_xy}%` }, { label: 'Value in play', value: `$${a.risk || a.opp}M` }, { label: 'Strategy', value: a.strat }] })])} /></Panel>
         <Panel title="Service-Line Opportunity Heatmap" foot="View service-line detail" onOpen={() => scrollTo('det-serviceline')}><Heatmap onCell={(acc, dim, tone) => open(ACC(acc).name, `${dim} · ${ACC(acc).name}`, [heatEv(acc, dim, tone)])} /></Panel>
@@ -536,8 +546,8 @@ export default function HomePage() {
 
         <Detail id="det-clientgrowth" idx="B" title="Client Growth vs Our Growth" sub="Where account revenue is under-indexing client momentum: the wallet-share read.">
           <div className="hg-3">{ACCOUNTS.map(a => { const gap = gapOf(a); return (
-            <AccCard key={a.key} name={a.name} pill={gap >= 5 ? 'WALLET LOSS RISK': gap >= 2 ? 'KEEP PACE': 'TRACKING CLOSELY'} tone={gap >= 5 ? 'red': gap >= 2 ? 'amber': 'green'} onClick={() => open(a.name, `${a.name} growth gap`, [ev(a.key, `${a.name} growth gap`, `Client YoY +${a.clientGrowth}% vs our +${a.ourGrowth}%: ${gap}pp gap.`, gap >= 5 ? 'red': gap >= 2 ? 'amber': 'green', { factBlock: [{ label: 'Client YoY', value: `+${a.clientGrowth}%` }, { label: 'Our YoY', value: `+${a.ourGrowth}%` }, { label: 'Gap', value: `${gap}pp` }], next_best_action: GROWTH_GAP_NBA[a.key] })])}>
-              <MLine k="Client YoY" v={`+${a.clientGrowth}%`} /><MLine k="Our YoY" v={`+${a.ourGrowth}%`} vColor={gap >= 5 ? 'var(--red)': undefined} /><MLine k="Gap" v={`${gap} pp`} vColor={gap >= 5 ? 'var(--red)': 'var(--text-1)'} />
+            <AccCard key={a.key} name={a.name} pill={gap >= 5 ? 'WALLET LOSS RISK': gap >= 2 ? 'KEEP PACE': 'TRACKING CLOSELY'} tone={gap >= 5 ? 'red': gap >= 2 ? 'amber': 'green'} onClick={() => open(a.name, `${a.name} growth gap`, [ev(a.key, `${a.name} growth gap`, `Client YoY +${a.clientGrowth}% vs our +${a.ourGrowth}%: ${gap}% gap.`, gap >= 5 ? 'red': gap >= 2 ? 'amber': 'green', { factBlock: [{ label: 'Client YoY', value: `+${a.clientGrowth}%` }, { label: 'Our YoY', value: `+${a.ourGrowth}%` }, { label: 'Gap', value: `${gap}%` }], next_best_action: GROWTH_GAP_NBA[a.key] })])}>
+              <MLine k="Client YoY" v={`+${a.clientGrowth}%`} /><MLine k="Our YoY" v={`+${a.ourGrowth}%`} vColor={gap >= 5 ? 'var(--red)': undefined} /><MLine k="Gap" v={`${gap}%`} vColor={gap >= 5 ? 'var(--red)': 'var(--text-1)'} />
             </AccCard>)})}</div>
         </Detail>
 
@@ -972,7 +982,7 @@ const radarPopup = (axis: string, v: number): PopupData => {
 }
 const gapOf = (a: Account) => Math.round((a.clientGrowth - a.ourGrowth) * 10) / 10
 const GROWTH_GAP_NBA: Record<string, string> = {
-  jnj: 'J&J\'s tight 1.6pp coupling comes from 80% penetration inside Tremfya, Icotyde and Darzalex launch engines. Replicate this playbook on the lagging accounts before their expansion lands elsewhere. Novartis (7pp gap): anchor to bolt-on M&A launch support before the insourcing pilot scales. Sanofi (6pp gap): anchor to AI-powered portfolio transformation inside the ExCo reset window. GSK (5pp gap): anchor to AI-enabled R&D and Specialty Medicines growth. AZ (4pp gap): anchor to the digital-health hub before Evinova locks the mandate.',
+  jnj: 'J&J\'s tight 1.6% coupling comes from 80% penetration inside Tremfya, Icotyde and Darzalex launch engines. Replicate this playbook on the lagging accounts before their expansion lands elsewhere. Novartis (7% gap): anchor to bolt-on M&A launch support before the insourcing pilot scales. Sanofi (6% gap): anchor to AI-powered portfolio transformation inside the ExCo reset window. GSK (5% gap): anchor to AI-enabled R&D and Specialty Medicines growth. AZ (4% gap): anchor to the digital-health hub before Evinova locks the mandate.',
   gsk: 'Map GSK\'s fastest-growing Specialty Medicines units (+17% CER) against Company AI/MLR service lines. Take a governed-AI expansion to the CSO office before the budget cycle locks.',
   sanofi: 'Engage Sanofi\'s new ExCo buying committee inside the 90-day vendor-list window. Lead with AI-enabled launch modernization beyond Dupixent to diversify the portfolio.',
   novartis: 'Anchor Company to Novartis bolt-on M&A launch support before the insourcing pilot scales. Convert the +1% cc momentum risk into named commercialization scope on acquired assets.',
@@ -981,12 +991,12 @@ const GROWTH_GAP_NBA: Record<string, string> = {
 const clientGapPopup = (a: Account): PopupData => {
   const gap = gapOf(a)
   return {
-    what: `${a.name}: client YoY +${a.clientGrowth}% vs our +${a.ourGrowth}% — a ${gap}pp gap.`,
-    signals: [{ module: 'Financials', text: `Client growing +${a.clientGrowth}% vs Company +${a.ourGrowth}% on the account (${gap}pp gap).` }, ...toSig(ciFor(a.key).slice(0, 3))],
-    why: gap >= 5 ? 'The client is growing faster than our revenue on the account: wallet-share erosion, since their expansion is landing with other partners.' : gap >= 2 ? 'We are roughly keeping pace with client momentum.' : 'Company growth on this account tracks client momentum within ~2pp — the tightest coupling in the portfolio.',
-    ifNone: gap >= 5 ? `${a.name}'s growth keeps accruing to competitors and the ${gap}pp gap widens into a structural wallet-share loss.` : undefined,
+    what: `${a.name}: client YoY +${a.clientGrowth}% vs our +${a.ourGrowth}% — a ${gap}% gap.`,
+    signals: [{ module: 'Financials', text: `Client growing +${a.clientGrowth}% vs Company +${a.ourGrowth}% on the account (${gap}% gap).` }, ...toSig(ciFor(a.key).slice(0, 3))],
+    why: gap >= 5 ? 'The client is growing faster than our revenue on the account: wallet-share erosion, since their expansion is landing with other partners.' : gap >= 2 ? 'We are roughly keeping pace with client momentum.' : 'Company growth on this account tracks client momentum within ~2% — the tightest coupling in the portfolio.',
+    ifNone: gap >= 5 ? `${a.name}'s growth keeps accruing to competitors and the ${gap}% gap widens into a structural wallet-share loss.` : undefined,
     next: GROWTH_GAP_NBA[a.key],
-    outcome: gap >= 5 ? `Company growth re-coupled to ${a.name}'s, closing the ${gap}pp wallet-share gap.` : undefined,
+    outcome: gap >= 5 ? `Company growth re-coupled to ${a.name}'s, closing the ${gap}% wallet-share gap.` : undefined,
   }
 }
 const concentrationPopup = (a: Account, pct: number): PopupData => ({
