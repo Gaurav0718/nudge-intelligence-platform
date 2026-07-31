@@ -1,0 +1,63 @@
+{
+  "account": "Johnson & Johnson",
+  "generated": "2026-07-30",
+  "currency": "USD",
+  "note": "All figures are FACT, transcribed from J&J results releases in sources.json/signals.json. Interpretations are labeled ai_hypothesis and separated from fact.",
+  "quarters": [
+    {
+      "period": "FY2025",
+      "period_end": "2025-12-31",
+      "fact": {
+        "total_sales": "$94.2bn",
+        "total_sales_growth": "+6.0%",
+        "adjusted_eps": "$10.79",
+        "segments": [
+          { "name": "Innovative Medicine", "value": "$60.4bn", "growth": "+6.0% reported" },
+          { "name": "MedTech", "value": "$33.8bn", "growth": "+6.1% reported" }
+        ],
+        "franchise_highlights": "Darzalex $14.4bn (+23.0%); Tremfya $5.2bn (+40.5%); Carvykti $1.9bn (+95.9%); Stelara $6.1bn (-41.3% on biosimilar erosion)."
+      },
+      "ai_hypothesis": "A ~$94bn base with fast-compounding Tremfya/Darzalex/Carvykti offsetting Stelara's collapse implies budget concentration on replacement-asset launches and oncology support.",
+      "confidence": "High",
+      "source_references": ["https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q4-and-Full-Year-2025-results/default.aspx"]
+    },
+    {
+      "period": "Q4 2025",
+      "period_end": "2025-12-31",
+      "fact": {
+        "total_sales": "$24.6bn",
+        "total_sales_growth": "+9.1%"
+      },
+      "ai_hypothesis": "Accelerating Q4 growth exiting 2025 sets up the $100bn 2026 revenue crossing.",
+      "confidence": "High",
+      "source_references": ["https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q4-and-Full-Year-2025-results/default.aspx"]
+    },
+    {
+      "period": "Q2 2026",
+      "period_end": "2026-06-30",
+      "fact": {
+        "total_sales": "$25.31bn",
+        "total_sales_growth": "+6.6%",
+        "segments": [
+          { "name": "Innovative Medicine", "value": "$16.384bn", "growth": "+6.8% operational" },
+          { "name": "MedTech", "value": "$8.926bn", "growth": "+3.6% operational", "note": "Slower-growing segment; cardiovascular (Abiomed, Shockwave) is the fastest-growing pillar." }
+        ],
+        "franchise_highlights": "Tremfya $2.046bn worldwide; Darzalex $4.207bn worldwide; Carvykti $657M (+); Stelara $740M (declining)."
+      },
+      "ai_hypothesis": "Innovative Medicine materially outpaces MedTech; MedTech underperformance opens a commercial-modernization opening while pharma launches drive the growth.",
+      "confidence": "High",
+      "source_references": ["https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q2-2026-results-raises-2026-outlook/default.aspx"]
+    }
+  ],
+  "guidance": {
+    "fact": {
+      "fy2026_reported_sales": "$101.1bn estimated (+7.3% at midpoint)",
+      "fy2026_adjusted_eps": "$11.68 (raised $0.13 at Q2)",
+      "milestone": "On track to surpass $100bn annual revenue for the first time in J&J's 140-year history",
+      "eps_dilution_note": "$0.15 dilution to 2026 adjusted EPS from the $3.05bn Halda Therapeutics acquisition (short-term financing + non-recurring charge)."
+    },
+    "ai_hypothesis": "Repeated Q1 and Q2 guidance raises signal management confidence and sustained-to-growing commercialization budgets, de-risking multi-year vendor commitments.",
+    "confidence": "High",
+    "source_references": ["https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q2-2026-results-raises-2026-outlook/default.aspx"]
+  }
+}

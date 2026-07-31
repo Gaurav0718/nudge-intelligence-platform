@@ -1,0 +1,56 @@
+{
+  "account": "GSK",
+  "generated": "2026-07-30",
+  "note": "Coverage is limited to executives explicitly verifiable in sources.json. No individuals, titles, or contact details were fabricated. Each record separates FACT (fact + source_references) from AI HYPOTHESIS (ai_hypothesis) and RECOMMENDATION (indegene_angle, engagement_recommendation).",
+  "executives": [
+    {
+      "id": "gsk-exec-01",
+      "name": "Luke Miels",
+      "role": "Chief Executive Officer",
+      "status": "Incoming / active",
+      "fact": "Luke Miels assumed the CEO role on 1 January 2026, succeeding Emma Walmsley. He attributed FY2025 growth mainly to Specialty Medicines, citing double-digit growth in Respiratory, Immunology & Inflammation, Oncology and HIV.",
+      "ai_hypothesis": "A CEO in his first full year typically re-examines commercial models, vendor rosters and cost structures; his stated Specialty and pipeline focus aligns with the concurrent Accelerate Growth strategy and the £1.9bn savings program.",
+      "indegene_angle": "The transition is the moment to position Company DAAI and Omnichannel as enablers of the Accelerate Growth strategy and as a cost-efficiency lever for the savings target, before preferred-vendor rosters are finalized.",
+      "why_it_matters": "A first-year CEO finalises preferred-vendor rosters now — timing outreach to his Specialty and savings agenda beats waiting for the FY2025-priority map to settle.",
+      "engagement_recommendation": "Map Miels's public priorities from the FY2025 and Q2 2026 statements and craft an executive briefing linking Company services to his Specialty and pipeline focus.",
+      "priority": "High",
+      "confidence": "High",
+      "source_references": [
+        "https://www.gsk.com/en-gb/media/press-releases/luke-miels-appointed-ceo-designate-for-gsk/",
+        "https://www.gsk.com/en-gb/media/press-releases/gsk-delivers-strong-2025-performance-and-re-affirms-long-term-outlooks/"
+      ]
+    },
+    {
+      "id": "gsk-exec-02",
+      "name": "Emma Walmsley",
+      "role": "Chief Executive Officer (outgoing)",
+      "status": "Departing",
+      "fact": "Emma Walmsley stepped down from the Board on 31 December 2025, with her employment ending 30 September 2026, handing the CEO role to Luke Miels.",
+      "ai_hypothesis": "As an outgoing CEO in a transition year, her influence over new vendor commitments is likely diminishing; decision authority is shifting to Miels and his incoming priorities.",
+      "indegene_angle": "Direct new-business engagement should be oriented toward the incoming leadership rather than the departing CEO; retain awareness of legacy relationships she shaped.",
+      "why_it_matters": "Her influence over new vendor commitments is already fading — anchoring outreach on her legacy risks being stranded once Miels sets the agenda.",
+      "engagement_recommendation": "Do not anchor outreach to Walmsley; use the transition as context when engaging Miels and the wider leadership team.",
+      "priority": "Low",
+      "confidence": "High",
+      "source_references": [
+        "https://www.gsk.com/en-gb/media/press-releases/luke-miels-appointed-ceo-designate-for-gsk/"
+      ]
+    },
+    {
+      "id": "gsk-exec-03",
+      "name": "Roy Jakobs",
+      "role": "Non-Executive Director (Board)",
+      "status": "Newly appointed",
+      "fact": "Roy Jakobs, CEO of Royal Philips, joined the GSK Board as a Non-Executive Director from 13 July 2026.",
+      "ai_hypothesis": "Adding a health-technology CEO to the board may reinforce GSK's digital and AI agenda and raise board-level expectations for technology partners.",
+      "indegene_angle": "A tech-oriented board voice strengthens the case for Company's DAAI and Tech Solutions offerings and raises the bar for demonstrated digital sophistication.",
+      "why_it_matters": "A Philips-CEO board voice raises expectations for digital sophistication — proposals without digital-maturity evidence will fall short.",
+      "engagement_recommendation": "Sharpen Company DAAI and Tech Solutions positioning to match a more tech-forward board agenda; reference digital-maturity outcomes in proposals.",
+      "priority": "Medium",
+      "confidence": "Medium",
+      "source_references": [
+        "https://www.gsk.com/en-gb/company/board-information/"
+      ]
+    }
+  ]
+}

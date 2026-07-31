@@ -1,0 +1,53 @@
+{
+  "account": "Johnson & Johnson",
+  "generated": "2026-07-30",
+  "note": "Named executives are limited to individuals explicitly verifiable in sources.json. Buying centers referenced in the research but not tied to a named individual are listed under target_functions WITHOUT fabricated names. FACT / AI HYPOTHESIS / RECOMMENDATION are separated.",
+  "executives": [
+    {
+      "id": "jnj-exec-01",
+      "name": "Joaquin Duato",
+      "role": "Chairman and Chief Executive Officer",
+      "status": "Active",
+      "fact": "Joaquin Duato is Chairman and CEO of Johnson & Johnson (CEO since January 2022, Chairman since January 2023), leading a company of ~138,000 employees that is on track to surpass $100bn in annual revenue for the first time in 2026.",
+      "ai_hypothesis": "With the talc litigation largely resolved ($5.5bn settlement, 99.75% of cases) and a record revenue year, leadership bandwidth and capital are freed to redeploy toward pipeline commercialization and MedTech expansion.",
+      "indegene_angle": "A de-risked balance sheet and refocused leadership favor discretionary commercialization spend — a favorable environment for a portfolio-level, multi-year Company engagement across Innovative Medicine and MedTech.",
+      "why_it_matters": "Post-settlement and on track to surpass $100bn, the reinvestment window is open now — the highest-visibility moment for a portfolio-level pitch in years.",
+      "engagement_recommendation": "Bring a portfolio-level commercialization-capacity narrative aligned to the $100bn scale-up story; time outreach to the post-settlement reinvestment cycle.",
+      "priority": "High",
+      "confidence": "High",
+      "source_references": ["https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q2-2026-results-raises-2026-outlook/default.aspx"]
+    }
+  ],
+  "target_functions": [
+    {
+      "id": "jnj-fn-01",
+      "function": "Innovative Medicine — Immunology franchise leadership (Tremfya, Icotyde)",
+      "basis_fact": "Stelara LOE drove a ~43% sales collapse; Tremfya surged +40.5% FY2025/+68.3% Q1 2026 and Icotyde was approved as the first IL-23-targeted oral peptide for psoriasis.",
+      "indegene_angle": "Stelara-to-Tremfya/Icotyde conversion is defensive spend J&J cannot postpone — DAAI prescriber analytics + accelerated MLR + omnichannel sequencing.",
+      "why_it_matters": "The Stelara loss compounds quarterly — conversion spend is mandatory now, not optional, making it the most time-sensitive entry point at J&J.",
+      "engagement_recommendation": "Pitch a Stelara conversion enablement program plus a full-funnel Icotyde launch across dermatology and gastroenterology.",
+      "priority": "High",
+      "source_references": ["https://finance.yahoo.com/news/j-j-offset-stelara-loe-161000514.html"]
+    },
+    {
+      "id": "jnj-fn-02",
+      "function": "Oncology franchise leadership (Darzalex, Carvykti, HLD-0915)",
+      "basis_fact": "Darzalex $14.4bn (+23%), Carvykti +95.9%; Halda ($3.05bn) adds pre-commercial HLD-0915.",
+      "indegene_angle": "Complex, evidence-heavy MedComm, medical affairs and MLR across expanding lines of therapy, plus future launch readiness for HLD-0915.",
+      "why_it_matters": "Darzalex and Carvykti are compounding at 23-96% growth — supporting workload scales with them, and HLD-0915 positioning should start before approval.",
+      "engagement_recommendation": "Offer an oncology medical-affairs and MLR acceleration package; begin early HLD-0915 launch-readiness relationship building.",
+      "priority": "Medium",
+      "source_references": ["https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q4-and-Full-Year-2025-results/default.aspx"]
+    },
+    {
+      "id": "jnj-fn-03",
+      "function": "MedTech commercial & digital leadership (Cardiovascular, OTTAVA, Polyphonic)",
+      "basis_fact": "MedTech grew only +3.6% vs Innovative Medicine +6.8%; OTTAVA robotic system got FDA De Novo authorization; Polyphonic intelligent-OR network launched with Abu Dhabi DoH.",
+      "indegene_angle": "Lagging MedTech growth creates appetite for omnichannel/analytics modernization, surgeon adoption content and DAAI/Tech Solutions platform enablement.",
+      "why_it_matters": "At +3.6% versus Innovative Medicine's +6.8%, MedTech leadership needs a growth story — OTTAVA and Polyphonic give concrete hooks Company can attach to.",
+      "engagement_recommendation": "Approach with an omnichannel + analytics modernization proposal and an OTTAVA surgeon adoption/digital-training engagement.",
+      "priority": "Medium",
+      "source_references": ["https://www.investor.jnj.com/investor-news/news-details/2026/Johnson--Johnson-reports-Q2-2026-results-raises-2026-outlook/default.aspx"]
+    }
+  ]
+}

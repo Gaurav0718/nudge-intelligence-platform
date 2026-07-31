@@ -1,0 +1,150 @@
+/* ─── Sales & Growth module — ported component classes ────────────────────────
+   Component-level classes the ported Growth / Account pages rely on. Uses the
+   design tokens already defined in index.css (navy/gold/text/border/radius).
+   Deliberately excludes the reference stylesheet's global/shell overrides
+   (html { zoom }, .sidebar/.main-area heights, body typography). */
+
+/* ─── BUTTON VARIANTS ─────────────────────────────────────────────────────── */
+.btn-sm { padding: 6px 13px; font-size: 12.5px; }
+.btn-xs { padding: 4px 10px; font-size: 11.5px; border-radius: 6px; }
+.btn-icon { width: 34px; height: 34px; padding: 0; border-radius: var(--radius-sm); }
+.btn-icon-sm { width: 28px; height: 28px; padding: 0; border-radius: 7px; }
+.btn-brand { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(27,54,93,0.3); }
+.btn-brand:hover { background: var(--navy-mid); transform: translateY(-1px); }
+
+/* ─── BADGE VARIANTS ──────────────────────────────────────────────────────── */
+.badge-green { background: var(--emerald-bg); color: var(--emerald); }
+.badge-muted { background: var(--bg-raised); color: var(--text-3); border: 1px solid var(--border); }
+.badge-brand { background: var(--navy-faint); color: var(--navy); border: 1px solid rgba(27,54,93,0.15); }
+
+/* ─── TABS (in-page) ──────────────────────────────────────────────────────── */
+.tab-bar { display: flex; border-bottom: 2px solid var(--border); }
+.tab-btn {
+  padding: 11px 0; margin-right: 28px;
+  font-size: 14px; font-weight: 600;
+  color: var(--text-3);
+  background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all var(--t) var(--ease);
+  font-family: inherit;
+}
+.tab-btn:hover { color: var(--text-2); }
+.tab-btn.active { color: var(--navy); font-weight: 700; border-bottom-color: var(--gold); }
+
+/* ─── INPUTS ──────────────────────────────────────────────────────────────── */
+.input {
+  background: var(--bg-raised);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px; font-family: inherit;
+  color: var(--text-1); outline: none; width: 100%;
+  transition: border-color var(--t), box-shadow var(--t);
+}
+.input::placeholder { color: var(--text-3); }
+.input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,0.15); }
+
+.textarea-expand { resize: both; min-height: 80px; }
+.textarea-cell {
+  width: 100%; min-height: 90px;
+  padding: 10px 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 13.5px; font-family: inherit;
+  color: var(--text-1); outline: none;
+  transition: border-color var(--t);
+  resize: vertical;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+.textarea-cell:focus { border-color: var(--gold); }
+.textarea-cell::placeholder { color: var(--text-3); }
+
+.select {
+  background: var(--bg-raised);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 32px 9px 12px;
+  font-size: 13.5px; font-family: inherit;
+  color: var(--text-1); outline: none; cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235a7499' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  transition: border-color var(--t);
+}
+.select:focus { border-color: var(--gold); outline: none; }
+
+/* ─── LABEL ───────────────────────────────────────────────────────────────── */
+.label {
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-3); font-family: inherit;
+}
+
+/* ─── MODAL ───────────────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(11,22,43,0.7);
+  backdrop-filter: blur(8px);
+  z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: fadeIn 180ms var(--ease);
+}
+.modal-overlay-top {
+  position: fixed; inset: 0;
+  background: rgba(11,22,43,0.7);
+  backdrop-filter: blur(8px);
+  z-index: 500;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 40px 20px 20px;
+  overflow-y: auto;
+  animation: fadeIn 180ms var(--ease);
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(212,175,55,0.08);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* ─── ACCOUNT REVIEW RECAP TABLE ──────────────────────────────────────────── */
+.recap-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.recap-table .cat-cell {
+  vertical-align: middle; text-align: center;
+  font-size: 13px; font-weight: 700; color: var(--navy);
+  background: linear-gradient(180deg, var(--navy-faint), #e8eef8);
+  padding: 10px 8px; border: 1px solid var(--border);
+  font-family: inherit; line-height: 1.4; width: 140px; word-wrap: break-word;
+}
+.recap-table .bu-cell {
+  font-size: 11.5px; font-weight: 700; text-align: center;
+  padding: 6px 8px; border: 1px solid var(--border);
+  background: var(--bg-surface); width: 60px; color: var(--text-2);
+}
+.recap-table td.content-cell {
+  padding: 4px; border: 1px solid var(--border);
+  vertical-align: top; background: var(--bg-surface); overflow: hidden;
+}
+.recap-table th {
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: rgba(255,255,255,0.9);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: left; font-family: inherit;
+}
+
+/* ─── SWOT GRID ───────────────────────────────────────────────────────────── */
+.swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ─── SECTION HEADING ─────────────────────────────────────────────────────── */
+.section-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700; color: var(--navy); letter-spacing: -0.015em;
+}

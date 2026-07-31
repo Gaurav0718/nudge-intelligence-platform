@@ -1,0 +1,62 @@
+{
+  "account": "Sanofi",
+  "generated": "2026-07-30",
+  "currency": "EUR",
+  "note": "All figures are FACT, transcribed from Sanofi results releases in sources.json/signals.json. Interpretations are labeled ai_hypothesis and separated from fact.",
+  "quarters": [
+    {
+      "period": "FY2025",
+      "period_end": "2025-12-31",
+      "fact": {
+        "net_sales": "€43,626m",
+        "net_sales_growth": "+9.9% CER",
+        "business_eps": "€7.83",
+        "business_eps_growth": "+15.0% CER",
+        "q4_note": "Q4 2025 sales €11,303m, +13.3%."
+      },
+      "ai_hypothesis": "A solid 2025 base with accelerating Q4 momentum sets up continued commercial investment into 2026 and budget stability for commercialization and digital programs.",
+      "confidence": "High",
+      "source_references": ["https://www.sanofi.com/en/media-room/press-releases/2026/2026-01-29-06-30-00-3228191"]
+    },
+    {
+      "period": "Q1 2026",
+      "period_end": "2026-03-31",
+      "fact": {
+        "net_sales": "€10,509m",
+        "net_sales_growth": "+13.6% CER",
+        "business_eps": "€1.88",
+        "business_eps_growth": "+14.0% CER",
+        "driver_note": "Supported by Pharma launches and recent acquisitions."
+      },
+      "ai_hypothesis": "Back-to-back double-digit quarters driven by launches and acquisitions indicate an execution engine dependent on efficient commercialization at scale.",
+      "confidence": "High",
+      "source_references": ["https://www.sanofi.com/en/media-room/press-releases/2026/2026-04-23-05-30-00-3279572"]
+    },
+    {
+      "period": "Q2 2026",
+      "period_end": "2026-06-30",
+      "fact": {
+        "net_sales": "€11,597m",
+        "net_sales_growth": "+17.8% CER",
+        "business_eps": "€2.09",
+        "business_eps_growth": "+33.3% CER",
+        "concentration_note": "Dupixent €5.2bn, roughly 45% of total quarterly sales (first quarter above €5bn).",
+        "vaccines_note": "Vaccines ~€1.1bn, -4.7% on continued US demand softness.",
+        "pipeline_note": "Seven regulatory approvals, two positive phase 3 studies, four additional regulatory designations."
+      },
+      "ai_hypothesis": "With ~45% of revenue on Dupixent, Sanofi has strong incentive to maximize its lifecycle via rapid indication expansion and to diversify via M&A and launches to reduce concentration risk.",
+      "confidence": "High",
+      "source_references": ["https://www.sanofi.com/en/media-room/press-releases/2026/2026-07-30-05-30-00-3335767"]
+    }
+  ],
+  "guidance": {
+    "fact": {
+      "fy2026_sales_growth": "Around 10% at CER (upgraded)",
+      "fy2026_business_eps": "At CER growing slightly faster than sales",
+      "strategy_note": "Play to Win pure-play biopharma; >35 late-stage studies funded by early 2026; up to €2bn cost savings targeted. Opella consumer-health separation delivered €10.4bn net cash (48.2% retained in OPAL JV)."
+    },
+    "ai_hypothesis": "Cost optimization plus a swelling late-stage pipeline suggests Sanofi will lean on external partners to absorb variable launch and R&D workload while cutting fixed headcount.",
+    "confidence": "High",
+    "source_references": ["https://www.sanofi.com/en/media-room/press-releases/2026/2026-07-30-05-30-00-3335767", "https://www.sanofi.com/en/media-room/press-releases/2026/2026-01-29-06-30-00-3228191"]
+  }
+}

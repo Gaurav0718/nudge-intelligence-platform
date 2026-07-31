@@ -1,0 +1,69 @@
+{
+  "account": "Novartis",
+  "generated": "2026-07-30",
+  "currency": "USD",
+  "note": "All figures are FACT, transcribed from Novartis results releases in sources.json/signals.json. Interpretations are labeled ai_hypothesis and separated from fact.",
+  "quarters": [
+    {
+      "period": "FY2025",
+      "period_end": "2025-12-31",
+      "fact": {
+        "net_sales": "$54.5bn",
+        "net_sales_growth": "+8% cc",
+        "core_operating_income": "$21.9bn",
+        "core_operating_income_growth": "+14% cc",
+        "core_operating_margin": "40.1% (+210bps)",
+        "net_income": "$14.0bn (+19% cc)",
+        "core_eps": "$8.98 (+17% cc)",
+        "free_cash_flow": "$17.6bn (+8%)",
+        "brand_highlights": "Cosentyx $6.7bn (+8%); Kisqali $4.8bn (+57%); Kesimpta $4.4bn (+36%); Pluvicto $2.0bn (+42%); Scemblix $1.3bn (+85%).",
+        "capital_return": "Dividend CHF 3.70/share (+5.7%, 29th consecutive increase); $8.9bn repurchased in 2025 plus a new $10bn buyback authorization."
+      },
+      "ai_hypothesis": "A 40.1% core margin delivered two years ahead of plan plus sustained capital returns signals management confidence that pipeline and priority-brand growth will offset patent-cliff losses, keeping commercial budgets intact.",
+      "confidence": "High",
+      "source_references": ["https://www.novartis.com/news/media-releases/novartis-delivered-high-single-digit-sales-growth-achieved-40-core-margin-and-further-advanced-pipeline-2025"]
+    },
+    {
+      "period": "Q1 2026",
+      "period_end": "2026-03-31",
+      "fact": {
+        "net_sales": "$13.113bn",
+        "net_sales_growth": "-5% cc (-1% USD)",
+        "core_operating_income": "$4.897bn",
+        "core_operating_margin": "37.3%",
+        "driver_note": "US generic erosion (notably Entresto) outweighed priority-brand growth."
+      },
+      "ai_hypothesis": "The Q1 dip quantifies how sharply loss of exclusivity bites before launches compound, underscoring the urgency of faster new-brand uptake.",
+      "confidence": "High",
+      "source_references": ["https://www.novartis.com/news/media-releases/novartis-delivered-strong-growth-priority-brands-and-launches-q1-fy-2026-guidance-reaffirmed"]
+    },
+    {
+      "period": "Q2 2026",
+      "period_end": "2026-06-30",
+      "fact": {
+        "net_sales": "$14.408bn",
+        "net_sales_growth": "+1% cc (+3% USD)",
+        "core_operating_income": "$5.940bn (flat)",
+        "core_operating_margin": "33.0%",
+        "net_income": "$3.257bn (-19%)",
+        "core_eps": "$2.41 (-1% cc)",
+        "brand_highlights": "Kisqali $1.695bn (+43%); Cosentyx $1.824bn (+10%); Kesimpta $1.424bn (+32%); Scemblix $562M (+89%); Pluvicto $651M (+43%); Leqvio $480M (+59%).",
+        "erosion_note": "Entresto $1.181bn, -51% cc on US generic competition."
+      },
+      "ai_hypothesis": "A return to top-line growth after Q1's decline suggests priority-brand momentum is beginning to outpace generic erosion, but the -19% net income shows launch, integration and financing costs pressuring the P&L and sharpening ROI scrutiny.",
+      "confidence": "High",
+      "source_references": ["https://www.novartis.com/news/media-releases/novartis-delivered-sales-growth-q2-and-further-advanced-pipeline-full-year-guidance-reaffirmed"]
+    }
+  ],
+  "guidance": {
+    "fact": {
+      "fy2026_net_sales": "Low single-digit growth (cc)",
+      "fy2026_core_operating_income": "Decline low single-digit (cc)",
+      "long_term_2025_2030_cagr": "+5-6% cc sales CAGR; return to 40%+ core margin by 2029; 30+ potential high-value pipeline assets",
+      "context_note": "2026 framed by leadership as the largest patent expiry in Novartis history, to be grown through."
+    },
+    "ai_hypothesis": "Guiding to sales growth while core operating income declines in cc reflects the peak-LoE year: launch investment and integration costs weigh on profit even as priority brands lift the top line — raising the premium on cost-efficient, measurable commercialization.",
+    "confidence": "High",
+    "source_references": ["https://www.novartis.com/news/media-releases/novartis-delivered-sales-growth-q2-and-further-advanced-pipeline-full-year-guidance-reaffirmed", "https://www.novartis.com/news/media-releases/novartis-projects-5-6-cc-sales-cagr-2025-2030-long-term-growth-backed-30-potential-high-value-pipeline-assets"]
+  }
+}

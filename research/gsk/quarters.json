@@ -1,0 +1,71 @@
+{
+  "account": "GSK",
+  "generated": "2026-07-30",
+  "currency": "GBP",
+  "note": "All figures are FACT, transcribed verbatim from GSK results releases in sources.json. Interpretations are labeled ai_hypothesis and are separated from fact.",
+  "quarters": [
+    {
+      "period": "FY2025",
+      "period_end": "2025-12-31",
+      "fact": {
+        "total_turnover": "£32.7bn",
+        "total_turnover_growth": "+4% AER, +7% CER",
+        "core_operating_profit": "£9.783bn",
+        "core_eps": "172.0p",
+        "core_eps_growth": "+8% AER",
+        "segment_commentary": "Growth driven mainly by Specialty Medicines, with double-digit sales growth in Respiratory, Immunology & Inflammation, Oncology and HIV (Luke Miels)."
+      },
+      "ai_hypothesis": "A £32.7bn base growing at +7% CER with a Specialty-led mix implies a durable, reinvestment-capable P&L that can sustain multi-year outsourced commercialization spend.",
+      "confidence": "High",
+      "source_references": ["https://www.gsk.com/en-gb/media/press-releases/gsk-delivers-strong-2025-performance-and-re-affirms-long-term-outlooks/"]
+    },
+    {
+      "period": "Q1 2026",
+      "period_end": "2026-03-31",
+      "fact": {
+        "total_sales": "£7.6bn",
+        "total_sales_growth": "+2% AER, +5% CER",
+        "core_operating_profit_growth": "+10%",
+        "segments": [
+          { "name": "Specialty Medicines", "value": "£3.2bn", "growth": "+14%" },
+          { "name": "General Medicines", "value": null, "growth": "-6%", "note": "Decline driven by genericization of the older established portfolio." }
+        ],
+        "franchise_highlights": "Shingrix delivered more than £1.0bn (+20%), a record quarter; HIV sales £1.8bn (+10%)."
+      },
+      "ai_hypothesis": "Specialty +14% versus General Medicines -6% confirms an accelerating budget shift toward growth franchises, concentrating services demand in Specialty and Vaccines.",
+      "confidence": "High",
+      "source_references": ["https://www.gsk.com/en-gb/media/press-releases/gsk-delivers-strong-q1-performance-and-start-to-2026/"]
+    },
+    {
+      "period": "Q2 2026",
+      "period_end": "2026-06-30",
+      "fact": {
+        "total_sales": "£8.4bn",
+        "total_sales_growth": "+5% AER and CER",
+        "core_operating_profit_growth": "+7%",
+        "core_eps": "50.5p",
+        "core_eps_growth": "+9%",
+        "segments": [
+          { "name": "Specialty Medicines", "value": "£3.8bn", "growth": "+14%", "note": "Led by continued launch of Nucala in COPD and HIV medicines Cabenuva and Dovato." },
+          { "name": "Vaccines", "value": "£2.3bn", "growth": "+8%", "note": "Helped by international expansion of Arexvy, meningitis vaccines and Shingrix in Europe." },
+          { "name": "General Medicines", "value": "£2.3bn", "growth": "-9%", "note": "Declining sales of the older established portfolio amid competition and genericization." }
+        ]
+      },
+      "ai_hypothesis": "Specialty and Vaccines now materially outweigh a shrinking General Medicines segment; the launch-driven Specialty engine is the highest-priority target for commercialization services.",
+      "confidence": "High",
+      "source_references": ["https://www.gsk.com/en-gb/media/press-releases/gsk-delivers-strong-q2-core-results-performance-and-continued-momentum/"]
+    }
+  ],
+  "guidance": {
+    "fact": {
+      "fy2026_turnover_growth": "3-5% (guided to upper half)",
+      "fy2026_core_operating_profit_growth": "+7-9% (upper half)",
+      "fy2026_core_eps_growth": "+7-9% (upper half)",
+      "fy2026_dividend": "70p expected",
+      "long_term_2031_outlook": "More than £40bn sales; accelerating growth from 2031 onwards"
+    },
+    "ai_hypothesis": "Narrowing 2026 guidance to the upper half plus a reaffirmed >£40bn 2031 target signals management confidence and a stable-to-expanding services budget environment favorable to multi-year engagements.",
+    "confidence": "High",
+    "source_references": ["https://www.gsk.com/en-gb/media/press-releases/gsk-delivers-strong-q2-core-results-performance-and-continued-momentum/"]
+  }
+}

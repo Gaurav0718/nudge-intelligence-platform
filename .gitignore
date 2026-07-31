@@ -1,0 +1,77 @@
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# Local environment overrides
+.env.local
+.env.*.local
+
+# =========================
+# Dependencies
+# =========================
+node_modules/
+
+# =========================
+# Build output
+# =========================
+dist/
+build/
+
+# =========================
+# Claude / AI local context
+# =========================
+.claude/
+claude.md
+AGENTS.md
+SESSION_CONTEXT.md
+
+# =========================
+# Local project notes/status
+# =========================
+PROJECT_STATUS.md
+
+# =========================
+# Logs
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Supabase local files
+# =========================
+supabase/.temp/
+supabase/.branches/
+
+# =========================
+# Sensitive files
+# =========================
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# Credentials / service accounts
+credentials.json
+service-account*.json
+secrets.json

@@ -1,0 +1,63 @@
+{
+  "account": "Novartis",
+  "generated": "2026-07-30",
+  "note": "The verified sources quote the CEO but do not state the individual's name; that record is therefore role-based with name null — NOT fabricated. Buying centers referenced without a named individual are listed under target_functions. FACT / AI HYPOTHESIS / RECOMMENDATION are separated.",
+  "executives": [
+    {
+      "id": "nvs-exec-01",
+      "name": null,
+      "role": "Chief Executive Officer",
+      "status": "Active (name not specified in verified sources)",
+      "fact": "Novartis leadership (CEO) framed 2026 as the year the company must 'grow through the largest patent expiry in Novartis history, underscoring the strength of our business.'",
+      "ai_hypothesis": "Managing peak loss-of-exclusivity while still growing requires flawless priority-brand launch execution, making every launch-efficiency gain commercially critical.",
+      "indegene_angle": "LoE pressure pushes Novartis toward cost-efficient, scalable commercialization partners — Company can pitch launch-excellence-at-lower-cost across MedComm, Omnichannel and MLR.",
+      "why_it_matters": "The largest patent cliff in Novartis history lands in 2026 — launch-efficiency gains are commercially critical now, making cost-efficient partners the priority.",
+      "engagement_recommendation": "Lead with a patent-cliff resilience narrative: accelerate priority-brand uptake per dollar via Company's integrated launch model. (Confirm the current CEO's name before named outreach — not established in these sources.)",
+      "priority": "High",
+      "confidence": "Medium",
+      "source_references": ["https://www.novartis.com/news/media-releases/novartis-delivered-high-single-digit-sales-growth-achieved-40-core-margin-and-further-advanced-pipeline-2025"]
+    }
+  ],
+  "target_functions": [
+    {
+      "id": "nvs-fn-01",
+      "function": "Oncology / Radioligand Therapy (RLT) commercial leadership (Pluvicto)",
+      "basis_fact": "FDA approved Pluvicto for earlier pre-chemotherapy mCRPC (roughly tripling eligible patients, 59% risk reduction); a further HSPC approval is expected Q3 2026 (~75% pool expansion); a five-site US RLT network is being built.",
+      "indegene_angle": "Complex RLT launches need specialized HCP/patient education, referral-network omnichannel, MedComm and MLR at speed — a launch-readiness build Company can own ahead of the Q3 decision.",
+      "why_it_matters": "Pluvicto's eligible pool roughly tripled with a Q3 2026 HSPC decision pending — the launch-readiness build must happen before that decision.",
+      "engagement_recommendation": "Propose a Pluvicto referral-pathway and HCP-education expansion program plus an HSPC launch-readiness sprint before the Q3 2026 decision.",
+      "priority": "High",
+      "source_references": ["https://www.novartis.com/news/media-releases/fda-approves-novartis-radioligand-therapy-pluvicto-earlier-use-chemotherapy-psma-positive-metastatic-castration-resistant-prostate-cancer"]
+    },
+    {
+      "id": "nvs-fn-02",
+      "function": "Priority-brand franchise leadership (Kisqali, Kesimpta, Cosentyx, Scemblix, Leqvio)",
+      "basis_fact": "Eight de-risked in-market brands with $3-10B peak potential; Kisqali +43% Q2 with US exclusivity locked to 2031; Cosentyx faces a 2029/2030 cliff.",
+      "indegene_angle": "High-growth and lifecycle-defense brands justify premium omnichannel/MedComm and competitive-messaging programs (e.g. Kisqali vs Verzenio; Cosentyx value-maximization).",
+      "why_it_matters": "Eight $3-10B brands need differentiated launch and defense programs now — Kisqali's 2031 runway makes a multi-year plan financially attractive this quarter.",
+      "engagement_recommendation": "Structure a portfolio-level engagement across the eight priority brands, anchoring a multi-year Kisqali plan on the 2031 runway.",
+      "priority": "High",
+      "source_references": ["https://www.novartis.com/news/media-releases/novartis-projects-5-6-cc-sales-cagr-2025-2030-long-term-growth-backed-30-potential-high-value-pipeline-assets"]
+    },
+    {
+      "id": "nvs-fn-03",
+      "function": "Neuroscience / Rare-disease commercial leadership (Avidity AOC platform)",
+      "basis_fact": "The ~$12B Avidity acquisition adds an AOC/xRNA platform and three late-stage neuromuscular programs (del-desiran, del-brax, del-zota).",
+      "indegene_angle": "Rare-neuromuscular launches need specialized patient-identification, KOL and MedComm programs Company can build pre-approval.",
+      "why_it_matters": "The ~$12B Avidity platform adds three late-stage programs — pre-approval program-building is the only way to be ready when they launch.",
+      "engagement_recommendation": "Engage neuroscience/rare-disease commercial leaders on Avidity AOC launch readiness.",
+      "priority": "Medium",
+      "source_references": ["https://www.novartis.com/news/media-releases/novartis-successfully-completes-acquisition-avidity-biosciences-strengthening-late-stage-neuroscience-pipeline-and-advancing-xrna-strategy"]
+    },
+    {
+      "id": "nvs-fn-04",
+      "function": "Digital / AI and Data leadership",
+      "basis_fact": "Novartis expanded AI partnerships across discovery and clinical ops (Chai, Generate ~$1B, AWS/Accenture).",
+      "indegene_angle": "Signals openness to DAAI/Tech Solutions — extend AI from discovery into commercial analytics, content automation and regulatory tech.",
+      "why_it_matters": "Novartis is already buying discovery AI at scale — extending into commercial and regulatory AI now prevents a competitor from owning that layer.",
+      "engagement_recommendation": "Pitch Company DAAI/Tech for commercial and regulatory AI, complementing existing discovery AI deals.",
+      "priority": "Medium",
+      "source_references": ["https://finance.yahoo.com/technology/ai/articles/chai-discovery-announces-collaboration-novartis-110000622.html"]
+    }
+  ]
+}

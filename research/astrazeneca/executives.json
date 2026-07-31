@@ -1,0 +1,77 @@
+{
+  "account": "AstraZeneca",
+  "generated": "2026-07-30",
+  "note": "Named executives are limited to individuals explicitly verifiable in sources.json/signals.json — for AZ these are both departures, so engagement priority is low. Buying centers referenced in the research but not tied to a named individual are listed under target_functions WITHOUT fabricated names. FACT / AI HYPOTHESIS / RECOMMENDATION are separated.",
+  "executives": [
+    {
+      "id": "az-exec-01",
+      "name": "Leon Wang",
+      "role": "Former Head of China business",
+      "status": "Departed / under legal proceedings",
+      "fact": "Leon Wang, AstraZeneca's former China business head, was formally charged by Chinese authorities more than a year after his detention. H1 2026 China revenue fell 5% at CER under volume-based procurement.",
+      "ai_hypothesis": "China remains a governance and revenue-pressure zone; commercial activity there carries elevated compliance scrutiny.",
+      "indegene_angle": "Heightened China compliance sensitivity raises the value of rigorous, auditable MLR and content-governance processes.",
+      "why_it_matters": "China is both revenue pressure and scrutiny risk right now — governance credibility, not this individual, is what opens the current leadership conversation.",
+      "engagement_recommendation": "Do not engage this individual. Use the compliance context to position Company's content-governance discipline with current AZ China leadership.",
+      "priority": "Low",
+      "confidence": "High",
+      "source_references": ["https://www.pharmexec.com/view/former-astrazeneca-executive-charged-several-offenses-china"]
+    },
+    {
+      "id": "az-exec-02",
+      "name": "Rene Haas",
+      "role": "Non-Executive Director (departed)",
+      "status": "Departed",
+      "fact": "Rene Haas stepped down as an AstraZeneca Non-Executive Director on 30 April 2026 after becoming CEO of SoftBank Group International alongside his Arm CEO role.",
+      "ai_hypothesis": "The loss of a tech/semiconductor board voice could modestly shift board-level technology perspective; executive commercial leadership is unaffected.",
+      "indegene_angle": "Minor for services engagement; monitor for a successor with digital/AI focus who could shape AZ technology-partner preferences.",
+      "why_it_matters": "Board tech perspective is a light-touch watch item — a digital/AI successor would raise the priority of Company's technology track.",
+      "engagement_recommendation": "No action required. Track board succession for digital/AI advocacy.",
+      "priority": "Low",
+      "confidence": "Medium",
+      "source_references": ["https://www.marketscreener.com/news/astrazeneca-rene-haas-to-step-down-as-non-executive-director-on-30-april-2026-ce7f59d9dc89f421"]
+    }
+  ],
+  "target_functions": [
+    {
+      "id": "az-fn-01",
+      "function": "Oncology Business Unit leadership",
+      "basis_fact": "Multiple 2026 oncology approvals (Enhertu, Datroway, Imfinzi, Calquence) drive parallel indication-specific content and HCP-education streams.",
+      "indegene_angle": "Highest-value cross-service target: MedComm indication content, MLR review volume, segmented oncologist Omnichannel.",
+      "why_it_matters": "Four 2026 approvals mean launch-content demand peaks now — approach this buying center before its capacity is locked to incumbents.",
+      "engagement_recommendation": "Bring a tumour-agnostic content-supply-chain proposal spanning the oncology launch portfolio.",
+      "priority": "High",
+      "source_references": ["https://www.astrazeneca.com/content/dam/az/PDF/2026/h1q2/H1-and-Q2-2026-results-announcement.pdf"]
+    },
+    {
+      "id": "az-fn-02",
+      "function": "Digital / AI leadership (commercial & medical)",
+      "basis_fact": "AZ acquired Modella AI and expanded AI partnerships (Immunai, Algen $555m, Owkin); leadership stated 'the future of the pharmaceutical industry is agentic.'",
+      "indegene_angle": "Both opportunity and competitive threat for DAAI/Tech Solutions — lead with regulated-commercial AI (MLR automation, omnichannel orchestration) to avoid displacement by AZ's own AI stack.",
+      "why_it_matters": "AZ is acquiring AI assets and building its own stack — the window to anchor regulated-commercial AI with them narrows as that stack matures.",
+      "engagement_recommendation": "Present an AI-native commercial-operations offering complementing AZ's R&D AI investments.",
+      "priority": "High",
+      "source_references": ["https://www.pharmaceutical-technology.com/news/jpm26-astrazeneca-bids-to-accelerate-oncology-rd-with-modella-ai-acquisition/"]
+    },
+    {
+      "id": "az-fn-03",
+      "function": "Metabolic / weight-management franchise leadership",
+      "basis_fact": "AZ is building an obesity/T2D franchise via up-to-$18.5bn CSPC alliance, SixPeaks acquisition and a Virginia oral GLP-1 plant.",
+      "indegene_angle": "Future whitespace launch needing broad primary-care + patient Omnichannel, differentiation MedComm and heavy MLR.",
+      "why_it_matters": "CSPC/SixPeaks build-out signals a major franchise entry — positioning now beats pitching after a launch team and vendors are set.",
+      "engagement_recommendation": "Begin capability positioning now, well ahead of approval.",
+      "priority": "Medium",
+      "source_references": ["https://medcitynews.com/2026/01/astrazeneca-obesity-diabetes-cspc-glp-1-gip-agonist-metabolic-disease-azn/"]
+    },
+    {
+      "id": "az-fn-04",
+      "function": "AZ Europe affiliate commercial leadership",
+      "basis_fact": "June 2026 CHMP positive-opinion cluster (Enhertu +pertuzumab, Enhertu tumour-agnostic, Datroway TNBC) will trigger compressed EU launches.",
+      "indegene_angle": "Multi-market MLR localisation, Regulatory ops and affiliate Omnichannel enablement.",
+      "why_it_matters": "June CHMP approvals compress EU launch timelines — localisation and MLR capacity is needed at exactly this moment.",
+      "engagement_recommendation": "Offer a multi-market launch-localisation and MLR bundle timed to post-CHMP EC approvals.",
+      "priority": "High",
+      "source_references": ["https://www.astrazeneca.com/media-centre/press-releases/2026/enhertu-plus-pertuzumab-recommended-for-approval-in-the-eu-by-chmp-as-1st-line-treatment-for-patients-with-her2-positive-metastatic-breast-cancer.html"]
+    }
+  ]
+}

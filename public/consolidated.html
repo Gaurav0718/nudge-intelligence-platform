@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company — Executive Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+/* ============================= RESET ============================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+img,svg{display:block;max-width:100%;}
+button{font:inherit;cursor:pointer;background:none;border:none;color:inherit;}
+a{color:inherit;text-decoration:none;}
+ul,ol{list-style:none;}
+table{border-collapse:collapse;width:100%;}
+
+/* ============================= TOKENS ============================= */
+:root{
+  --navy:#1B365D;
+  --navy-light:#2A4A7A;
+  --navy-dark:#132844;
+  --navy-soft:rgba(27,54,93,0.08);
+  --gold:#D4AF37;
+  --gold-light:#E6C866;
+  --gold-soft:rgba(212,175,55,0.14);
+  --bg:#F8FAFC;
+  --bg-elevated:#FFFFFF;
+  --card:#FFFFFF;
+  --border:#E5E7EB;
+  --border-soft:#EEF1F5;
+  --text:#0F172A;
+  --text-secondary:#64748B;
+  --muted:#94A3B8;
+  --success:#22C55E;
+  --success-soft:#DCFCE7;
+  --warning:#F59E0B;
+  --warning-soft:#FEF3C7;
+  --danger:#EF4444;
+  --danger-soft:#FEE2E2;
+  --info:#3B82F6;
+  --info-soft:#DBEAFE;
+  --purple:#7C3AED;
+  --purple-soft:#EDE4FC;
+  --teal:#14B8A6;
+  --teal-soft:#CCFBF1;
+  --radius:12px;
+  --radius-sm:8px;
+  --radius-lg:20px;
+  --shadow-sm:0 1px 2px rgba(15,23,42,0.04);
+  --shadow-md:0 4px 16px rgba(15,23,42,0.06);
+  --shadow-lg:0 12px 40px rgba(15,23,42,0.10);
+  --shadow-gold:0 8px 24px rgba(212,175,55,0.18);
+  --font-ui:'Stack Sans Text','Inter','SF Pro Display','Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+:root[data-theme="dark"]{
+  --bg:#0A1220;
+  --bg-elevated:#0D1626;
+  --card:#101B30;
+  --border:#1E2C42;
+  --border-soft:#182234;
+  --text:#EDF1F7;
+  --text-secondary:#94A3B8;
+  --muted:#5C6B84;
+  --navy:#3E639C;
+  --navy-light:#4E79B8;
+  --navy-soft:rgba(78,121,184,0.16);
+  --gold-soft:rgba(212,175,55,0.16);
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md:0 4px 20px rgba(0,0,0,0.35);
+  --shadow-lg:0 16px 48px rgba(0,0,0,0.5);
+  --shadow-gold:0 8px 24px rgba(212,175,55,0.12);
+  --success-soft:rgba(34,197,94,0.14);
+  --warning-soft:rgba(245,158,11,0.14);
+  --danger-soft:rgba(239,68,68,0.14);
+  --info-soft:rgba(59,130,246,0.14);
+  --purple-soft:rgba(124,58,237,0.16);
+  --teal-soft:rgba(20,184,166,0.14);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A1220;--bg-elevated:#0D1626;--card:#101B30;--border:#1E2C42;--border-soft:#182234;
+    --text:#EDF1F7;--text-secondary:#94A3B8;--muted:#5C6B84;--navy:#3E639C;--navy-light:#4E79B8;
+    --navy-soft:rgba(78,121,184,0.16);--gold-soft:rgba(212,175,55,0.16);
+    --shadow-sm:0 1px 2px rgba(0,0,0,0.3);--shadow-md:0 4px 20px rgba(0,0,0,0.35);--shadow-lg:0 16px 48px rgba(0,0,0,0.5);
+    --shadow-gold:0 8px 24px rgba(212,175,55,0.12);
+    --success-soft:rgba(34,197,94,0.14);--warning-soft:rgba(245,158,11,0.14);--danger-soft:rgba(239,68,68,0.14);
+    --info-soft:rgba(59,130,246,0.14);--purple-soft:rgba(124,58,237,0.16);--teal-soft:rgba(20,184,166,0.14);
+  }
+}
+
+body{
+  font-family:var(--font-ui);
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s var(--ease),color .35s var(--ease);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ============================= TYPOGRAPHY ============================= */
+h1,h2,h3,h4{font-family:var(--font-ui);color:var(--text);letter-spacing:-0.01em;}
+.text-hero{font-size:44px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;}
+.text-page{font-size:32px;font-weight:700;line-height:1.15;letter-spacing:-0.01em;}
+.text-section{font-size:22px;font-weight:600;line-height:1.2;}
+.text-card{font-size:18px;font-weight:600;line-height:1.3;}
+.text-widget{font-size:16px;font-weight:600;}
+.text-body-lg{font-size:18px;font-weight:400;line-height:1.7;}
+.text-body{font-size:16px;font-weight:400;line-height:1.65;}
+.text-secondary{font-size:14px;color:var(--text-secondary);line-height:1.6;}
+.text-label{font-size:13px;font-weight:500;letter-spacing:0.02em;color:var(--text-secondary);}
+.text-micro{font-size:12px;font-weight:500;letter-spacing:0.03em;color:var(--muted);}
+.mono{font-family:var(--font-mono);}
+
+/* ============================= LAYOUT ============================= */
+.container{max-width:1440px;margin:0 auto;padding:0 40px;}
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;animation:fadeIn .5s var(--ease);}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
+.reveal{animation:fadeInUp .6s var(--ease) both;}
+
+/* ============================= NAV ============================= */
+.landing-nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb, var(--bg) 85%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft);}
+.landing-nav .bar{display:flex;align-items:center;justify-content:space-between;padding:20px 0;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);}
+.brand-mark svg{width:18px;height:18px;}
+.brand-name{font-weight:700;font-size:17px;letter-spacing:-0.01em;}
+.brand-sub{font-size:12px;color:var(--text-secondary);font-weight:500;}
+
+.icon-btn{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--card);transition:all .2s var(--ease);}
+.icon-btn:hover{border-color:var(--navy);box-shadow:var(--shadow-sm);transform:translateY(-1px);}
+.icon-btn svg{width:17px;height:17px;stroke:var(--text-secondary);}
+
+.top-nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--bg-elevated) 88%, transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-soft);}
+.top-nav .bar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px;}
+.top-nav-left{display:flex;align-items:center;gap:18px;}
+.back-link{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--text-secondary);padding:8px 12px;border-radius:8px;transition:all .2s;}
+.back-link:hover{background:var(--border-soft);color:var(--text);}
+.back-link svg{width:15px;height:15px;stroke:currentColor;}
+.divider-v{width:1px;height:22px;background:var(--border);}
+.account-switch{display:flex;align-items:center;gap:10px;padding:6px 12px 6px 6px;border-radius:10px;border:1px solid var(--border);background:var(--card);}
+.account-switch .logo-badge{width:26px;height:26px;font-size:10px;}
+.account-switch select{border:none;background:transparent;font-weight:600;font-size:14px;color:var(--text);appearance:none;padding-right:14px;cursor:pointer;}
+.top-nav-right{display:flex;align-items:center;gap:10px;}
+.module-pills{display:flex;gap:6px;}
+.module-pill{font-size:13px;font-weight:500;padding:7px 13px;border-radius:8px;color:var(--text-secondary);transition:all .2s;}
+.module-pill:hover{background:var(--border-soft);color:var(--text);}
+
+/* ============================= BUTTONS / BADGES ============================= */
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:10px 18px;border-radius:9px;transition:all .2s var(--ease);}
+.btn-primary{background:var(--navy);color:#fff;box-shadow:var(--shadow-sm);}
+.btn-primary:hover{background:var(--navy-light);transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.btn-ghost{border:1px solid var(--border);color:var(--text);}
+.btn-ghost:hover{border-color:var(--navy);}
+
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;letter-spacing:0.01em;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.badge-success{background:var(--success-soft);color:#16803c;}
+.badge-warning{background:var(--warning-soft);color:#b45309;}
+.badge-danger{background:var(--danger-soft);color:#b91c1c;}
+.badge-info{background:var(--info-soft);color:#1d4ed8;}
+.badge-purple{background:var(--purple-soft);color:#6d28d9;}
+.badge-neutral{background:var(--border-soft);color:var(--text-secondary);}
+:root[data-theme="dark"] .badge-success{color:#4ade80;}
+:root[data-theme="dark"] .badge-warning{color:#fbbf24;}
+:root[data-theme="dark"] .badge-danger{color:#f87171;}
+:root[data-theme="dark"] .badge-info{color:#60a5fa;}
+:root[data-theme="dark"] .badge-purple{color:#a78bfa;}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .badge-success{color:#4ade80;}
+  :root:not([data-theme="light"]) .badge-warning{color:#fbbf24;}
+  :root:not([data-theme="light"]) .badge-danger{color:#f87171;}
+  :root:not([data-theme="light"]) .badge-info{color:#60a5fa;}
+  :root:not([data-theme="light"]) .badge-purple{color:#a78bfa;}
+}
+
+.confidence{display:flex;align-items:center;gap:6px;}
+.confidence-bars{display:flex;gap:2px;}
+.confidence-bars span{width:4px;height:12px;border-radius:2px;background:var(--border);}
+.confidence-bars span.on{background:var(--gold);}
+
+/* ============================= CARDS ============================= */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:box-shadow .25s var(--ease),transform .25s var(--ease),border-color .25s;}
+.card-pad{padding:24px;}
+.card-hover:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:color-mix(in srgb, var(--navy) 30%, var(--border));}
+
+/* ============================= LANDING ============================= */
+.landing-hero{padding:64px 0 40px;}
+.landing-hero .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--gold-light);background:color-mix(in srgb, var(--navy) 92%, black);padding:7px 14px;border-radius:999px;margin-bottom:22px;}
+:root:not([data-theme="dark"]) .landing-hero .eyebrow{background:var(--navy);}
+.landing-hero .eyebrow svg{width:13px;height:13px;stroke:var(--gold-light);}
+.landing-hero h1{max-width:760px;margin-bottom:16px;}
+.landing-hero p{max-width:600px;color:var(--text-secondary);font-size:18px;line-height:1.7;}
+
+.account-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding:8px 0 80px;}
+@media(max-width:1240px){.account-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:680px){.account-grid{grid-template-columns:1fr;}}
+
+.account-card{padding:26px;cursor:pointer;position:relative;overflow:hidden;}
+.account-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}
+.account-card:hover::before{transform:scaleX(1);}
+.account-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;}
+.logo-badge{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;letter-spacing:0.02em;background:linear-gradient(135deg,var(--navy),var(--navy-light));box-shadow:var(--shadow-sm);}
+.account-card h3{font-size:19px;font-weight:600;margin-bottom:4px;}
+.account-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.tag{font-size:12px;font-weight:500;color:var(--text-secondary);background:var(--border-soft);padding:4px 9px;border-radius:6px;}
+.account-update{font-size:12px;color:var(--muted);margin-top:18px;padding-top:14px;border-top:1px solid var(--border-soft);display:flex;align-items:center;gap:5px;}
+
+/* ============================= HERO (dashboard) ============================= */
+.exec-hero{padding:40px 0 8px;}
+.exec-hero-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);border-radius:var(--radius-lg);padding:40px 44px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-lg);}
+.exec-hero-card::after{content:'';position:absolute;top:-40%;right:-10%;width:420px;height:420px;background:radial-gradient(circle,rgba(212,175,55,0.18),transparent 70%);}
+.exec-hero-top{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;z-index:1;}
+.exec-hero-id{display:flex;align-items:center;gap:16px;}
+.exec-hero-id .logo-badge{width:58px;height:58px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);}
+.exec-hero-id h1{color:#fff;font-size:30px;margin-bottom:6px;}
+.exec-hero-id .meta{display:flex;gap:10px;flex-wrap:wrap;}
+.exec-hero-id .meta span{font-size:13px;color:rgba(255,255,255,0.65);}
+.exec-narrative{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.14);position:relative;z-index:1;display:flex;gap:14px;}
+.exec-narrative .ai-tag{flex-shrink:0;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--gold-light);background:rgba(212,175,55,0.14);border:1px solid rgba(212,175,55,0.3);padding:5px 10px;border-radius:999px;height:fit-content;}
+.exec-narrative p{font-size:16.5px;line-height:1.75;color:rgba(255,255,255,0.88);max-width:900px;}
+
+/* ============================= MODULE GRID ============================= */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px;}
+.section-head h2{font-size:20px;}
+.module-section{padding:40px 0 8px;}
+.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:1100px){.module-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.module-grid{grid-template-columns:1fr;}}
+.module-card{padding:24px;cursor:pointer;display:flex;flex-direction:column;gap:14px;position:relative;}
+.module-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.module-icon svg{width:22px;height:22px;stroke-width:1.8;}
+.module-card h3{font-size:17px;}
+.module-card p{font-size:13.5px;color:var(--text-secondary);line-height:1.55;}
+.module-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border-soft);}
+.module-cta{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--navy);}
+:root[data-theme="dark"] .module-cta{color:var(--navy-light);}
+.module-cta svg{width:14px;height:14px;transition:transform .2s;}
+.module-card:hover .module-cta svg{transform:translateX(3px);}
+.module-card.disabled{cursor:not-allowed;opacity:0.55;}
+.module-card.disabled:hover{transform:none;box-shadow:var(--shadow-sm);}
+.soon-badge{position:absolute;top:20px;right:20px;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:var(--border-soft);color:var(--muted);padding:4px 9px;border-radius:999px;}
+
+/* ============================= CHARTS ============================= */
+.charts-section{padding:44px 0 8px;}
+.chart-card{padding:22px 22px 18px;}
+.chart-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.chart-card-head h4{font-size:15px;font-weight:600;}
+.chart-canvas-wrap{position:relative;width:100%;}
+.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;}
+.chart-legend span{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text-secondary);}
+.legend-dot{width:8px;height:8px;border-radius:2px;}
+
+/* ============================= AI SUMMARY ============================= */
+.ai-summary-section{padding:44px 0 8px;}
+.ai-summary-card{padding:30px 34px;background:linear-gradient(135deg,color-mix(in srgb, var(--navy) 6%, var(--card)),var(--card));position:relative;}
+.ai-summary-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.ai-spark{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-gold);}
+.ai-spark svg{width:16px;height:16px;stroke:#fff;}
+.ai-summary-card p{font-size:16.5px;line-height:1.8;color:var(--text);max-width:980px;}
+.ai-pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+
+/* ============================= RECOMMENDATIONS ============================= */
+.reco-section{padding:44px 0 90px;}
+.reco-list{display:flex;flex-direction:column;gap:12px;}
+.reco-row{padding:18px 22px;display:grid;grid-template-columns:34px 1.8fr 1fr 1fr 0.8fr 1fr;align-items:center;gap:18px;}
+@media(max-width:1000px){.reco-row{grid-template-columns:1fr;gap:8px;padding:18px;}}
+.reco-rank{width:30px;height:30px;border-radius:9px;background:var(--border-soft);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--text-secondary);font-family:var(--font-mono);}
+.reco-title{font-size:14.5px;font-weight:600;line-height:1.4;}
+.reco-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+.reco-col-lbl{display:none;}
+@media(max-width:1000px){.reco-col-lbl{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:2px;}}
+
+/* ============================= SLIDE-OVER PANEL ============================= */
+.panel-overlay{position:fixed;inset:0;background:rgba(8,14,26,0.5);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .35s var(--ease);z-index:90;}
+.panel-overlay.active{opacity:1;pointer-events:auto;}
+.module-panel{position:fixed;top:0;right:0;bottom:0;width:min(1180px,96vw);background:var(--bg);box-shadow:-20px 0 60px rgba(0,0,0,0.25);transform:translateX(100%);transition:transform .45s var(--ease);z-index:95;display:flex;flex-direction:column;}
+.module-panel.active{transform:translateX(0);}
+.panel-header{position:sticky;top:0;background:var(--bg-elevated);border-bottom:1px solid var(--border-soft);padding:22px 36px;display:flex;align-items:center;justify-content:space-between;z-index:2;}
+.panel-header-left{display:flex;align-items:center;gap:14px;}
+.panel-header h2{font-size:22px;}
+.panel-close{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.panel-close:hover{background:var(--danger-soft);border-color:var(--danger);}
+.panel-close svg{width:16px;height:16px;}
+.panel-body{padding:32px 36px 90px;overflow-y:auto;flex:1;}
+.panel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;grid-auto-flow:dense;}
+@media(max-width:1000px){.panel-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.panel-grid{grid-template-columns:1fr;}}
+.panel-charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px;}
+@media(max-width:900px){.panel-charts-grid{grid-template-columns:1fr;}}
+.info-card{padding:22px;}
+.info-card h4{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.info-card h4 svg{width:16px;height:16px;stroke:var(--navy);flex-shrink:0;}
+.viz-card h4 svg{width:16px;height:16px;stroke:var(--navy);flex-shrink:0;}
+.mini-list{display:flex;flex-direction:column;gap:10px;}
+.mini-list li{font-size:13.5px;color:var(--text-secondary);line-height:1.5;display:flex;gap:8px;align-items:flex-start;}
+.mini-list li .badge{flex-shrink:0;margin-top:1px;}
+.mini-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:7px;flex-shrink:0;}
+.stat-line{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border-soft);font-size:13.5px;}
+.stat-line:last-child{border-bottom:none;}
+.stat-line b{font-family:var(--font-mono);font-weight:600;}
+
+/* ============================= CUSTOM VIZ ============================= */
+.viz-card{padding:22px;}
+.funnel{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+.funnel-row{display:flex;align-items:center;gap:12px;}
+.funnel-label{width:130px;font-size:12.5px;color:var(--text-secondary);flex-shrink:0;}
+.funnel-bar-track{flex:1;height:26px;background:var(--border-soft);border-radius:6px;overflow:hidden;}
+.funnel-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--navy),var(--navy-light));width:0;transition:width 1.1s var(--ease);}
+.funnel-value{width:40px;flex-shrink:0;text-align:right;font-size:12.5px;font-weight:600;font-family:var(--font-mono);color:var(--text);}
+
+.heatmap-caption{font-size:13px;color:var(--text-secondary);line-height:1.55;margin-top:-6px;margin-bottom:14px;max-width:640px;}
+.heatmap-grid{display:grid;gap:6px;align-items:center;}
+.heatmap-colhead{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:6px;}
+.heatmap-colhead.total{text-align:right;padding-right:4px;}
+.heatmap-rowlabel{font-size:13.5px;font-weight:700;color:var(--text);display:flex;align-items:center;padding-right:10px;min-height:44px;}
+.heatmap-cell{border-radius:8px;min-height:44px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;opacity:0;animation:scaleIn .4s var(--ease) forwards;}
+.heatmap-cell.empty{background:var(--border-soft);color:var(--muted);font-weight:600;font-size:13px;}
+.heatmap-rowtotal{font-size:14px;font-weight:700;color:var(--text);font-family:var(--font-mono);text-align:right;padding-right:4px;}
+.heatmap-divider{grid-column:1/-1;height:1px;background:var(--border-soft);margin:4px 0;}
+.heatmap-totlabel{font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--muted);}
+.heatmap-totval{font-size:14px;font-weight:700;color:var(--text-secondary);font-family:var(--font-mono);text-align:center;}
+.heatmap-totval.grand{color:var(--text);text-align:right;padding-right:4px;}
+
+.tl{display:flex;flex-direction:column;gap:0;margin-top:8px;}
+.tl-item{display:flex;gap:14px;padding-bottom:20px;position:relative;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-line{position:absolute;left:5px;top:16px;bottom:0;width:1px;background:var(--border);}
+.tl-item:last-child .tl-line{display:none;}
+.tl-dot{width:11px;height:11px;border-radius:50%;background:var(--navy);flex-shrink:0;margin-top:3px;box-shadow:0 0 0 3px var(--border-soft);z-index:1;}
+.tl-content{flex:1;}
+.tl-date{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0.03em;text-transform:uppercase;margin-bottom:3px;}
+.tl-title{font-size:13.5px;font-weight:600;margin-bottom:2px;}
+.tl-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.5;}
+
+
+.progress-list{display:flex;flex-direction:column;gap:16px;margin-top:8px;}
+.progress-item .pi-top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px;}
+.progress-item .pi-top b{font-family:var(--font-mono);}
+.progress-track{height:8px;background:var(--border-soft);border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:99px;width:0;transition:width 1.2s var(--ease);}
+
+.network-wrap{display:flex;justify-content:center;padding:10px 0;}
+
+/* ============================= RISK / RANK LISTS ============================= */
+.rank-list{display:flex;flex-direction:column;gap:2px;}
+.rank-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border-soft);}
+.rank-row:last-child{border-bottom:none;}
+.rank-num{width:22px;font-size:12px;font-weight:700;color:var(--muted);font-family:var(--font-mono);}
+.rank-name{flex:1;font-size:13.5px;font-weight:600;}
+.rank-sub{font-size:11.5px;color:var(--muted);}
+
+.watch-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-soft);}
+.watch-row:last-child{border-bottom:none;}
+.watch-avatar{width:34px;height:34px;border-radius:9px;background:var(--border-soft);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-secondary);flex-shrink:0;}
+
+/* ============================= SKELETON ============================= */
+.skeleton{background:linear-gradient(100deg,var(--border-soft) 30%,var(--border) 50%,var(--border-soft) 70%);background-size:200% 100%;animation:shimmer 1.4s ease-in-out infinite;border-radius:8px;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+#loading-overlay{position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;align-items:center;justify-content:center;transition:opacity .5s var(--ease),visibility .5s;}
+#loading-overlay.hide{opacity:0;visibility:hidden;}
+.load-mark{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;animation:pulseMark 1.3s ease-in-out infinite;}
+@keyframes pulseMark{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.08);opacity:.75;}}
+.dash-skeleton{display:none;}
+.dash-skeleton.active{display:block;}
+
+/* ============================= FOOTER ============================= */
+.app-footer{border-top:1px solid var(--border-soft);padding:24px 0;margin-top:20px;}
+.app-footer p{font-size:12.5px;color:var(--muted);}
+
+/* scrollbar */
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
+::-webkit-scrollbar-thumb:hover{background:var(--muted);}
+
+@media(max-width:768px){
+  .container{padding:0 20px;}
+  .text-hero{font-size:32px;}
+  .exec-hero-card{padding:28px 24px;}
+  .panel-header,.panel-body{padding-left:20px;padding-right:20px;}
+}
+</style>
+</head>
+<body>
+
+<div id="loading-overlay">
+  <div class="load-mark">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="24" height="24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+  </div>
+</div>
+
+<!-- ============================= LANDING SCREEN ============================= -->
+<div class="screen active" id="landing-screen">
+  <header class="landing-nav">
+    <div class="container bar">
+      <div class="brand">
+        <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <div>
+          <div class="brand-name">Company</div>
+          <div class="brand-sub">Executive Intelligence</div>
+        </div>
+      </div>
+      <button class="icon-btn" id="theme-toggle-landing" aria-label="Toggle dark mode">
+        <svg id="theme-icon-landing" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="landing-hero">
+      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>AI-Generated Account Intelligence</span>
+      <h1 class="text-hero">Understand any account's health in under 60 seconds.</h1>
+      <p>Select an account to open its executive intelligence dashboard — growth, market position, delivery execution, and competitive dynamics, synthesized into one view.</p>
+    </section>
+    <section class="account-grid" id="account-grid"></section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container"><p>Company Executive Intelligence Platform · Prototype build · Data refreshed nightly from connected sources</p></div>
+  </footer>
+</div>
+
+<!-- ============================= DASHBOARD SCREEN ============================= -->
+<div class="screen" id="dashboard-screen">
+  <nav class="top-nav">
+    <div class="container bar">
+      <div class="top-nav-left">
+        <a class="back-link" id="back-to-accounts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Accounts</a>
+        <div class="divider-v"></div>
+        <div class="account-switch">
+          <div class="logo-badge" id="switch-logo">AZ</div>
+          <select id="account-switch-select"></select>
+        </div>
+      </div>
+      <div class="module-pills">
+        <a class="module-pill" data-scroll="exec-hero">Overview</a>
+        <a class="module-pill" data-scroll="module-section">Modules</a>
+        <a class="module-pill" data-scroll="charts-section">Charts</a>
+        <a class="module-pill" data-scroll="reco-section">Actions</a>
+      </div>
+      <div class="top-nav-right">
+        <button class="icon-btn" id="theme-toggle-dash" aria-label="Toggle dark mode">
+          <svg id="theme-icon-dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" id="dash-main">
+    <!-- HERO -->
+    <section class="exec-hero" id="exec-hero"></section>
+
+    <!-- MODULES -->
+    <section class="module-section" id="module-section">
+      <div class="section-head"><h2>Intelligence Modules</h2></div>
+      <div class="module-grid" id="module-grid"></div>
+    </section>
+
+    <!-- CHARTS -->
+    <section class="charts-section" id="charts-section">
+      <div class="section-head"><h2>Revenue Trend</h2></div>
+      <div class="card chart-card">
+        <div class="chart-card-head"><h4>Revenue Trend — Trailing 6 Months</h4><span class="badge badge-info">6mo</span></div>
+        <div class="chart-canvas-wrap" style="height:260px;"><canvas id="ov-revenue"></canvas></div>
+      </div>
+    </section>
+
+    <!-- AI SUMMARY -->
+    <section class="ai-summary-section" id="ai-summary-section">
+      <div class="card ai-summary-card">
+        <div class="ai-summary-head">
+          <div class="ai-spark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+          <h3 class="text-card">Executive AI Summary</h3>
+        </div>
+        <p id="ai-summary-text"></p>
+        <div class="ai-pill-row" id="ai-summary-pills"></div>
+      </div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section class="reco-section" id="reco-section">
+      <div class="section-head"><h2>Executive Recommendations</h2><span class="text-micro">Top 5 · Ranked by impact</span></div>
+      <div class="reco-list" id="reco-list"></div>
+    </section>
+  </main>
+</div>
+
+<!-- ============================= MODULE SLIDE-OVER ============================= -->
+<div class="panel-overlay" id="panel-overlay"></div>
+<div class="module-panel" id="module-panel">
+  <div class="panel-header">
+    <div class="panel-header-left">
+      <div class="module-icon" id="panel-icon" style="width:38px;height:38px;"></div>
+      <h2 id="panel-title">Module</h2>
+    </div>
+    <button class="panel-close" id="panel-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</div>
+
+<script>
+'use strict';
+
+/* ======================================================================
+   ICONS
+====================================================================== */
+const ICONS = {
+  growth:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>',
+  marketing:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v3a1 1 0 0 0 1 1h2l3 6V4L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 8a5 5 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/></svg>',
+  delivery:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="13" height="9" rx="1"/><path d="M15 11h3l3 3v3h-6"/><circle cx="6.5" cy="19" r="1.6"/><circle cx="17.5" cy="19" r="1.6"/></svg>',
+  competition:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg>',
+  hr:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  rfp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h2"/></svg>',
+  arrowUp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+  arrowDown:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>',
+  arrowRight:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
+  target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg>',
+  zap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>',
+  users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
+  award:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg>',
+  briefcase:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+  layers:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5zM3 13l9 5 9-5M3 18l9 5 9-5"/></svg>',
+  route:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h8a3 3 0 0 0 0-6H7a3 3 0 0 1 0-6h6"/></svg>',
+  pulse:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
+  network:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v5M9.8 15.5 6.9 17M14.2 15.5l2.9 1.5"/></svg>',
+};
+
+/* ======================================================================
+   UTIL
+====================================================================== */
+function seeded(seed){ let s = seed % 2147483647; if(s<=0) s+=2147483646; return function(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }; }
+function genSeries(seed, base, n, drift, vol){ const r=seeded(seed); let v=base; const out=[]; for(let i=0;i<n;i++){ v = v + drift + (r()-0.5)*vol; out.push(Math.max(0,Math.round(v*10)/10)); } return out; }
+function fmtDelta(d){ const s = d>0?'+':''; return s+d.toFixed(1); }
+function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+function colorMix(hex,pct){ return hex; }
+function themeColors(){
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark' || (document.documentElement.getAttribute('data-theme')!=='light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  return {
+    dark, text: dark?'#94A3B8':'#64748B', grid: dark?'rgba(148,163,184,0.10)':'rgba(15,23,42,0.06)',
+    tick: dark?'#5C6B84':'#94A3B8'
+  };
+}
+
+/* ======================================================================
+   ACCOUNT DATA
+====================================================================== */
+const ACCOUNTS = {
+  az: {
+    id:'az', name:'AstraZeneca', ticker:'AZN · LSE / NASDAQ', industry:'Biopharmaceuticals', region:'EMEA · Global',
+    hq:'Cambridge, UK', ceo:'Pascal Soriot', employees:'~90,000', revenue:'$45.8B',
+    accent:'#7C3AED', logo:'AZ', badge:'Excellent',
+    health:{ overall:87, relationship:91, exec:85, momentum:83, delivery:88, growth:86, compRisk:34 },
+    latestUpdate:'Jul 20, 2026',
+    heroNarrative:"AstraZeneca continues to invest heavily in oncology and rare-disease expansion, anchored by Alexion's biologics platform and the Enhertu/Datroway partnership with Daiichi Sankyo. US biologics manufacturing investment and AI-enabled discovery programs are accelerating pipeline velocity. Competitive pressure in oncology is elevated, but delivery execution and account engagement remain strong.",
+    kpis:[
+      {label:'Overall Health',value:87,unit:'/100',delta:2.4,trend:'up',seed:1,badge:'success'},
+      {label:'Executive Score',value:85,unit:'/100',delta:1.1,trend:'up',seed:2,badge:'success'},
+      {label:'Market Momentum',value:83,unit:'/100',delta:3.2,trend:'up',seed:3,badge:'success'},
+      {label:'Delivery Health',value:88,unit:'/100',delta:0.6,trend:'up',seed:4,badge:'success'},
+      {label:'Growth Potential',value:86,unit:'/100',delta:1.8,trend:'up',seed:5,badge:'success'},
+      {label:'Competitive Risk',value:34,unit:'/100',delta:-1.4,trend:'down',seed:6,badge:'warning',inverse:true},
+      {label:'Relationship Score',value:91,unit:'/100',delta:0.9,trend:'up',seed:7,badge:'success'},
+    ],
+    growth:{
+      financial:{revenue:'$45.8B',growth:'+18.4% YoY',employees:'~90,000',pipeline:'190+ projects'},
+      priorities:['Oncology leadership via Enhertu, Datroway, Truqap expansion','Alexion rare-disease platform scale-up','US biologics manufacturing — $3.5B capacity investment','AI-native drug discovery partnerships (Absci, Tempus)'],
+      orgHealth:{score:88,note:'Executive sponsorship strong across R&D and Commercial; engagement steady across 4 consecutive quarters.'},
+      nextActions:['Deepen oncology co-development council cadence','Align on US manufacturing site enablement roadmap','Expand joint AI-discovery workshop series'],
+      pipeline:{stages:[['Qualified',210],['Evaluation',146],['Proposal',92],['Committed',58],['Closed-Won',31]]},
+      treemap:[['Oncology R&D',38,'#7C3AED'],['Biologics Mfg.',26,'#1B365D'],['Rare Disease',18,'#14B8A6'],['AI & Digital',12,'#D4AF37'],['Vaccines',6,'#3B82F6']],
+      timeline:[
+        ['Jun 2026','Enhertu label expansion','Additional HER2-low indication approved, broadening addressable oncology population.'],
+        ['Apr 2026','US biologics site groundbreaking','New Maryland biologics facility construction begins under $3.5B investment plan.'],
+        ['Feb 2026','Alexion pipeline update','Two rare-disease assets advance to late-stage trials.'],
+        ['Dec 2025','AI discovery partnership renewed','Multi-year extension signed to scale generative target-discovery models.'],
+      ],
+      revSeed:11,
+    },
+    marketing:{
+      brief:"Commercial momentum remains strongest in oncology and respiratory, with AI-enabled omnichannel engagement lifting HCP visibility scores across priority territories. Competitive share of voice softened slightly against Merck in immuno-oncology messaging.",
+      momentum:{score:83,trend:'up'},
+      position:'#2 of 6 tracked competitors in oncology share of voice',
+      threats:[['Merck & Co. oncology messaging surge','High','Expanded KEYTRUDA combination-therapy campaigns across 3 priority markets'],['Roche diagnostics bundling','Medium','Companion-diagnostic bundling pressuring account conversations']],
+      opportunities:[['Digital therapeutics cross-sell','High','Respiratory + digital adherence tools under-penetrated in 2 key regions'],['Emerging-market oncology access programs','Medium','Access program expansion opening new HCP segments']],
+      recommendedActions:['Refresh omnichannel messaging cadence in oncology','Launch joint access-program pilot in APAC','Increase share-of-voice investment in immuno-oncology'],
+      execution:{percent:74},
+      campaigns:[['Oncology Access Program',82,'#7C3AED'],['Respiratory Digital Push',66,'#14B8A6'],['Rare Disease Awareness',58,'#3B82F6'],['HCP Omnichannel Refresh',91,'#D4AF37']],
+      heatmap:{rows:['Oncology','Respiratory','Rare Disease','Vaccines'],cols:['NA','EMEA','APAC','LatAm'],seed:21},
+      compRankSeed:22, activitySeed:23, visSeed:24,
+      sov:[['AstraZeneca',27],['Merck & Co.',24],['Roche',19],['BMS',16],['Novartis',14]],
+    },
+    delivery:{
+      portfolio:{critical:2,attention:6,healthy:24},
+      intervention:[['Flagged',11],['Triaged',8],['Action Plan',5],['Resolved',3]],
+      accounts:[['Oncology Platform Rollout','Medium','J. Whitfield'],['APAC Access Program','Low','R. Nakamura'],['Biologics Site Integration','High','M. Alvarez']],
+      risks:[['Manufacturing site ramp timeline','Medium','Weekly steering cadence added, contingency supply plan active'],['Cross-region data integration delays','Low','Additional integration engineers onboarded']],
+      execActions:['Escalate biologics site integration to exec sponsor','Approve contingency resourcing for APAC rollout','Confirm Q3 delivery milestones with joint steering committee'],
+      trendSeed:31, serviceLine:[['Oncology',92],['Rare Disease',88],['Respiratory',81],['Vaccines & Immune',77],['Digital Health',85]],
+      heatmap:{rows:['Oncology','Rare Disease','Respiratory','Digital'],cols:['Scope','Timeline','Budget','Quality'],seed:32},
+    },
+    competition:{
+      landscape:"Oncology and rare disease remain the two most contested fronts, with Merck and Roche intensifying investment. AstraZeneca holds a durable lead in HER2-directed therapies while facing emerging pressure in immuno-oncology combinations.",
+      threatRank:[['Merck & Co.',88,'up'],['Roche',79,'flat'],['Novartis',74,'up'],['Bristol Myers Squibb',68,'down'],['GSK',61,'flat']],
+      momentum:{score:83,trend:'up'},
+      moves:[['Jun 2026','Merck & Co.','Expanded combination-therapy trial network across 12 markets'],['May 2026','Roche','Announced companion-diagnostics bundling program'],['Mar 2026','Novartis','Scaled radioligand manufacturing capacity']],
+      industryTrends:['AI-accelerated target discovery becoming standard R&D infrastructure','Biologics manufacturing reshoring to US and EU','Combination-therapy trial designs replacing monotherapy-first approaches'],
+      recognition:[['Access to Medicine Index — Sector Leader','AtM Foundation','2026'],['Dow Jones Sustainability Index — Pharma','S&P Global','2025']],
+      signals:[['Jul 2026','Competitor filed new IO combination IND','Medium'],['Jun 2026','Pricing pressure signal in EU oncology tender','Low'],['Jun 2026','Talent movement: 2 senior R&D leads hired from rival','Medium']],
+      watchlist:[['Merck & Co.','Escalating oncology combination investment'],['Roche','Diagnostics bundling threatens account stickiness']],
+      network:['Merck & Co.','Roche','Novartis','Bristol Myers Squibb','GSK'],
+      rankSeed:41, momentumSeed:42,
+      industryInvest:{labels:['Oncology','Immunology','Rare Disease','Neuroscience'],a:[42,28,20,10],b:[35,25,22,18]},
+      heatmap:{rows:['AstraZeneca','Merck','Roche','Novartis'],cols:['Oncology','Immunology','Rare Dz'],seed:43},
+    },
+    aiSummary:"AstraZeneca's account trajectory remains firmly positive, driven by oncology franchise expansion and disciplined biologics manufacturing investment. Relationship health is exceptionally strong, with executive sponsorship consistent across R&D and Commercial. Competitive intensity is rising in immuno-oncology, primarily from Merck & Co., but delivery execution provides a stable foundation for continued growth through H2 2026.",
+    recommendations:[
+      {priority:1,title:'Accelerate oncology co-development council cadence',owner:'VP, Strategic Accounts',impact:'High',timeline:'30 days',status:'In Progress',confidence:5},
+      {priority:2,title:'Launch APAC access-program pilot with joint funding',owner:'Regional Growth Lead',impact:'High',timeline:'45 days',status:'Planned',confidence:4},
+      {priority:3,title:'Escalate biologics site integration risk to sponsor',owner:'Delivery Director',impact:'Medium',timeline:'2 weeks',status:'In Progress',confidence:4},
+      {priority:4,title:'Increase immuno-oncology share-of-voice investment',owner:'Marketing Lead',impact:'Medium',timeline:'60 days',status:'Planned',confidence:3},
+      {priority:5,title:'Formalize AI-discovery workshop cadence',owner:'Innovation Partner',impact:'Medium',timeline:'30 days',status:'Not Started',confidence:4},
+    ],
+  },
+
+  gsk: {
+    id:'gsk', name:'GSK', ticker:'GSK · LSE / NYSE', industry:'Biopharmaceuticals', region:'EMEA · Global',
+    hq:'London, UK', ceo:'Emma Walmsley', employees:'~70,000', revenue:'£30.3B',
+    accent:'#3B82F6', logo:'GS', badge:'Good',
+    health:{ overall:78, relationship:80, exec:76, momentum:70, delivery:81, growth:75, compRisk:52 },
+    latestUpdate:'Jul 18, 2026',
+    heroNarrative:"GSK is executing a focused biopharma strategy centred on vaccines (Shingrix, Arexvy), HIV leadership via ViiV Healthcare, and a growing specialty-medicines and oncology pipeline. Investment in mRNA and respiratory programmes is lifting pipeline velocity, though competitive pressure in vaccines and RSV remains elevated. Delivery execution is healthy and account engagement is steady.",
+    kpis:[
+      {label:'Overall Health',value:78,unit:'/100',delta:1.3,trend:'up',seed:8,badge:'info'},
+      {label:'Executive Score',value:76,unit:'/100',delta:0.4,trend:'up',seed:9,badge:'info'},
+      {label:'Market Momentum',value:70,unit:'/100',delta:-2.1,trend:'down',seed:10,badge:'warning'},
+      {label:'Delivery Health',value:81,unit:'/100',delta:1.7,trend:'up',seed:12,badge:'success'},
+      {label:'Growth Potential',value:75,unit:'/100',delta:2.5,trend:'up',seed:13,badge:'info'},
+      {label:'Competitive Risk',value:52,unit:'/100',delta:3.0,trend:'up',seed:14,badge:'warning',inverse:true},
+      {label:'Relationship Score',value:80,unit:'/100',delta:0.2,trend:'flat',seed:15,badge:'info'},
+    ],
+    growth:{
+      financial:{revenue:'£30.3B',growth:'+4.1% YoY (ex-COVID)',employees:'~70,000',pipeline:'110+ projects'},
+      priorities:['ViiV Healthcare oncology ADC integration and pipeline scale-up','$4B cost-realignment program completion','Vaccines franchise stabilization beyond COVID-19','Obesity and cardiometabolic pipeline advancement'],
+      orgHealth:{score:79,note:'Sponsorship stable at VP level; C-suite engagement improving following ViiV Healthcare integration milestones.'},
+      nextActions:['Confirm ViiV Healthcare integration synergy milestones for Q3','Align on obesity-pipeline co-marketing readiness','Review vaccines-franchise account coverage model'],
+      pipeline:{stages:[['Qualified',175],['Evaluation',121],['Proposal',74],['Committed',44],['Closed-Won',22]]},
+      treemap:[['Oncology (ViiV Healthcare ADC)',34,'#3B82F6'],['Vaccines',24,'#1B365D'],['Internal Medicine',20,'#14B8A6'],['Cost Realignment',14,'#D4AF37'],['Rare Disease',8,'#7C3AED']],
+      timeline:[
+        ['Jun 2026','ViiV Healthcare ADC combination data readout','Positive Phase 2 data supports expanded oncology combination strategy.'],
+        ['Apr 2026','Cost realignment program 80% complete','$4B savings target on track for full-year completion.'],
+        ['Feb 2026','Obesity asset advances to Phase 3','Danuglipron program progresses following dosing optimization.'],
+        ['Nov 2025','Vaccines franchise refresh launched','Updated respiratory vaccine portfolio positioning introduced.'],
+      ],
+      revSeed:51,
+    },
+    marketing:{
+      brief:"Commercial visibility has softened modestly as oncology competitors accelerate ADC-focused messaging. GSK's cost-realignment narrative is resonating with payers, but HCP share of voice in oncology trails category leaders.",
+      momentum:{score:70,trend:'down'},
+      position:'#4 of 6 tracked competitors in oncology share of voice',
+      threats:[['AbbVie ADC portfolio expansion','High','Competing antibody-drug conjugate launches in adjacent indications'],['Merck & Co. vaccines bundling','Medium','Combined respiratory vaccine bundling pressuring account share']],
+      opportunities:[['ViiV Healthcare cross-sell into existing oncology accounts','High','Under-penetrated ADC positioning in 3 priority accounts'],['Payer cost-realignment narrative','Medium','Value-based contracting opportunity with 2 major payers']],
+      recommendedActions:['Accelerate ADC messaging refresh across oncology accounts','Deploy payer-facing value narrative toolkit','Rebuild HCP share of voice in core oncology segments'],
+      execution:{percent:61},
+      campaigns:[['ADC Oncology Launch',54,'#3B82F6'],['Payer Value Narrative',77,'#D4AF37'],['Vaccines Refresh',49,'#14B8A6'],['Cost Realignment Comms',88,'#7C3AED']],
+      heatmap:{rows:['Oncology','Vaccines','Internal Med','Rare Disease'],cols:['NA','EMEA','APAC','LatAm'],seed:61},
+      compRankSeed:62, activitySeed:63, visSeed:64,
+      sov:[['Merck & Co.',26],['AbbVie',23],['Johnson & Johnson',20],['GSK',18],['AstraZeneca',13]],
+    },
+    delivery:{
+      portfolio:{critical:4,attention:9,healthy:19},
+      intervention:[['Flagged',15],['Triaged',11],['Action Plan',7],['Resolved',4]],
+      accounts:[['ViiV Healthcare Integration Program','High','D. Castillo'],['Vaccines Distribution Refresh','Medium','K. Lindqvist'],['Payer Contracting Rollout','Medium','S. Osei']],
+      risks:[['ViiV Healthcare integration timeline compression','High','Dedicated PMO stood up, weekly exec checkpoint added'],['Payer contract renegotiation delays','Medium','Legal fast-track process initiated']],
+      execActions:['Escalate ViiV Healthcare integration PMO staffing gap','Confirm payer contracting legal fast-track timeline','Review vaccines distribution SLA performance with ops lead'],
+      trendSeed:71, serviceLine:[['Oncology',74],['Vaccines',79],['Internal Medicine',83],['Rare Disease',86],['Digital Health',72]],
+      heatmap:{rows:['Oncology','Vaccines','Internal Med','Rare Dz'],cols:['Scope','Timeline','Budget','Quality'],seed:72},
+    },
+    competition:{
+      landscape:"Oncology ADC competition has intensified sharply, led by AbbVie and Merck & Co. GSK's ViiV Healthcare acquisition strengthens its long-term position, but near-term share-of-voice and pricing pressure remain the primary watch items.",
+      threatRank:[['Merck & Co.',85,'up'],['AbbVie',82,'up'],['Johnson & Johnson',73,'flat'],['AstraZeneca',69,'up'],['Moderna',55,'down']],
+      momentum:{score:70,trend:'down'},
+      moves:[['Jun 2026','AbbVie','Launched second-generation ADC in adjacent oncology indication'],['May 2026','Merck & Co.','Expanded respiratory vaccine bundling program'],['Mar 2026','Johnson & Johnson','Announced new oncology manufacturing capacity']],
+      industryTrends:['ADC platforms becoming primary oncology battleground','Payer value-based contracting expanding across major markets','Vaccines category consolidating around bundled respiratory portfolios'],
+      recognition:[['Best Places to Work — Disability Inclusion','DEI Index','2026'],['Patient Access Innovation Award','Industry Council','2025']],
+      signals:[['Jul 2026','AbbVie ADC trial expansion filed','High'],['Jun 2026','New payer pricing pressure signal in EU','Medium'],['May 2026','Talent movement: oncology commercial lead departure','Medium']],
+      watchlist:[['AbbVie','Fast-following ADC portfolio expansion'],['Merck & Co.','Vaccines bundling threatens distribution share']],
+      network:['Merck & Co.','AbbVie','Johnson & Johnson','AstraZeneca','Moderna'],
+      rankSeed:81, momentumSeed:82,
+      industryInvest:{labels:['Oncology','Vaccines','Internal Med','Rare Disease'],a:[38,26,22,14],b:[44,20,20,16]},
+      heatmap:{rows:['GSK','Merck','AbbVie','J&J'],cols:['Oncology','Vaccines','Internal Med'],seed:83},
+    },
+    aiSummary:"GSK's account health reflects a company in disciplined transition — recovering from post-pandemic revenue normalization while integrating ViiV Healthcare's oncology platform. Delivery execution is solid and cost-realignment progress is on track, but competitive risk has increased as AbbVie and Merck & Co. accelerate ADC and vaccines-bundling strategies. Rebuilding oncology share of voice is the top near-term priority.",
+    recommendations:[
+      {priority:1,title:'Rebuild oncology share of voice against ADC competitors',owner:'CMO, Oncology BU',impact:'High',timeline:'45 days',status:'Planned',confidence:4},
+      {priority:2,title:'Add dedicated PMO staffing to ViiV Healthcare integration',owner:'Integration Lead',impact:'High',timeline:'2 weeks',status:'In Progress',confidence:5},
+      {priority:3,title:'Deploy payer value-based contracting toolkit',owner:'Market Access Lead',impact:'Medium',timeline:'30 days',status:'Planned',confidence:4},
+      {priority:4,title:'Fast-track payer contract renegotiation',owner:'Legal & Contracts',impact:'Medium',timeline:'21 days',status:'In Progress',confidence:3},
+      {priority:5,title:'Refresh vaccines distribution SLA framework',owner:'Ops Director',impact:'Low',timeline:'60 days',status:'Not Started',confidence:3},
+    ],
+  },
+
+  jnj: {
+    id:'jnj', name:'Johnson & Johnson', ticker:'JNJ · NYSE', industry:'Biopharmaceuticals', region:'North America · Global',
+    hq:'New Brunswick, NJ', ceo:'Joaquin Duato', employees:'~135,000', revenue:'$88.8B',
+    accent:'#EF4444', logo:'JJ', badge:'Good',
+    health:{ overall:74, relationship:77, exec:72, momentum:71, delivery:69, growth:78, compRisk:47 },
+    latestUpdate:'Jul 15, 2026',
+    heroNarrative:"Johnson & Johnson is executing across its two-sector model — Innovative Medicine and MedTech — anchored by Darzalex, Carvykti, and Tremfya as it navigates the Stelara loss-of-exclusivity transition. MedTech expansion (Abiomed, Shockwave) and a deep immunology and oncology pipeline are compounding momentum. Delivery execution is healthy and account engagement is strong.",
+    kpis:[
+      {label:'Overall Health',value:74,unit:'/100',delta:1.0,trend:'up',seed:16,badge:'info'},
+      {label:'Executive Score',value:72,unit:'/100',delta:0.8,trend:'up',seed:17,badge:'info'},
+      {label:'Market Momentum',value:71,unit:'/100',delta:1.9,trend:'up',seed:18,badge:'info'},
+      {label:'Delivery Health',value:69,unit:'/100',delta:-2.6,trend:'down',seed:19,badge:'warning'},
+      {label:'Growth Potential',value:78,unit:'/100',delta:3.4,trend:'up',seed:20,badge:'success'},
+      {label:'Competitive Risk',value:47,unit:'/100',delta:0.5,trend:'up',seed:23,badge:'warning',inverse:true},
+      {label:'Relationship Score',value:77,unit:'/100',delta:0.3,trend:'flat',seed:24,badge:'info'},
+    ],
+    growth:{
+      financial:{revenue:'$88.8B',growth:'+3.6% YoY (core)',employees:'~135,000',pipeline:'65+ projects'},
+      priorities:['Post-Abiomed balance-sheet deleveraging','Plasma-derived therapy capacity expansion','GI franchise growth via Stelara subcutaneous uptake','Darzalex dengue-vaccine market expansion'],
+      orgHealth:{score:75,note:'Sponsorship consistent at regional VP level; global exec engagement improving as deleveraging milestones are met.'},
+      nextActions:['Confirm plasma capacity expansion timeline with ops','Align on Stelara SC launch coverage in EMEA','Review Darzalex market-access roadmap for LatAm'],
+      pipeline:{stages:[['Qualified',128],['Evaluation',86],['Proposal',51],['Committed',29],['Closed-Won',15]]},
+      treemap:[['GI (Stelara)',30,'#EF4444'],['Plasma-Derived Therapies',26,'#1B365D'],['Rare Disease',18,'#14B8A6'],['Vaccines (Darzalex)',16,'#D4AF37'],['Neuroscience',10,'#7C3AED']],
+      timeline:[
+        ['Jun 2026','Stelara subcutaneous EU rollout','Expanded self-administration option launched across 6 EU markets.'],
+        ['Apr 2026','Plasma facility capacity milestone','New fractionation capacity comes online, easing prior supply constraints.'],
+        ['Feb 2026','Darzalex access expansion','Additional national immunization program approvals secured in LatAm.'],
+        ['Dec 2025','Deleveraging target reaffirmed','Net debt/EBITDA ratio continues trending toward long-term target.'],
+      ],
+      revSeed:91,
+    },
+    marketing:{
+      brief:"Momentum is strengthening around Stelara's subcutaneous launch and Darzalex's expanding immunization footprint. Visibility in GI remains category-leading, though rare-disease share of voice trails larger competitors with broader portfolios.",
+      momentum:{score:71,trend:'up'},
+      position:'#1 of 5 tracked competitors in GI biologics share of voice',
+      threats:[['Amgen GI biosimilar entry','Medium','Biosimilar competition emerging in adjacent GI indications'],['Sanofi rare-disease bundling','Medium','Broader rare-disease portfolio bundling pressuring account share']],
+      opportunities:[['Stelara SC cross-market expansion','High','Self-administration format under-launched in 4 markets'],['Darzalex immunization program growth','High','New national program approvals opening large addressable population']],
+      recommendedActions:['Accelerate Stelara SC launch sequencing across EMEA','Expand Darzalex market-access team coverage in LatAm','Strengthen rare-disease share-of-voice campaign'],
+      execution:{percent:69},
+      campaigns:[['Stelara SC Launch',71,'#EF4444'],['Darzalex Access Expansion',84,'#D4AF37'],['Rare Disease SoV Push',47,'#7C3AED'],['GI Digital Engagement',63,'#14B8A6']],
+      heatmap:{rows:['GI','Rare Disease','Vaccines','Neuroscience'],cols:['NA','EMEA','APAC','LatAm'],seed:101},
+      compRankSeed:102, activitySeed:103, visSeed:104,
+      sov:[['Johnson & Johnson',29],['AbbVie',24],['Amgen',19],['Sanofi',17],['Roche',11]],
+    },
+    delivery:{
+      portfolio:{critical:5,attention:8,healthy:14},
+      intervention:[['Flagged',13],['Triaged',9],['Action Plan',6],['Resolved',2]],
+      accounts:[['Plasma Capacity Expansion','High','Y. Tanaka'],['Stelara SC EMEA Rollout','Medium','L. Fischer'],['Darzalex LatAm Access Program','Medium','C. Mendes']],
+      risks:[['Plasma facility ramp-up delays','High','Contingency supply agreements activated, daily ops standup added'],['Cross-border regulatory timeline variance','Medium','Regional regulatory affairs team reinforced']],
+      execActions:['Escalate plasma facility ramp-up to global ops sponsor','Approve contingency supply agreement extension','Review Darzalex regulatory timeline with LatAm affairs lead'],
+      trendSeed:111, serviceLine:[['GI',81],['Rare Disease',74],['Vaccines',69],['Neuroscience',65],['Plasma Therapies',62]],
+      heatmap:{rows:['GI','Plasma','Vaccines','Rare Dz'],cols:['Scope','Timeline','Budget','Quality'],seed:112},
+    },
+    competition:{
+      landscape:"Johnson & Johnson maintains category leadership in GI biologics, but plasma-therapy and rare-disease competitors are scaling capacity aggressively. Amgen's biosimilar entry and Sanofi's rare-disease bundling represent the most active near-term threats.",
+      threatRank:[['Sanofi',77,'up'],['Amgen',74,'up'],['AbbVie',70,'flat'],['Roche',63,'flat'],['Astellas',58,'down']],
+      momentum:{score:71,trend:'up'},
+      moves:[['Jun 2026','Amgen','Filed biosimilar application in adjacent GI indication'],['May 2026','Sanofi','Expanded rare-disease bundled contracting program'],['Mar 2026','Astellas','Announced neuroscience pipeline restructuring']],
+      industryTrends:['Plasma-derived therapy capacity becoming a strategic differentiator','Biosimilar entrants increasing pressure on legacy GI biologics','Subcutaneous self-administration formats reshaping launch strategy'],
+      recognition:[['Dow Jones Sustainability Index — Pharma','S&P Global','2026'],['Patient-Centricity Recognition','Industry Council','2025']],
+      signals:[['Jul 2026','Amgen biosimilar filing confirmed','Medium'],['Jun 2026','Sanofi bundling program expanded in EU','Medium'],['May 2026','Talent movement: rare-disease commercial hire from rival','Low']],
+      watchlist:[['Amgen','Biosimilar entry threatens GI franchise economics'],['Sanofi','Rare-disease bundling threatens account stickiness']],
+      network:['Sanofi','Amgen','AbbVie','Roche','Astellas'],
+      rankSeed:121, momentumSeed:122,
+      industryInvest:{labels:['GI','Rare Disease','Vaccines','Neuroscience'],a:[33,27,23,17],b:[30,31,20,19]},
+      heatmap:{rows:['Johnson & Johnson','Sanofi','Amgen','AbbVie'],cols:['GI','Rare Dz','Vaccines'],seed:123},
+    },
+    aiSummary:"Johnson & Johnson's account trajectory shows strong growth potential led by Stelara's subcutaneous expansion and Darzalex's growing immunization footprint, though delivery health has softened due to plasma-facility capacity constraints. Post-Abiomed deleveraging remains on track, supporting continued executive confidence. Near-term focus should center on resolving plasma-capacity delivery risk while defending GI category leadership against biosimilar entrants.",
+    recommendations:[
+      {priority:1,title:'Escalate plasma facility ramp-up to global ops sponsor',owner:'VP, Global Operations',impact:'High',timeline:'2 weeks',status:'In Progress',confidence:4},
+      {priority:2,title:'Accelerate Stelara SC launch sequencing in EMEA',owner:'Regional Commercial Lead',impact:'High',timeline:'30 days',status:'Planned',confidence:5},
+      {priority:3,title:'Strengthen rare-disease share-of-voice campaign',owner:'Marketing Lead',impact:'Medium',timeline:'45 days',status:'Planned',confidence:3},
+      {priority:4,title:'Expand Darzalex market-access coverage in LatAm',owner:'Market Access Director',impact:'Medium',timeline:'60 days',status:'Not Started',confidence:4},
+      {priority:5,title:'Reinforce regional regulatory affairs staffing',owner:'Regulatory Affairs Lead',impact:'Low',timeline:'30 days',status:'In Progress',confidence:3},
+    ],
+  },
+
+  nvs: {
+    id:'nvs', name:'Novartis', ticker:'NVS · NYSE / SIX', industry:'Biopharmaceuticals', region:'EMEA · Global',
+    hq:'Basel, Switzerland', ceo:'Vas Narasimhan', employees:'~76,000', revenue:'$45.4B',
+    accent:'#14B8A6', logo:'NV', badge:'Excellent',
+    health:{ overall:91, relationship:93, exec:90, momentum:89, delivery:92, growth:88, compRisk:29 },
+    latestUpdate:'Jul 21, 2026',
+    heroNarrative:"Novartis is executing cleanly on its pure-play innovative-medicines strategy following the Sandoz spin-off. Radioligand therapy leadership via Pluvicto, strong Kisqali growth in early breast cancer, and disciplined bolt-on M&A (Chinook, MorphoSys, Mariana Oncology) are compounding momentum. Delivery execution and relationship health are exceptional across the account.",
+    kpis:[
+      {label:'Overall Health',value:91,unit:'/100',delta:2.0,trend:'up',seed:25,badge:'success'},
+      {label:'Executive Score',value:90,unit:'/100',delta:1.6,trend:'up',seed:26,badge:'success'},
+      {label:'Market Momentum',value:89,unit:'/100',delta:2.8,trend:'up',seed:27,badge:'success'},
+      {label:'Delivery Health',value:92,unit:'/100',delta:1.2,trend:'up',seed:28,badge:'success'},
+      {label:'Growth Potential',value:88,unit:'/100',delta:2.1,trend:'up',seed:29,badge:'success'},
+      {label:'Competitive Risk',value:29,unit:'/100',delta:-2.0,trend:'down',seed:30,badge:'success',inverse:true},
+      {label:'Relationship Score',value:93,unit:'/100',delta:0.7,trend:'up',seed:33,badge:'success'},
+    ],
+    growth:{
+      financial:{revenue:'$45.4B',growth:'+11.2% YoY (core)',employees:'~76,000',pipeline:'145+ projects'},
+      priorities:['Radioligand therapy manufacturing scale-up (Pluvicto)','Kisqali expansion into early breast cancer','Cardiovascular-renal-metabolic growth (Entresto, Leqvio)','Bolt-on M&A execution — Chinook, MorphoSys, Mariana Oncology'],
+      orgHealth:{score:92,note:'Executive sponsorship exceptional at C-suite level; consistent engagement across R&D, Commercial and Ops for 6+ quarters.'},
+      nextActions:['Confirm radioligand manufacturing site #4 timeline','Align on Kisqali early-breast-cancer co-marketing plan','Review Mariana Oncology integration governance model'],
+      pipeline:{stages:[['Qualified',232],['Evaluation',168],['Proposal',104],['Committed',67],['Closed-Won',39]]},
+      treemap:[['Radioligand Therapy',32,'#14B8A6'],['Cardiovascular-Renal',24,'#1B365D'],['Immunology',20,'#7C3AED'],['Oncology (Kisqali)',16,'#D4AF37'],['Neuroscience',8,'#3B82F6']],
+      timeline:[
+        ['Jun 2026','Kisqali early breast cancer uptake milestone','Adoption curve exceeds internal forecast in 4 priority markets.'],
+        ['Apr 2026','Radioligand manufacturing site #4 approved','Additional capacity approved to meet Pluvicto demand growth.'],
+        ['Feb 2026','Mariana Oncology integration begins','Radioligand-focused bolt-on acquisition integration kicks off.'],
+        ['Nov 2025','Leqvio access expansion','Broader reimbursement secured across 5 additional markets.'],
+      ],
+      revSeed:131,
+    },
+    marketing:{
+      brief:"Novartis holds category leadership in radioligand therapy and is extending its cardiovascular-renal-metabolic franchise through Entresto and Leqvio. Share of voice is strongest in oncology and cardiovascular, with immunology messaging steadily gaining ground against Cosentyx-era competitors.",
+      momentum:{score:89,trend:'up'},
+      position:'#1 of 5 tracked competitors in radioligand therapy share of voice',
+      threats:[['Eli Lilly cardiometabolic pipeline','Medium','Broader metabolic portfolio expansion could pressure CV-renal messaging'],['Roche radioligand entry','Medium','Emerging radioligand pipeline could challenge category leadership']],
+      opportunities:[['Kisqali early breast cancer cross-sell','High','Under-penetrated in 3 priority oncology accounts'],['Leqvio primary-care channel expansion','High','New reimbursement unlocking primary-care prescribing channel']],
+      recommendedActions:['Defend radioligand category leadership narrative proactively','Expand Leqvio primary-care channel campaign','Accelerate Kisqali early breast cancer HCP education program'],
+      execution:{percent:86},
+      campaigns:[['Radioligand Leadership Campaign',93,'#14B8A6'],['Leqvio Primary Care Push',79,'#D4AF37'],['Kisqali HCP Education',88,'#7C3AED'],['Cosentyx Immunology Refresh',72,'#3B82F6']],
+      heatmap:{rows:['Oncology','Cardiovascular','Immunology','Neuroscience'],cols:['NA','EMEA','APAC','LatAm'],seed:141},
+      compRankSeed:142, activitySeed:143, visSeed:144,
+      sov:[['Novartis',31],['Roche',22],['AstraZeneca',19],['Eli Lilly',16],['GSK',12]],
+    },
+    delivery:{
+      portfolio:{critical:1,attention:4,healthy:29},
+      intervention:[['Flagged',7],['Triaged',5],['Action Plan',3],['Resolved',3]],
+      accounts:[['Radioligand Site #4 Buildout','Low','H. Bergman'],['Mariana Oncology Integration','Medium','P. Delacroix'],['Leqvio Channel Expansion','Low','A. Kowalski']],
+      risks:[['Radioligand supply-chain concentration','Medium','Second-source isotope supplier agreement in progress'],['Integration governance overlap','Low','Unified PMO structure established for bolt-on acquisitions']],
+      execActions:['Approve second-source isotope supplier agreement','Confirm unified PMO structure for Mariana integration','Recognize delivery team performance in quarterly exec review'],
+      trendSeed:151, serviceLine:[['Radioligand Therapy',94],['Cardiovascular-Renal',90],['Immunology',86],['Oncology',89],['Neuroscience',83]],
+      heatmap:{rows:['Radioligand','CV-Renal','Immunology','Oncology'],cols:['Scope','Timeline','Budget','Quality'],seed:152},
+    },
+    competition:{
+      landscape:"Novartis leads the radioligand therapy category outright, with Roche the most credible emerging challenger. Cardiovascular-renal-metabolic competition is intensifying as Eli Lilly broadens its metabolic portfolio, but Novartis's focused pure-play strategy continues to outperform diversified peers.",
+      threatRank:[['Roche',71,'up'],['Eli Lilly',69,'up'],['AstraZeneca',64,'flat'],['GSK',52,'flat'],['Merck & Co.',48,'down']],
+      momentum:{score:89,trend:'up'},
+      moves:[['Jun 2026','Roche','Advanced early-stage radioligand pipeline asset'],['May 2026','Eli Lilly','Expanded cardiometabolic combination trial program'],['Mar 2026','AstraZeneca','Scaled US biologics manufacturing capacity']],
+      industryTrends:['Radioligand therapy manufacturing capacity becoming a key strategic moat','Cardiometabolic combination therapies gaining broader payer support','Focused pure-play portfolio strategies outperforming diversified peers'],
+      recognition:[["Fortune World's Most Admired Companies — Pharma",'Fortune','2026'],['Dow Jones Sustainability Index — Pharma','S&P Global','2026']],
+      signals:[['Jul 2026','Roche radioligand asset advances to Phase 1','Medium'],['Jun 2026','Eli Lilly combination trial expansion filed','Low'],['Jun 2026','Talent movement: radioligand manufacturing lead hired from rival','Low']],
+      watchlist:[['Roche','Emerging radioligand pipeline could challenge category leadership'],['Eli Lilly','Cardiometabolic portfolio expansion pressuring CV-renal share']],
+      network:['Roche','Eli Lilly','AstraZeneca','GSK','Merck & Co.'],
+      rankSeed:161, momentumSeed:162,
+      industryInvest:{labels:['Radioligand','CV-Renal','Immunology','Oncology'],a:[36,29,20,15],b:[40,25,19,16]},
+      heatmap:{rows:['Novartis','Roche','Lilly','AstraZeneca'],cols:['Radioligand','CV-Renal','Immunology'],seed:163},
+    },
+    aiSummary:"Novartis stands as the strongest-performing account in the portfolio, with exceptional relationship health and delivery execution following its successful transition to a focused pure-play innovative-medicines strategy. Radioligand therapy leadership and cardiovascular-renal-metabolic growth are compounding momentum, while competitive risk remains the lowest among tracked accounts. Continued investment in category defense and disciplined M&A integration will sustain this trajectory through 2026.",
+    recommendations:[
+      {priority:1,title:'Proactively defend radioligand category leadership narrative',owner:'Chief Commercial Officer',impact:'High',timeline:'30 days',status:'In Progress',confidence:5},
+      {priority:2,title:'Expand Leqvio primary-care channel campaign',owner:'Marketing Lead',impact:'High',timeline:'45 days',status:'Planned',confidence:4},
+      {priority:3,title:'Approve second-source isotope supplier agreement',owner:'VP, Supply Chain',impact:'Medium',timeline:'2 weeks',status:'In Progress',confidence:4},
+      {priority:4,title:'Accelerate Kisqali early breast cancer HCP education',owner:'Medical Affairs Lead',impact:'Medium',timeline:'30 days',status:'Planned',confidence:5},
+      {priority:5,title:'Formalize unified PMO for bolt-on acquisition integration',owner:'Integration Director',impact:'Low',timeline:'60 days',status:'Not Started',confidence:3},
+    ],
+  },
+  sny: {
+    id:'sny', name:'Sanofi', ticker:'SNY · NASDAQ / EPA', industry:'Biopharmaceuticals', region:'EMEA · Global',
+    hq:'Paris, France', ceo:'Paul Hudson', employees:'~70,000', revenue:'€41.1B',
+    accent:'#6D28D9', logo:'SA', badge:'Excellent',
+    health:{ overall:91, relationship:93, exec:90, momentum:89, delivery:92, growth:88, compRisk:29 },
+    latestUpdate:'Jul 21, 2026',
+    heroNarrative:"Sanofi is executing its 'Play to Win' pure-play biopharma strategy, anchored by Dupixent's multi-indication expansion, a reinvigorated vaccines franchise (Beyfortus, flu), and disciplined pipeline focus following the Opella consumer-health separation. Immunology leadership and AI-enabled R&D are accelerating pipeline velocity. Delivery execution and relationship health are strong across the account.",
+    kpis:[
+      {label:'Overall Health',value:91,unit:'/100',delta:2.0,trend:'up',seed:75,badge:'success'},
+      {label:'Executive Score',value:90,unit:'/100',delta:1.6,trend:'up',seed:76,badge:'success'},
+      {label:'Market Momentum',value:89,unit:'/100',delta:2.8,trend:'up',seed:77,badge:'success'},
+      {label:'Delivery Health',value:92,unit:'/100',delta:1.2,trend:'up',seed:78,badge:'success'},
+      {label:'Growth Potential',value:88,unit:'/100',delta:2.1,trend:'up',seed:79,badge:'success'},
+      {label:'Competitive Risk',value:29,unit:'/100',delta:-2.0,trend:'down',seed:80,badge:'success',inverse:true},
+      {label:'Relationship Score',value:93,unit:'/100',delta:0.7,trend:'up',seed:83,badge:'success'},
+    ],
+    growth:{
+      financial:{revenue:'€41.1B',growth:'+11.2% YoY (core)',employees:'~70,000',pipeline:'145+ projects'},
+      priorities:['Immunology therapy manufacturing scale-up (Dupixent)','Beyfortus expansion into early breast cancer','Cardiovascular-renal-metabolic growth (Entresto, Sarclisa)','Bolt-on M&A execution — Provention Bio, Inhibrx, Translate Bio'],
+      orgHealth:{score:92,note:'Executive sponsorship exceptional at C-suite level; consistent engagement across R&D, Commercial and Ops for 6+ quarters.'},
+      nextActions:['Confirm immunology manufacturing site #4 timeline','Align on Beyfortus early-breast-cancer co-marketing plan','Review Mariana Oncology integration governance model'],
+      pipeline:{stages:[['Qualified',232],['Evaluation',168],['Proposal',104],['Committed',67],['Closed-Won',39]]},
+      treemap:[['Immunology Therapy',32,'#14B8A6'],['Cardiovascular-Renal',24,'#1B365D'],['Immunology',20,'#7C3AED'],['Oncology (Beyfortus)',16,'#D4AF37'],['Neuroscience',8,'#3B82F6']],
+      timeline:[
+        ['Jun 2026','Beyfortus early breast cancer uptake milestone','Adoption curve exceeds internal forecast in 4 priority markets.'],
+        ['Apr 2026','Immunology manufacturing site #4 approved','Additional capacity approved to meet Dupixent demand growth.'],
+        ['Feb 2026','Mariana Oncology integration begins','Immunology-focused bolt-on acquisition integration kicks off.'],
+        ['Nov 2025','Sarclisa access expansion','Broader reimbursement secured across 5 additional markets.'],
+      ],
+      revSeed:181,
+    },
+    marketing:{
+      brief:"Sanofi holds category leadership in immunology therapy and is extending its cardiovascular-renal-metabolic franchise through Entresto and Sarclisa. Share of voice is strongest in oncology and cardiovascular, with immunology messaging steadily gaining ground against Cosentyx-era competitors.",
+      momentum:{score:89,trend:'up'},
+      position:'#1 of 5 tracked competitors in immunology therapy share of voice',
+      threats:[['Eli Lilly cardiometabolic pipeline','Medium','Broader metabolic portfolio expansion could pressure CV-renal messaging'],['Roche immunology entry','Medium','Emerging immunology pipeline could challenge category leadership']],
+      opportunities:[['Beyfortus early breast cancer cross-sell','High','Under-penetrated in 3 priority oncology accounts'],['Sarclisa primary-care channel expansion','High','New reimbursement unlocking primary-care prescribing channel']],
+      recommendedActions:['Defend immunology category leadership narrative proactively','Expand Sarclisa primary-care channel campaign','Accelerate Beyfortus early breast cancer HCP education program'],
+      execution:{percent:86},
+      campaigns:[['Immunology Leadership Campaign',93,'#14B8A6'],['Sarclisa Primary Care Push',79,'#D4AF37'],['Beyfortus HCP Education',88,'#7C3AED'],['Cosentyx Immunology Refresh',72,'#3B82F6']],
+      heatmap:{rows:['Oncology','Cardiovascular','Immunology','Neuroscience'],cols:['NA','EMEA','APAC','LatAm'],seed:191},
+      compRankSeed:142, activitySeed:143, visSeed:144,
+      sov:[['Sanofi',31],['Roche',22],['AstraZeneca',19],['Eli Lilly',16],['GSK',12]],
+    },
+    delivery:{
+      portfolio:{critical:1,attention:4,healthy:29},
+      intervention:[['Flagged',7],['Triaged',5],['Action Plan',3],['Resolved',3]],
+      accounts:[['Immunology Site #4 Buildout','Low','H. Bergman'],['Mariana Oncology Integration','Medium','P. Delacroix'],['Sarclisa Channel Expansion','Low','A. Kowalski']],
+      risks:[['Immunology supply-chain concentration','Medium','Second-source antibody supplier agreement in progress'],['Integration governance overlap','Low','Unified PMO structure established for bolt-on acquisitions']],
+      execActions:['Approve second-source antibody supplier agreement','Confirm unified PMO structure for Mariana integration','Recognize delivery team performance in quarterly exec review'],
+      trendSeed:151, serviceLine:[['Immunology Therapy',94],['Cardiovascular-Renal',90],['Immunology',86],['Oncology',89],['Neuroscience',83]],
+      heatmap:{rows:['Immunology','CV-Renal','Immunology','Oncology'],cols:['Scope','Timeline','Budget','Quality'],seed:202},
+    },
+    competition:{
+      landscape:"Sanofi leads the immunology therapy category outright, with Roche the most credible emerging challenger. Cardiovascular-renal-metabolic competition is intensifying as Eli Lilly broadens its metabolic portfolio, but Sanofi's focused pure-play strategy continues to outperform diversified peers.",
+      threatRank:[['Roche',71,'up'],['Eli Lilly',69,'up'],['AstraZeneca',64,'flat'],['GSK',52,'flat'],['Merck & Co.',48,'down']],
+      momentum:{score:89,trend:'up'},
+      moves:[['Jun 2026','Roche','Advanced early-stage immunology pipeline asset'],['May 2026','Eli Lilly','Expanded cardiometabolic combination trial program'],['Mar 2026','AstraZeneca','Scaled US biologics manufacturing capacity']],
+      industryTrends:['Immunology therapy manufacturing capacity becoming a key strategic moat','Cardiometabolic combination therapies gaining broader payer support','Focused pure-play portfolio strategies outperforming diversified peers'],
+      recognition:[["Fortune World's Most Admired Companies — Pharma",'Fortune','2026'],['Dow Jones Sustainability Index — Pharma','S&P Global','2026']],
+      signals:[['Jul 2026','Roche immunology asset advances to Phase 1','Medium'],['Jun 2026','Eli Lilly combination trial expansion filed','Low'],['Jun 2026','Talent movement: immunology manufacturing lead hired from rival','Low']],
+      watchlist:[['Roche','Emerging immunology pipeline could challenge category leadership'],['Eli Lilly','Cardiometabolic portfolio expansion pressuring CV-renal share']],
+      network:['Roche','Eli Lilly','AstraZeneca','GSK','Merck & Co.'],
+      rankSeed:161, momentumSeed:162,
+      industryInvest:{labels:['Immunology','CV-Renal','Immunology','Oncology'],a:[36,29,20,15],b:[40,25,19,16]},
+      heatmap:{rows:['Sanofi','Roche','Lilly','AstraZeneca'],cols:['Immunology','CV-Renal','Immunology'],seed:213},
+    },
+    aiSummary:"Sanofi stands as the strongest-performing account in the portfolio, with exceptional relationship health and delivery execution following its successful transition to a focused pure-play innovative-medicines strategy. Immunology therapy leadership and cardiovascular-renal-metabolic growth are compounding momentum, while competitive risk remains the lowest among tracked accounts. Continued investment in category defense and disciplined M&A integration will sustain this trajectory through 2026.",
+    recommendations:[
+      {priority:1,title:'Proactively defend immunology category leadership narrative',owner:'Chief Commercial Officer',impact:'High',timeline:'30 days',status:'In Progress',confidence:5},
+      {priority:2,title:'Expand Sarclisa primary-care channel campaign',owner:'Marketing Lead',impact:'High',timeline:'45 days',status:'Planned',confidence:4},
+      {priority:3,title:'Approve second-source antibody supplier agreement',owner:'VP, Supply Chain',impact:'Medium',timeline:'2 weeks',status:'In Progress',confidence:4},
+      {priority:4,title:'Accelerate Beyfortus early breast cancer HCP education',owner:'Medical Affairs Lead',impact:'Medium',timeline:'30 days',status:'Planned',confidence:5},
+      {priority:5,title:'Formalize unified PMO for bolt-on acquisition integration',owner:'Integration Director',impact:'Low',timeline:'60 days',status:'Not Started',confidence:3},
+    ],
+  },
+};
+
+const ACCOUNT_ORDER = ['az','gsk','jnj','nvs','sny'];
+let currentAccountId = 'az';
+let activeCharts = {};
+
+/* ======================================================================
+   CHART.JS GLOBAL DEFAULTS
+====================================================================== */
+function applyChartDefaults(){
+  const t = themeColors();
+  Chart.defaults.font.family = "'Inter','Stack Sans Text',sans-serif";
+  Chart.defaults.color = t.tick;
+  Chart.defaults.borderColor = t.grid;
+  Chart.defaults.animation = { duration: 900, easing:'easeOutQuart' };
+}
+
+function destroyChart(key){ if(activeCharts[key]){ activeCharts[key].destroy(); delete activeCharts[key]; } }
+function destroyChartsWithPrefix(prefix){ Object.keys(activeCharts).forEach(k=>{ if(k.startsWith(prefix)) destroyChart(k); }); }
+
+/* ======================================================================
+   RENDER: LANDING
+====================================================================== */
+function renderLanding(){
+  const grid = document.getElementById('account-grid');
+  grid.innerHTML = ACCOUNT_ORDER.map((id,i)=>{
+    const a = ACCOUNTS[id];
+    return `<div class="card card-hover account-card reveal" style="animation-delay:${i*80}ms;" data-account="${id}">
+      <div class="account-card-top">
+        <div class="logo-badge">${a.logo}</div>
+      </div>
+      <h3>${a.name}</h3>
+      <div class="text-secondary" style="margin-bottom:10px;">${a.ticker}</div>
+      <div class="account-meta">
+        <span class="tag">${a.industry}</span>
+        <span class="tag">${a.region}</span>
+      </div>
+      <div class="account-update">${ICONS.clock.replace('<svg ','<svg width="12" height="12" ')}<span>Updated ${a.latestUpdate}</span></div>
+    </div>`;
+  }).join('');
+
+  grid.querySelectorAll('.account-card').forEach(el=>{
+    // Open the full cross-module Account Research Report (React page) instead of the
+    // in-iframe slide-over dashboard. Map this doc's short ids to the app's account ids.
+    var ID_MAP = { az:'astrazeneca', gsk:'gsk', jnj:'jnj', nvs:'novartis', sny:'sanofi' };
+    el.addEventListener('click',()=>{ var rid = ID_MAP[el.dataset.account] || el.dataset.account; var url = '/accounts/' + rid + '/report'; try { window.top.location.href = url; } catch(e){ window.location.href = url; } });
+  });
+}
+
+/* ======================================================================
+   RENDER: DASHBOARD SHELL
+====================================================================== */
+function populateAccountSwitch(){
+  const sel = document.getElementById('account-switch-select');
+  sel.innerHTML = ACCOUNT_ORDER.map(id=>`<option value="${id}">${ACCOUNTS[id].name}</option>`).join('');
+  sel.value = currentAccountId;
+  sel.onchange = ()=> openDashboard(sel.value);
+}
+
+function openDashboard(id){
+  currentAccountId = id;
+  const a = ACCOUNTS[id];
+  document.getElementById('landing-screen').classList.remove('active');
+  document.getElementById('dashboard-screen').classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+  populateAccountSwitch();
+  document.getElementById('switch-logo').textContent = a.logo;
+  renderHero(a);
+  renderModuleGrid(a);
+  renderOverviewCharts(a);
+  renderAISummary(a);
+  renderRecommendations(a);
+}
+
+document.getElementById('back-to-accounts').addEventListener('click',()=>{
+  destroyChartsWithPrefix('ov-');
+  document.getElementById('dashboard-screen').classList.remove('active');
+  document.getElementById('landing-screen').classList.add('active');
+  window.scrollTo({top:0});
+});
+
+document.querySelectorAll('.module-pill').forEach(p=>{
+  p.addEventListener('click',()=>{
+    const el = document.getElementById(p.dataset.scroll);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+/* ---------- HERO ---------- */
+function renderHero(a){
+  const el = document.getElementById('exec-hero');
+  el.innerHTML = `<div class="card exec-hero-card reveal">
+    <div class="exec-hero-top">
+      <div class="exec-hero-id">
+        <div class="logo-badge">${a.logo}</div>
+        <div>
+          <h1>${a.name}</h1>
+          <div class="meta"><span>${a.industry}</span><span>·</span><span>${a.hq}</span><span>·</span><span>CEO ${a.ceo}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="exec-narrative">
+      <span class="ai-tag">${ICONS.zap.replace('<svg ','<svg width="12" height="12" ')}AI</span>
+      <p>${a.heroNarrative}</p>
+    </div>
+  </div>`;
+}
+
+/* ---------- MODULE GRID ---------- */
+const MODULE_META = {
+  growth:{title:'Growth',desc:'Financial trajectory, strategic priorities, investment allocation and pipeline health.',icon:'growth',color:'var(--gold)',bg:'var(--navy-soft)'},
+  marketing:{title:'Marketing / Service Line',desc:'Market momentum, competitive position, top threats and opportunities.',icon:'marketing',color:'var(--gold)',bg:'var(--navy-soft)'},
+  delivery:{title:'Delivery',desc:'Project portfolio health, intervention pipeline and organizational risk.',icon:'delivery',color:'var(--gold)',bg:'var(--navy-soft)'},
+  competition:{title:'Competition',desc:'Competitive landscape, threat ranking, momentum and strategic moves.',icon:'competition',color:'var(--gold)',bg:'var(--navy-soft)'},
+};
+function renderModuleGrid(a){
+  const grid = document.getElementById('module-grid');
+  const cards = Object.keys(MODULE_META).map((key,i)=>{
+    const m = MODULE_META[key];
+    return `<div class="card card-hover module-card reveal" style="animation-delay:${i*70}ms" data-module="${key}">
+      <div class="module-icon" style="background:${m.bg};color:${m.color}">${ICONS[m.icon]}</div>
+      <h3>${m.title}</h3>
+      <p>${m.desc}</p>
+      <div class="module-foot">
+        <span class="badge badge-info">Live</span>
+        <span class="module-cta">View module ${ICONS.arrowRight}</span>
+      </div>
+    </div>`;
+  }).join('');
+  const soon = `
+    <div class="card module-card disabled">
+      <span class="soon-badge">Coming Soon</span>
+      <div class="module-icon" style="background:var(--border-soft);color:var(--muted)">${ICONS.hr}</div>
+      <h3>HR</h3>
+      <p>Workforce intelligence and organizational health signals for this account.</p>
+      <div class="module-foot"><span class="badge" style="background:var(--border-soft);color:var(--muted)">Locked</span></div>
+    </div>
+    <div class="card module-card disabled">
+      <span class="soon-badge">Coming Soon</span>
+      <div class="module-icon" style="background:var(--border-soft);color:var(--muted)">${ICONS.rfp}</div>
+      <h3>RFP</h3>
+      <p>Proposal pipeline tracking and win-probability intelligence.</p>
+      <div class="module-foot"><span class="badge" style="background:var(--border-soft);color:var(--muted)">Locked</span></div>
+    </div>`;
+  grid.innerHTML = cards + soon;
+  grid.querySelectorAll('.module-card[data-module]').forEach(el=>{
+    el.addEventListener('click',()=> openModulePanel(el.dataset.module));
+  });
+}
+
+/* ---------- OVERVIEW CHARTS ---------- */
+function renderOverviewCharts(a){
+  applyChartDefaults();
+  destroyChartsWithPrefix('ov-');
+  const t = themeColors();
+  const months = ['Feb','Mar','Apr','May','Jun','Jul'];
+  const rev = genSeries(a.growth.revSeed, a.health.overall*0.7, 6, 1.2, 4);
+
+  activeCharts['ov-revenue'] = new Chart(document.getElementById('ov-revenue'), {
+    type:'line',
+    data:{ labels:months, datasets:[
+      {label:'Revenue Trend',data:rev,borderColor:a.accent,backgroundColor:hexAlpha(a.accent,0.14),fill:true,tension:.4,pointRadius:0,borderWidth:2.5},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:t.grid},ticks:{font:{size:10}}}}}
+  });
+}
+function hexAlpha(hex,a){
+  const h = hex.replace('#','');
+  const r=parseInt(h.substring(0,2),16), g=parseInt(h.substring(2,4),16), b=parseInt(h.substring(4,6),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+/* ---------- AI SUMMARY ---------- */
+function renderAISummary(a){
+  document.getElementById('ai-summary-text').textContent = a.aiSummary;
+  const pills = document.getElementById('ai-summary-pills');
+  pills.innerHTML = `
+    <span class="badge badge-info">${ICONS.target.replace('<svg ','<svg width="11" height="11" ')} Focus: ${MODULE_META[Object.keys(MODULE_META)[0]].title}</span>
+    <span class="badge badge-purple">${ICONS.zap.replace('<svg ','<svg width="11" height="11" ')} Confidence: High</span>
+    <span class="badge badge-success">${ICONS.pulse.replace('<svg ','<svg width="11" height="11" ')} Momentum: ${a.health.momentum>=75?'Positive':'Stable'}</span>`;
+}
+
+/* ---------- RECOMMENDATIONS ---------- */
+function renderRecommendations(a){
+  const list = document.getElementById('reco-list');
+  list.innerHTML = a.recommendations.map(r=>{
+    const statusClass = r.status==='In Progress'?'badge-info':r.status==='Planned'?'badge-purple':r.status==='Not Started'?'badge-warning':'badge-success';
+    const impactClass = r.impact==='High'?'badge-danger':r.impact==='Medium'?'badge-warning':'badge-info';
+    const conf = Array.from({length:5},(_,i)=> `<span class="${i<r.confidence?'on':''}"></span>`).join('');
+    return `<div class="card reco-row reveal">
+      <div class="reco-rank">${r.priority}</div>
+      <div>
+        <div class="reco-title">${r.title}</div>
+        <div class="reco-sub">Owner · ${r.owner}</div>
+      </div>
+      <div><div class="reco-col-lbl">Impact</div><span class="badge ${impactClass}">${r.impact}</span></div>
+      <div><div class="reco-col-lbl">Timeline</div><span class="text-secondary" style="font-size:13.5px;">${r.timeline}</span></div>
+      <div><div class="reco-col-lbl">Status</div><span class="badge ${statusClass}">${r.status}</span></div>
+      <div><div class="reco-col-lbl">Confidence</div><div class="confidence"><div class="confidence-bars">${conf}</div></div></div>
+    </div>`;
+  }).join('');
+}
+
+/* ======================================================================
+   MODULE PANEL
+====================================================================== */
+const panel = document.getElementById('module-panel');
+const overlay = document.getElementById('panel-overlay');
+document.getElementById('panel-close').addEventListener('click', closeModulePanel);
+overlay.addEventListener('click', closeModulePanel);
+
+function openModulePanel(key){
+  const a = ACCOUNTS[currentAccountId];
+  const m = MODULE_META[key];
+  document.getElementById('panel-title').textContent = `${m.title} — ${a.name}`;
+  document.getElementById('panel-icon').style.background = m.bg;
+  document.getElementById('panel-icon').style.color = m.color;
+  document.getElementById('panel-icon').innerHTML = ICONS[m.icon];
+  document.getElementById('panel-body').innerHTML = RENDERERS[key](a);
+  panel.classList.add('active');
+  overlay.classList.add('active');
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(()=> initModuleCharts(key,a));
+}
+function closeModulePanel(){
+  panel.classList.remove('active');
+  overlay.classList.remove('active');
+  document.body.style.overflow='';
+  setTimeout(()=> destroyChartsWithPrefix('mod-'), 400);
+}
+
+function statBar(label,value,color){
+  return `<div class="progress-item"><div class="pi-top"><span class="text-secondary">${label}</span><b>${value}%</b></div><div class="progress-track"><div class="progress-fill" data-w="${value}" style="background:${color}"></div></div></div>`;
+}
+function funnelHTML(stages,color1,color2){
+  const max = stages[0][1];
+  return `<div class="funnel">${stages.map(s=>{
+    const pct = Math.round((s[1]/max)*100);
+    return `<div class="funnel-row"><span class="funnel-label">${s[0]}</span><div class="funnel-bar-track"><div class="funnel-bar-fill" data-w="${pct}" style="background:linear-gradient(90deg,${color1},${color2})"></div></div><span class="funnel-value">${s[1]}</span></div>`;
+  }).join('')}</div>`;
+}
+function timelineHTML(items){
+  return `<div class="tl">${items.map(it=>`<div class="tl-item"><div class="tl-line"></div><div class="tl-dot"></div><div class="tl-content"><div class="tl-date">${it[0]}</div><div class="tl-title">${it[1]}</div><div class="tl-desc">${it[2]}</div></div></div>`).join('')}</div>`;
+}
+function investmentListHTML(items){
+  const tiers = ['Primary Focus','Core Investment','Core Investment','Emerging Area','Emerging Area'];
+  const tierClass = ['badge-success','badge-info','badge-info','badge-neutral','badge-neutral'];
+  return `<div class="rank-list">${items.map((it,i)=>{
+    const tier = tiers[i] || 'Emerging Area';
+    const cls = tierClass[i] || 'badge-neutral';
+    return `<div class="rank-row"><span class="rank-name">${it[0]}</span><span class="badge ${cls}">${tier}</span></div>`;
+  }).join('')}</div>`;
+}
+function heatmapHTML(cfg){
+  const rand = seeded(cfg.seed);
+  const rows = cfg.rows, cols = cfg.cols;
+  const levelColor = ['','#8B98B8','#3E5578','#1B365D'];
+  const matrix = rows.map(()=> cols.map(()=>{
+    const roll = rand();
+    if(roll<0.50) return 0;
+    if(roll<0.78) return 1;
+    if(roll<0.93) return 2;
+    return 3;
+  }));
+  const rowTotals = matrix.map(row=> row.reduce((s,v)=>s+v,0));
+  const colTotals = cols.map((_,ci)=> matrix.reduce((s,row)=>s+row[ci],0));
+  const grandTotal = rowTotals.reduce((s,v)=>s+v,0);
+  const gridCols = `132px repeat(${cols.length},1fr) 52px`;
+  let out = `<div class="heatmap-grid" style="grid-template-columns:${gridCols};">`;
+  out += `<div></div>`;
+  cols.forEach(c=> out += `<div class="heatmap-colhead">${c}</div>`);
+  out += `<div class="heatmap-colhead total">Total</div>`;
+  rows.forEach((rl,ri)=>{
+    out += `<div class="heatmap-rowlabel">${rl}</div>`;
+    cols.forEach((_,ci)=>{
+      const v = matrix[ri][ci]; const delay = (ri*cols.length+ci)*45;
+      out += v===0
+        ? `<div class="heatmap-cell empty" style="animation-delay:${delay}ms">–</div>`
+        : `<div class="heatmap-cell" style="background:${levelColor[v]};animation-delay:${delay}ms">${v}</div>`;
+    });
+    out += `<div class="heatmap-rowtotal">${rowTotals[ri]}</div>`;
+  });
+  out += `<div class="heatmap-divider"></div>`;
+  out += `<div class="heatmap-totlabel">Total</div>`;
+  colTotals.forEach(ct=> out += `<div class="heatmap-totval">${ct}</div>`);
+  out += `<div class="heatmap-totval grand">${grandTotal}</div>`;
+  out += `</div>`;
+  return out;
+}
+function networkSVG(center,nodes,color){
+  const cx=200,cy=140,R=95;
+  const pts = nodes.map((n,i)=>{ const ang = (i/nodes.length)*Math.PI*2 - Math.PI/2; return {x:cx+R*Math.cos(ang), y:cy+R*Math.sin(ang), name:n}; });
+  const lines = pts.map(p=>`<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="${color}" stroke-opacity="0.25" stroke-width="1.5"/>`).join('');
+  const nodeEls = pts.map(p=>`<g><circle cx="${p.x}" cy="${p.y}" r="26" fill="var(--card)" stroke="${color}" stroke-width="1.5"/><text x="${p.x}" y="${p.y+3}" text-anchor="middle" font-size="9" font-weight="600" fill="var(--text)">${p.name.split(' ').map(w=>w[0]).join('').slice(0,3)}</text></g>`).join('');
+  return `<div class="network-wrap"><svg viewBox="0 0 400 280" width="100%" height="260">
+    ${lines}
+    <circle cx="${cx}" cy="${cy}" r="34" fill="${color}"/>
+    <text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">${center.split(' ').map(w=>w[0]).join('').slice(0,3)}</text>
+    ${nodeEls}
+  </svg></div>
+  <div class="chart-legend">${nodes.map(n=>`<span><span class="legend-dot" style="background:${color}"></span>${n}</span>`).join('')}</div>`;
+}
+
+/* ---------- GROWTH PANEL ---------- */
+function renderGrowthPanel(a){
+  const g = a.growth;
+  return `
+  <div class="panel-grid">
+    <div class="card info-card"><h4>${ICONS.briefcase}Financial Snapshot</h4>
+      <div class="stat-line"><span>Annual Revenue</span><b>${g.financial.revenue}</b></div>
+      <div class="stat-line"><span>YoY Growth</span><b>${g.financial.growth}</b></div>
+      <div class="stat-line"><span>Employees</span><b>${g.financial.employees}</b></div>
+      <div class="stat-line"><span>Active Pipeline</span><b>${g.financial.pipeline}</b></div>
+    </div>
+    <div class="card info-card"><h4>${ICONS.target}Strategic Priorities</h4><ul class="mini-list">${g.priorities.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.layers}Investment Strategy</h4><div style="margin-top:4px;">${investmentListHTML(g.treemap)}</div></div>
+    <div class="card info-card"><h4>${ICONS.pulse}Organization Health</h4>
+      <div style="margin-bottom:10px;"><span class="badge badge-success">Healthy Sponsorship</span></div>
+      <p class="text-secondary" style="font-size:13.5px;">${g.orgHealth.note}</p>
+    </div>
+    <div class="card info-card"><h4>${ICONS.route}Next Best Actions</h4><ul class="mini-list">${g.nextActions.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.growth}Pipeline Overview</h4>${funnelHTML(g.pipeline.stages,'#1B365D','#3B82F6')}</div>
+  </div>
+  <div class="card chart-card" style="margin-bottom:28px;">
+    <div class="chart-card-head"><h4>Revenue Trend</h4></div>
+    <div class="chart-canvas-wrap" style="height:230px;"><canvas id="mod-g-revenue"></canvas></div>
+  </div>
+  <div class="card viz-card"><h4 style="font-size:15px;margin-bottom:4px;display:flex;align-items:center;gap:8px;">${ICONS.clock.replace('<svg ','<svg width="16" height="16" ')}Account Growth Timeline</h4>${timelineHTML(g.timeline)}</div>
+  `;
+}
+
+/* ---------- MARKETING PANEL ---------- */
+function renderMarketingPanel(a){
+  const m = a.marketing;
+  return `
+  <div class="panel-grid">
+    <div class="card info-card"><h4>${ICONS.zap}Executive AI Brief</h4><p class="text-secondary" style="font-size:13.5px;line-height:1.6;">${m.brief}</p></div>
+    <div class="card info-card"><h4>${ICONS.pulse}Market Momentum</h4>
+      <div style="margin-bottom:6px;"><span class="badge ${m.momentum.trend==='up'?'badge-success':'badge-warning'}">${m.momentum.trend==='up'?'Rising':'Softening'}</span></div>
+      <p class="text-secondary" style="font-size:13px;">${m.position}</p>
+    </div>
+    <div class="card info-card"><h4>${ICONS.alert}Top Threats</h4><ul class="mini-list">${m.threats.map(t=>`<li><b>${t[0]}</b> — ${t[2]} <span class="badge ${t[1]==='High'?'badge-danger':'badge-warning'}" style="margin-left:4px;">${t[1]}</span></li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.target}Top Opportunities</h4><ul class="mini-list">${m.opportunities.map(t=>`<li><b>${t[0]}</b> — ${t[2]} <span class="badge badge-info" style="margin-left:4px;">${t[1]}</span></li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.route}Recommended Actions</h4><ul class="mini-list">${m.recommendedActions.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.briefcase}Execution Progress</h4>${m.campaigns.map(c=>statBar(c[0],c[1],c[2])).join('')}</div>
+  </div>
+  <div class="panel-charts-grid">
+    <div class="card chart-card"><div class="chart-card-head"><h4>Competitor Ranking</h4></div><div class="chart-canvas-wrap" style="height:220px;"><canvas id="mod-m-ranking"></canvas></div></div>
+    <div class="card chart-card"><div class="chart-card-head"><h4>Share of Voice</h4></div><div class="chart-canvas-wrap" style="height:220px;"><canvas id="mod-m-sov"></canvas></div></div>
+  </div>
+  <div class="card viz-card"><h4 style="font-size:15px;margin-bottom:4px;">Opportunity Heatmap — Service Line × Region</h4><p class="heatmap-caption">Service line × region — number of open opportunity signals at each intersection. Darker cells mean stronger opportunity concentration.</p>${heatmapHTML(m.heatmap)}</div>
+  `;
+}
+
+/* ---------- DELIVERY PANEL ---------- */
+function renderDeliveryPanel(a){
+  const d = a.delivery;
+  return `
+  <div class="panel-grid">
+    <div class="card info-card"><h4>${ICONS.layers}Delivery Portfolio</h4>
+      <div class="stat-line"><span><span class="badge badge-danger" style="margin-right:6px;">●</span>Critical</span><b>${d.portfolio.critical}</b></div>
+      <div class="stat-line"><span><span class="badge badge-warning" style="margin-right:6px;">●</span>Attention</span><b>${d.portfolio.attention}</b></div>
+      <div class="stat-line"><span><span class="badge badge-success" style="margin-right:6px;">●</span>Healthy</span><b>${d.portfolio.healthy}</b></div>
+    </div>
+    <div class="card info-card"><h4>${ICONS.route}Intervention Pipeline</h4>${funnelHTML(d.intervention,'#14B8A6','#1B365D')}</div>
+    <div class="card info-card"><h4>${ICONS.users}Accounts Requiring Attention</h4>${d.accounts.map(ac=>`<div class="watch-row"><div class="watch-avatar">${ac[2].split(' ').map(w=>w[0]).join('')}</div><div style="flex:1;"><div style="font-size:13.5px;font-weight:600;">${ac[0]}</div><div class="text-micro">Owner · ${ac[2]}</div></div><span class="badge ${ac[1]==='High'?'badge-danger':ac[1]==='Medium'?'badge-warning':'badge-info'}">${ac[1]}</span></div>`).join('')}</div>
+    <div class="card info-card"><h4>${ICONS.alert}Top Organizational Risks</h4><ul class="mini-list">${d.risks.map(r=>`<li><b>${r[0]}</b> — ${r[1]} severity. ${r[2]}</li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.target}Executive Actions</h4><ul class="mini-list">${d.execActions.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.pulse}Portfolio Trend</h4><p class="text-secondary" style="font-size:13.5px;">The portfolio now shows <b class="mono">${d.portfolio.healthy}</b> healthy, <b class="mono">${d.portfolio.attention}</b> needing attention, and <b class="mono">${d.portfolio.critical}</b> critical projects. Continued focus on the flagged critical items is recommended.</p></div>
+  </div>
+  <div class="card chart-card" style="margin-bottom:28px;">
+    <div class="chart-card-head"><h4>Project Health</h4></div>
+    <div class="chart-canvas-wrap" style="height:230px;"><canvas id="mod-d-health"></canvas></div>
+  </div>
+  <div class="card viz-card"><h4 style="font-size:15px;margin-bottom:4px;">Risk Heatmap — Service Line × Dimension</h4><p class="heatmap-caption">Service line × dimension — number of flagged risk items at each intersection. Darker cells mean more concentrated risk.</p>${heatmapHTML(d.heatmap)}</div>
+  `;
+}
+
+/* ---------- COMPETITION PANEL ---------- */
+function renderCompetitionPanel(a){
+  const c = a.competition;
+  const threatLevel = score => score>=75?'High': score>=55?'Medium':'Low';
+  const threatBadgeClass = lvl => lvl==='High'?'badge-danger':lvl==='Medium'?'badge-warning':'badge-info';
+  return `
+  <div class="panel-grid">
+    <div class="card info-card" style="grid-column:span 2;"><h4>${ICONS.shield}Competitive Landscape</h4><p class="text-secondary" style="font-size:14px;line-height:1.7;">${c.landscape}</p></div>
+    <div class="card info-card"><h4>${ICONS.target}Key Competitors</h4><div class="rank-list">${c.threatRank.map((r)=>{ const lvl=threatLevel(r[1]); return `<div class="rank-row"><span class="rank-name">${r[0]}</span><span class="badge ${threatBadgeClass(lvl)}">${lvl} threat</span></div>`; }).join('')}</div></div>
+    <div class="card info-card"><h4>${ICONS.layers}Industry Trends</h4><ul class="mini-list">${c.industryTrends.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.award}Recognition</h4><ul class="mini-list">${c.recognition.map(r=>`<li><b>${r[0]}</b> — ${r[1]}, ${r[2]}</li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.alert}Recent Signals</h4><ul class="mini-list">${c.signals.map(s=>`<li><span class="text-micro">${s[0]}</span> — ${s[1]} <span class="badge ${s[2]==='High'?'badge-danger':s[2]==='Medium'?'badge-warning':'badge-info'}" style="margin-left:4px;">${s[2]}</span></li>`).join('')}</ul></div>
+    <div class="card info-card"><h4>${ICONS.users}Executive Watchlist</h4>${c.watchlist.map(w=>`<div class="watch-row"><div class="watch-avatar">${w[0].split(' ').map(x=>x[0]).join('').slice(0,2)}</div><div><div style="font-size:13.5px;font-weight:600;">${w[0]}</div><div class="text-micro">${w[1]}</div></div></div>`).join('')}</div>
+    <div class="card info-card" style="grid-column:span 2;"><h4>${ICONS.network}Competitor Network</h4>${networkSVG(a.name,c.network,a.accent)}</div>
+  </div>
+  <div class="card viz-card" style="margin-bottom:28px;"><h4 style="font-size:15px;margin-bottom:4px;">Threat Heatmap — Competitor × Category</h4><p class="heatmap-caption">Competitor × category — number of active threat signals at each intersection. Darker cells mean higher threat concentration.</p>${heatmapHTML(c.heatmap)}</div>
+  <div class="card viz-card"><h4 style="font-size:15px;margin-bottom:4px;">Strategic Moves Timeline</h4>${timelineHTML(c.moves)}</div>
+  `;
+}
+
+const RENDERERS = { growth:renderGrowthPanel, marketing:renderMarketingPanel, delivery:renderDeliveryPanel, competition:renderCompetitionPanel };
+
+/* ---------- MODULE CHART INIT ---------- */
+function initModuleCharts(key,a){
+  applyChartDefaults();
+  const t = themeColors();
+  const months = ['Feb','Mar','Apr','May','Jun','Jul'];
+
+  document.querySelectorAll('.progress-fill').forEach(el=>{ requestAnimationFrame(()=> el.style.width = el.dataset.w+'%'); });
+  document.querySelectorAll('.funnel-bar-fill').forEach(el=>{ requestAnimationFrame(()=> el.style.width = el.dataset.w+'%'); });
+
+  if(key==='growth'){
+    const g = a.growth;
+    const rev = genSeries(g.revSeed,a.health.overall*0.7,6,1.3,4);
+    activeCharts['mod-g-revenue'] = new Chart(document.getElementById('mod-g-revenue'),{type:'line',data:{labels:months,datasets:[{data:rev,borderColor:a.accent,backgroundColor:hexAlpha(a.accent,0.15),fill:true,tension:.4,pointRadius:0,borderWidth:2.5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:t.grid}}}}});
+  }
+  if(key==='marketing'){
+    const m = a.marketing;
+    activeCharts['mod-m-ranking'] = new Chart(document.getElementById('mod-m-ranking'),{type:'bar',data:{labels:m.sov.map(s=>s[0]),datasets:[{data:m.sov.map(s=>s[1]),backgroundColor:m.sov.map(s=>s[0]===a.name?a.accent:hexAlpha('#64748B',0.35)),borderRadius:6,barThickness:16}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:t.grid}},y:{grid:{display:false}}}}});
+    activeCharts['mod-m-sov'] = new Chart(document.getElementById('mod-m-sov'),{type:'doughnut',data:{labels:m.sov.map(s=>s[0]),datasets:[{data:m.sov.map(s=>s[1]),backgroundColor:['#1B365D','#3B82F6','#14B8A6','#D4AF37','#94A3B8'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{boxWidth:8,boxHeight:8,usePointStyle:true,padding:10,font:{size:10.5}}}}}});
+  }
+  if(key==='delivery'){
+    const d = a.delivery;
+    activeCharts['mod-d-health'] = new Chart(document.getElementById('mod-d-health'),{type:'doughnut',data:{labels:['Critical','Attention','Healthy'],datasets:[{data:[d.portfolio.critical,d.portfolio.attention,d.portfolio.healthy],backgroundColor:['#EF4444','#F59E0B','#22C55E'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{boxWidth:8,boxHeight:8,usePointStyle:true,padding:12,font:{size:11}}}}}});
+  }
+}
+
+/* ======================================================================
+   THEME TOGGLE
+====================================================================== */
+function setThemeIcon(){
+  const dark = document.documentElement.getAttribute('data-theme')==='dark' || (document.documentElement.getAttribute('data-theme')!=='light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const sun = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  const moon = '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';
+  document.getElementById('theme-icon-landing').innerHTML = dark? moon : sun;
+  document.getElementById('theme-icon-dash').innerHTML = dark? moon : sun;
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const isDark = cur==='dark' || (cur!=='light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme',next);
+  localStorage.setItem('nudge-theme',next);
+  setThemeIcon();
+  if(document.getElementById('dashboard-screen').classList.contains('active')){
+    renderOverviewCharts(ACCOUNTS[currentAccountId]);
+    if(panel.classList.contains('active')){
+      const openKey = Object.keys(MODULE_META).find(k=> document.getElementById('panel-title').textContent.startsWith(MODULE_META[k].title));
+      if(openKey) setTimeout(()=> initModuleCharts(openKey, ACCOUNTS[currentAccountId]), 50);
+    }
+  }
+}
+document.getElementById('theme-toggle-landing').addEventListener('click',toggleTheme);
+document.getElementById('theme-toggle-dash').addEventListener('click',toggleTheme);
+
+/* ======================================================================
+   INIT
+====================================================================== */
+(function init(){
+  const saved = localStorage.getItem('nudge-theme');
+  if(saved) document.documentElement.setAttribute('data-theme',saved);
+  setThemeIcon();
+  renderLanding();
+  setTimeout(()=>{ document.getElementById('loading-overlay').classList.add('hide'); },550);
+})();
+</script>
+</body>
+</html>

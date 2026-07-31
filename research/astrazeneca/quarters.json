@@ -1,0 +1,66 @@
+{
+  "account": "AstraZeneca",
+  "generated": "2026-07-30",
+  "currency": "USD",
+  "note": "All figures are FACT, transcribed from AstraZeneca results announcements in sources.json/signals.json. Interpretations are labeled ai_hypothesis and separated from fact.",
+  "quarters": [
+    {
+      "period": "FY2025",
+      "period_end": "2025-12-31",
+      "fact": {
+        "total_revenue": "$58,739m",
+        "total_revenue_growth": "+8% CER",
+        "core_eps": "$9.16",
+        "core_eps_growth": "+11%",
+        "segment_commentary": "Driven by Oncology, CVRM, R&I and Rare Disease."
+      },
+      "ai_hypothesis": "The FY2025 base plus 2026 momentum keeps AZ on a trajectory toward its $80bn 2030 ambition, implying proportional compounding of content, review and engagement volumes.",
+      "confidence": "High",
+      "source_references": ["https://www.astrazeneca.com/content/dam/az/PDF/2025/Q4-FY/Full-year-Q4-2025-results-announcement.pdf"]
+    },
+    {
+      "period": "H1 2026",
+      "period_end": "2026-06-30",
+      "fact": {
+        "total_revenue": "$30,672m",
+        "total_revenue_growth": "+6% CER (+9% actual)",
+        "core_eps_growth": "+12%",
+        "segments": [
+          { "name": "Oncology", "value": "$14,124m", "growth": "+15% CER" },
+          { "name": "BioPharmaceuticals", "value": "$11,151m", "growth": "-5% CER", "note": "Farxiga -11% CER to $3,998m; Brilinta -66% CER to $186m on US loss of exclusivity." },
+          { "name": "Rare Disease", "value": "$4,911m", "growth": "+11% CER" }
+        ],
+        "geography_note": "China revenue $3,510m, -5% CER under volume-based procurement pressure."
+      },
+      "ai_hypothesis": "Growth is concentrating in Oncology and Rare Disease — the most content- and specialist-engagement-intensive therapy areas — while mature CVRM primary-care brands enter steep decline, signaling a portfolio rotation of promotional spend.",
+      "confidence": "High",
+      "source_references": ["https://www.astrazeneca.com/content/dam/az/PDF/2026/h1q2/H1-and-Q2-2026-results-announcement.pdf"]
+    },
+    {
+      "period": "Q2 2026",
+      "period_end": "2026-06-30",
+      "fact": {
+        "total_revenue": "$15,384m",
+        "total_revenue_growth": "+5% CER",
+        "core_eps": "$2.63",
+        "core_eps_growth": "+18% CER",
+        "core_operating_margin": "34% (+2pp)",
+        "core_rd_pct_revenue": "24%",
+        "core_sga_pct_revenue": "26%"
+      },
+      "ai_hypothesis": "Strong EPS leverage over modest top-line growth plus margin expansion shows the launch portfolio converting to profit while SG&A stays disciplined — favoring outsourced variable-cost content and engagement models.",
+      "confidence": "High",
+      "source_references": ["https://www.astrazeneca.com/content/dam/az/PDF/2026/h1q2/H1-and-Q2-2026-results-announcement.pdf"]
+    }
+  ],
+  "guidance": {
+    "fact": {
+      "fy2026_total_revenue_growth": "Mid-to-high single-digit percentage",
+      "fy2026_core_eps_growth": "Low double-digit percentage",
+      "long_term_2030_ambition": "$80bn Total Revenue; 20+ high-value data readouts due over the next 18 months"
+    },
+    "ai_hypothesis": "Guidance reaffirmed despite Farxiga LoE and China VBP indicates management confidence in launch-driven offsets and a secure, plannable commercial budget environment.",
+    "confidence": "High",
+    "source_references": ["https://www.astrazeneca.com/content/dam/az/PDF/2026/h1q2/H1-and-Q2-2026-results-announcement.pdf"]
+  }
+}

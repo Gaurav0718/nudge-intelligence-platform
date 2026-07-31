@@ -1,0 +1,173 @@
+/* Account Research Report — warm "first-read" dossier styling (scoped under .arep).
+   Matches the Sales & Growth research-report reference; reused for all 4 modules. */
+.arep {
+  --arep-bg: #eef2f8;
+  --arep-card: #ffffff;
+  --arep-ink: #1b2b45;
+  --arep-muted: #5c6675;
+  --arep-faint: #8a8f99;
+  --arep-accent: #1B365D;      /* navy — brand primary (section heads, text accents) */
+  --arep-accent-soft: #eef2f8; /* navy tint */
+  --arep-line: #e4e7ee;
+  --arep-navy: #1B365D;
+  --arep-green: #2f855a;
+  --arep-teal: #2b6cb0;
+  --arep-blue: #2b6cb0;
+  --arep-gold: #C9A227;        /* brand gold — decorative accents */
+  --arep-red: #b23b3b;
+  background: var(--arep-bg);
+  color: var(--arep-ink);
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  border-radius: 14px;
+  padding: 4px;
+}
+.arep * { box-sizing: border-box; }
+
+/* Sticky action bar */
+.arep-bar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: rgba(244,241,234,0.94); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--arep-line);
+  padding: 12px 20px; margin-bottom: 8px; border-radius: 12px 12px 0 0; flex-wrap: wrap;
+}
+.arep-back {
+  display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  background: var(--arep-navy); color: #fff; border: none; border-radius: 8px;
+  font-size: 13.5px; font-weight: 700; letter-spacing: 0.02em; padding: 10px 18px;
+  font-family: inherit;
+}
+.arep-back:hover { background: #24487a; }
+/* Module jump buttons — navy solid, matching Back to Account */
+.arep-jump { display: flex; gap: 8px; flex-wrap: wrap; }
+.arep-jump a {
+  font-size: 12.5px; font-weight: 700; letter-spacing: 0.03em;
+  color: #fff; background: var(--arep-navy); text-decoration: none;
+  padding: 10px 16px; border-radius: 8px; border: 1px solid var(--arep-navy); cursor: pointer;
+  line-height: 1; white-space: nowrap;
+}
+.arep-jump a:hover { background: #24487a; }
+
+.arep-body { padding: 0 20px 34px; }
+
+/* Hero */
+.arep-hero { padding: 22px 4px 26px; }
+.arep-eyebrow { font-size: 12px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--arep-gold); }
+.arep-title { font-size: 42px; font-weight: 800; letter-spacing: -0.02em; margin: 6px 0 4px; color: var(--arep-ink); font-family: Georgia, 'Times New Roman', serif; }
+.arep-sub { font-size: 15px; color: var(--arep-muted); }
+.arep-firstread {
+  margin-top: 16px; display: inline-block; background: var(--arep-accent);
+  color: #fff; font-size: 12.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 8px 18px; border-radius: 6px;
+}
+
+/* Module banner divider */
+.arep-module-banner {
+  margin: 38px 0 20px; display: flex; align-items: center; gap: 12px;
+  border-top: 2px solid var(--arep-navy); padding-top: 16px;
+  scroll-margin-top: 132px; /* clear the app top bar + report sticky bar on jump */
+}
+.arep-module-banner .n { font-size: 13px; font-weight: 800; color: #fff; background: var(--arep-navy); border-radius: 6px; padding: 5px 10px; letter-spacing: 0.04em; }
+.arep-module-banner .t { font-size: 22px; font-weight: 800; color: var(--arep-ink); letter-spacing: -0.01em; }
+.arep-gotomod {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  background: var(--arep-navy); color: #fff; border: none; border-radius: 8px;
+  font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; padding: 9px 16px; font-family: inherit; white-space: nowrap;
+}
+.arep-gotomod:hover { background: #24487a; }
+
+/* Section head */
+.arep-shead { display: flex; align-items: center; gap: 9px; margin: 4px 0 14px; }
+.arep-shead .dot { width: 8px; height: 8px; border-radius: 2px; background: var(--arep-gold); transform: rotate(45deg); flex-shrink: 0; }
+.arep-shead h3 { font-size: 13.5px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--arep-accent); margin: 0; white-space: nowrap; }
+.arep-shead .rule { flex: 1; height: 1px; background: var(--arep-line); }
+.arep-shead .tag { font-size: 11.5px; font-weight: 700; color: var(--arep-faint); letter-spacing: 0.04em; }
+
+/* Card — flex column so content fills the (equal) card height, no hollow bottoms */
+.arep-card { background: var(--arep-card); border: 1px solid var(--arep-line); border-radius: 12px; padding: 20px 22px; height: 100%; display: flex; flex-direction: column; }
+/* section head sitting directly above a full-width block */
+.arep-body > .arep-shead { margin-top: 20px; }
+
+/* facts block that distributes to fill remaining card height (Company Overview) */
+.arep-facts { display: flex; flex-direction: column; flex: 1; justify-content: space-evenly; margin-top: 4px; }
+
+/* Grid helpers — cards in a row share equal height (clean, structured bottoms) */
+.arep-grid { display: grid; gap: 18px; align-items: stretch; margin-bottom: 18px; }
+.arep-g2 { grid-template-columns: 1fr 1fr; }
+.arep-g3 { grid-template-columns: repeat(3, 1fr); }
+.arep-g4 { grid-template-columns: repeat(4, 1fr); }
+.arep-g5 { grid-template-columns: repeat(5, 1fr); }
+/* nested grids inside a card shouldn't add extra bottom margin */
+.arep-card .arep-grid { margin-bottom: 0; }
+@media (max-width: 1100px) { .arep-g5 { grid-template-columns: repeat(3,1fr); } .arep-g4 { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 760px)  { .arep-g2,.arep-g3,.arep-g4,.arep-g5 { grid-template-columns: 1fr; } }
+
+/* Column block (labelled list) */
+.arep-col-title { font-size: 13.5px; font-weight: 800; color: var(--arep-ink); margin-bottom: 11px; display: flex; align-items: center; gap: 6px; }
+.arep-col-title .ci { color: var(--arep-gold); display: inline-flex; }
+.arep-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.arep-list li { font-size: 13.5px; line-height: 1.55; color: var(--arep-ink); display: flex; gap: 8px; }
+.arep-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--arep-gold); margin-top: 7px; flex-shrink: 0; }
+.arep-list.muted li { color: var(--arep-muted); }
+
+/* Fact row (label / value) */
+.arep-fact { display: flex; gap: 10px; align-items: baseline; font-size: 13.5px; padding: 8px 0; border-bottom: 1px dashed var(--arep-line); }
+.arep-fact:last-child { border-bottom: none; }
+.arep-fact .fl { color: var(--arep-muted); flex-shrink: 0; }
+.arep-fact .fv { color: var(--arep-ink); font-weight: 700; margin-left: auto; text-align: right; }
+
+/* Metric tile — equal height + aligned value baseline */
+.arep-metric { border: 1px solid var(--arep-line); border-radius: 10px; padding: 15px 16px; background: #fff; text-align: left; align-self: stretch; display: flex; flex-direction: column; }
+.arep-metric .ml { font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--arep-muted); margin-bottom: 8px; min-height: 2.4em; line-height: 1.3; }
+.arep-metric .mv { font-size: 21px; font-weight: 800; line-height: 1.15; margin-top: auto; }
+.arep-metric .mn { font-size: 12px; color: var(--arep-muted); margin-top: 4px; }
+
+/* Chips / tag wall */
+.arep-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.arep-chip { font-size: 12px; font-weight: 600; color: var(--arep-ink); background: #fff; border: 1px solid var(--arep-line); border-radius: 6px; padding: 6px 11px; }
+.arep-chip.soft { background: var(--arep-accent-soft); border-color: #cdd8ea; color: var(--arep-navy); }
+
+/* Meter (opportunity/fit) */
+.arep-meter-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--arep-line); }
+.arep-meter-row:last-child { border-bottom: none; }
+.arep-meter-row .lab { font-size: 13.5px; font-weight: 600; color: var(--arep-ink); }
+.arep-meter { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+.arep-dots { display: flex; gap: 3px; }
+.arep-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--arep-line); display: inline-block; }
+.arep-dots i.on { background: var(--arep-gold); }
+.arep-level { font-size: 11.5px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; min-width: 58px; text-align: right; }
+.arep-level.high { color: var(--arep-green); }
+.arep-level.medium { color: var(--arep-gold); }
+.arep-level.low { color: var(--arep-faint); }
+
+/* Table */
+.arep-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.arep-table th { text-align: left; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--arep-muted); padding: 11px 14px; border-bottom: 2px solid var(--arep-line); }
+.arep-table td { padding: 12px 14px; border-bottom: 1px solid var(--arep-line); color: var(--arep-ink); vertical-align: top; line-height: 1.55; }
+.arep-table tr:last-child td { border-bottom: none; }
+
+/* Initiative card */
+.arep-init { border: 1px solid var(--arep-line); border-top: 3px solid var(--arep-gold); border-radius: 0 0 10px 10px; padding: 14px 15px; background: #fff; align-self: stretch; }
+.arep-init .k { font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--arep-accent); margin-bottom: 6px; }
+.arep-init .h { font-size: 14px; font-weight: 800; color: var(--arep-ink); margin-bottom: 6px; line-height: 1.35; }
+.arep-init .b { font-size: 12.5px; color: var(--arep-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Org node */
+.arep-org { border: 1px solid var(--arep-line); border-radius: 10px; padding: 13px 15px; background: #fff; align-self: stretch; }
+.arep-org .r { font-size: 11px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--arep-accent); }
+.arep-org .n { font-size: 15px; font-weight: 800; color: var(--arep-ink); margin: 3px 0; }
+.arep-org .i { font-size: 12.5px; color: var(--arep-muted); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* RAG badge */
+.arep-rag { font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+.arep-rag.red { background: #fbe9e9; color: #b23b3b; }
+.arep-rag.amber { background: #fdf1dd; color: #b7791f; }
+.arep-rag.green { background: #e6f4ec; color: #2f855a; }
+
+/* Checklist (Why account) */
+.arep-check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.6; color: var(--arep-ink); padding: 9px 0; border-bottom: 1px dashed var(--arep-line); }
+.arep-check:last-child { border-bottom: none; }
+.arep-check .ck { color: var(--arep-green); flex-shrink: 0; margin-top: 2px; }
+
+.arep-note { font-size: 12.5px; color: var(--arep-muted); line-height: 1.6; font-style: italic; }
+.arep-p { font-size: 14px; line-height: 1.7; color: var(--arep-ink); margin: 0; }

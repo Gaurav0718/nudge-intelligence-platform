@@ -1,0 +1,95 @@
+{
+  "account": "Sanofi",
+  "generated": "2026-07-30",
+  "note": "Named executives are limited to individuals explicitly verifiable in sources.json/signals.json. Buying centers referenced without a named individual are listed under target_functions WITHOUT fabricated names. FACT / AI HYPOTHESIS / RECOMMENDATION are separated.",
+  "executives": [
+    {
+      "id": "snf-exec-01",
+      "name": "Belen Garijo",
+      "role": "Chief Executive Officer",
+      "status": "Incoming (effective 29 April 2026)",
+      "fact": "Belen Garijo became Sanofi CEO effective April 29, 2026, succeeding ousted CEO Paul Hudson, after shares fell ~25% over the prior year amid underwhelming trial updates.",
+      "ai_hypothesis": "A new CEO installed after a stalled turnaround will likely reset strategic priorities, scrutinize vendor spend and re-evaluate commercial and R&D partnerships within her first two to three quarters.",
+      "indegene_angle": "Incumbent vendor relationships tied to the prior regime are exposed to review, but the new team opens a window to re-pitch DAAI, Omnichannel and MedComm value against Garijo's incoming agenda.",
+      "why_it_matters": "A new CEO reviewing vendor spend creates the rarest commercial window — re-pitch now or wait out her full first-year agenda.",
+      "engagement_recommendation": "Map current Company stakeholders against the new leadership structure and prepare a value-reaffirmation briefing timed to Garijo's first 100 days.",
+      "priority": "High",
+      "confidence": "High",
+      "source_references": ["https://www.cnbc.com/2026/02/12/sanofi-ousts-ceo-hudson-names-beln-garijo-new-ceo.html"]
+    },
+    {
+      "id": "snf-exec-02",
+      "name": "Olivier Charmeil",
+      "role": "Interim Chief Executive Officer",
+      "status": "Interim (bridging to Garijo)",
+      "fact": "Olivier Charmeil served as interim CEO between Paul Hudson's departure (last day Feb 17, 2026) and Belen Garijo's start (April 29, 2026).",
+      "ai_hypothesis": "As a bridge leader, Charmeil is unlikely to authorize major new vendor commitments; strategic decisions defer to the incoming CEO.",
+      "indegene_angle": "Maintain relationship continuity during the interim period without expecting large new mandates until Garijo sets direction.",
+      "why_it_matters": "Interim leaders do not authorise mandates — staying warm now positions Company the moment Garijo sets direction.",
+      "engagement_recommendation": "Keep engagement warm and informational through the interim; time substantive proposals to post-Garijo transition.",
+      "priority": "Medium",
+      "confidence": "High",
+      "source_references": ["https://www.sanofi.com/en/media-room/press-releases/2026/2026-02-12-06-30-00-3236866"]
+    },
+    {
+      "id": "snf-exec-03",
+      "name": "Paul Hudson",
+      "role": "Chief Executive Officer (ousted)",
+      "status": "Departed",
+      "fact": "Paul Hudson was ousted after seven years as CEO, his last day February 17, 2026, following underwhelming trial updates and a ~25% share decline.",
+      "ai_hypothesis": "Relationships anchored to Hudson's tenure carry elevated churn risk as the new regime reassesses commitments.",
+      "indegene_angle": "Do not anchor future outreach to Hudson-era relationships; reframe value for the incoming leadership.",
+      "why_it_matters": "Hudson-era relationships carry elevated churn risk as the new regime reassesses commitments — flag them before they become surprises.",
+      "engagement_recommendation": "No engagement. Audit any Hudson-era stakeholder dependencies for continuity risk.",
+      "priority": "Low",
+      "confidence": "High",
+      "source_references": ["https://www.cnbc.com/2026/02/12/sanofi-ousts-ceo-hudson-names-beln-garijo-new-ceo.html"]
+    },
+    {
+      "id": "snf-exec-04",
+      "name": "Frederic Oudea",
+      "role": "Chairman of the Board",
+      "status": "Active",
+      "fact": "Frederic Oudea is Chairman, overseeing the CEO transition from Hudson to Garijo.",
+      "ai_hypothesis": "As Chairman through a contentious CEO change, Oudea's board is signaling a demand for improved execution and disciplined capital allocation.",
+      "indegene_angle": "Board-level focus on execution and cost discipline supports Company's efficiency and launch-velocity value narrative.",
+      "why_it_matters": "The board drove a CEO change over execution concerns — every proposal must now prove measurable execution and cost outcomes.",
+      "engagement_recommendation": "Frame proposals around measurable execution improvement and cost efficiency consistent with board priorities.",
+      "priority": "Low",
+      "confidence": "Medium",
+      "source_references": ["https://www.sanofi.com/en/media-room/press-releases/2026/2026-02-12-06-30-00-3236866"]
+    }
+  ],
+  "target_functions": [
+    {
+      "id": "snf-fn-01",
+      "function": "Dupixent (Immunology) global franchise leadership",
+      "basis_fact": "Dupixent is ~45% of quarterly revenue (€5.2bn Q2 2026) with a rapid indication cadence (bullous pemphigoid, CSU adult and pediatric).",
+      "indegene_angle": "A repeatable Omnichannel/MedComm/MLR engine across successive indications plus competitive defense against emerging AD entrants (Amgen rocatinlimab).",
+      "why_it_matters": "Dupixent is ~45% of quarterly revenue with a rapid indication cadence — each approval compounds launch workload, and Amgen's entrant makes speed a defense.",
+      "engagement_recommendation": "Propose a standing indication-launch playbook Company executes on each new Dupixent approval, plus a competitive-defense analytics program.",
+      "priority": "High",
+      "source_references": ["https://www.sanofi.com/en/media-room/press-releases/2026/2026-07-30-05-30-00-3335767"]
+    },
+    {
+      "id": "snf-fn-02",
+      "function": "Rare Disease / new-brand launch leadership (Wayrilz, Qfitlia, Cablivi)",
+      "basis_fact": "Multiple first-in-class rare-disease approvals across US, EU and China (first BTK inhibitor for ITP; first US therapy for hemophilia A/B).",
+      "indegene_angle": "Greenfield multi-region launches across Omnichannel, MedComm, MLR and Regulatory ops.",
+      "why_it_matters": "First-in-class approvals across US, EU and China mean simultaneous multi-region launch waves — greenfield capacity is needed now, not after launch.",
+      "engagement_recommendation": "Target the Wayrilz and Qfitlia launches with a global launch-excellence proposal spanning US, EU and China.",
+      "priority": "Medium",
+      "source_references": ["https://www.news.sanofi.us/2025-08-29-Sanofis-Wayrilz-approved-in-US-as-first-BTK-inhibitor-for-immune-thrombocytopenia"]
+    },
+    {
+      "id": "snf-fn-03",
+      "function": "Digital / AI leadership",
+      "basis_fact": "Sanofi is building a proprietary AI ecosystem (Snowflake/ElementumAI data partnerships; earlier Formation Bio and OpenAI) toward becoming the first biopharma powered by AI at scale.",
+      "indegene_angle": "DAAI/Tech Solutions inflection point — position as a life-sciences-specialized AI partner for commercialization-specific use cases rather than risk disintermediation.",
+      "why_it_matters": "Sanofi is building its own AI ecosystem at scale — Company either anchors commercialization-specific AI use cases now or gets disintermediated.",
+      "engagement_recommendation": "Develop a POV on complementing Sanofi's proprietary AI with commercialization-specific AI use cases.",
+      "priority": "High",
+      "source_references": ["https://fortune.com/2026/05/27/sanofi-snowflake-elementumai-data/"]
+    }
+  ]
+}

@@ -1,0 +1,464 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── NAVY/GOLD DESIGN TOKENS (master CLAUDE.md §4.1) ─────────────────────── */
+:root {
+  --sb-w: 240px;
+  --topbar-h: 56px;
+
+  --navy:        #1B365D;
+  --navy-mid:    #244878;
+  --navy-light:  #2e5a96;
+  --navy-faint:  #eef2f8;
+  --navy-subtle: #e4eaf4;
+
+  --gold:        #D4AF37;
+  --gold-bright: #e8c547;
+  --gold-muted:  #b89428;
+  --gold-light:  #fdf8e8;
+  --gold-pale:   #f5edcc;
+
+  --bg-base:    #f2f5fb;
+  --bg-surface: #ffffff;
+  --bg-raised:  #f8f9fd;
+  --bg-subtle:  var(--navy-faint);
+  --bg-hover:   #e8eef8;
+
+  --border:        rgba(27,54,93,0.12);
+  --border-strong: rgba(27,54,93,0.25);
+
+  --text-1:  #0d1a2e;
+  --text-2:  #1B365D;
+  --text-3:  #5a7499;
+  --text-inv: #ffffff;
+
+  --emerald:    #10b981; --emerald-bg: rgba(16,185,129,0.1);
+  --amber:      #d97706; --amber-bg:   rgba(217,119,6,0.1);
+  --red:        #dc2626; --red-bg:     rgba(220,38,38,0.1);
+  --blue:       #1d4ed8; --blue-bg:    rgba(29,78,216,0.1);
+  --teal:       #0891b2; --teal-bg:    rgba(8,145,178,0.1);
+
+  /* fixes the undefined-variable bug carried over from the source repo (master §1.3) */
+  --brand:    var(--navy);
+  --brand-2:  var(--gold);
+  --brand-bg: var(--gold-light);
+
+  --glow-card:       0 0 0 1px rgba(27,54,93,0.08), 0 4px 16px rgba(27,54,93,0.1), 0 1px 3px rgba(0,0,0,0.04);
+  --glow-card-hover: 0 0 0 1px rgba(212,175,55,0.3), 0 8px 28px rgba(27,54,93,0.18), 0 2px 8px rgba(27,54,93,0.1);
+  --glow-gold:       0 0 16px rgba(212,175,55,0.4), 0 0 32px rgba(212,175,55,0.15);
+  --glow-navy:       0 0 16px rgba(27,54,93,0.3), 0 0 32px rgba(27,54,93,0.12);
+  --glow-sm:         0 0 8px rgba(212,175,55,0.25);
+  --glow-text-gold:  0 0 12px rgba(212,175,55,0.5);
+  --glow-text-navy:  0 0 12px rgba(27,54,93,0.4);
+
+  --shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm: 0 2px 8px rgba(27,54,93,0.08);
+  --shadow-md: 0 4px 20px rgba(27,54,93,0.1);
+  --shadow-lg: 0 12px 40px rgba(27,54,93,0.14);
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
+  --ease:   cubic-bezier(0.4, 0, 0.2, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t: 200ms; --t-slow: 320ms;
+}
+
+/* ─── RESET ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+/* ─── TYPOGRAPHY (master §4.2 — Stack Sans Text platform-wide; Playfair reserved
+       for exactly two "deck" moments: the wordmark and the Executive Briefing) ── */
+body {
+  font-family: "Stack Sans Text", "Inter", "SF Pro Display", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0;
+  background: var(--bg-base);
+  color: var(--text-1);
+  overflow-x: hidden;
+  font-weight: 400;
+}
+h1 { font-weight: 700; font-size: 40px; line-height: 1.15; letter-spacing: -0.01em; }
+h2 { font-weight: 600; font-size: 32px; line-height: 1.2; }
+h3 { font-weight: 600; font-size: 24px; line-height: 1.3; }
+.eyebrow, .small-caps-label { font-weight: 500; font-size: 13px; line-height: 1.5; letter-spacing: 0.2px; }
+.wordmark, .briefing-deck h1, .briefing-deck h2 { font-family: "Playfair Display", Georgia, serif; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gold-muted); border-radius: 3px; opacity: 0.7; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes landing-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.landing-fade   { animation: landing-fade-up 0.6s cubic-bezier(0.4,0,0.2,1) both; }
+.landing-fade-2 { animation: landing-fade-up 0.6s cubic-bezier(0.4,0,0.2,1) 0.15s both; }
+
+/* ─── SIDEBAR (Navy background with gold accents) ─────────────────────────── */
+.sidebar {
+  width: var(--sb-w);
+  min-width: var(--sb-w);
+  background: linear-gradient(180deg, #0f1e36 0%, #152847 50%, #0f1e36 100%);
+  min-height: 100vh;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid rgba(212,175,55,0.18);
+  box-shadow: 4px 0 24px rgba(15,30,54,0.4);
+  transition: transform var(--t-slow) var(--ease);
+}
+.sidebar.hidden { transform: translateX(-100%); }
+
+.main-area {
+  margin-left: var(--sb-w);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left var(--t-slow) var(--ease);
+}
+.main-area.sidebar-hidden { margin-left: 0; }
+
+/* ─── TOPBAR ──────────────────────────────────────────────────────────────── */
+.topbar {
+  height: var(--topbar-h);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-xs);
+}
+
+/* ─── CARDS ───────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--glow-card);
+  transition: box-shadow var(--t) var(--ease), border-color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+.card:hover { box-shadow: var(--glow-card-hover); }
+.card-clickable { cursor: pointer; }
+.card-clickable:hover { transform: translateY(-2px); border-color: rgba(212,175,55,0.3); }
+
+.coming-badge {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 9999px; background: var(--bg-raised); color: var(--text-3);
+  border: 1px solid var(--border);
+}
+
+/* ─── BUTTONS ─────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius-sm);
+  font-size: 13.5px; font-weight: 600;
+  border: none; cursor: pointer;
+  transition: all var(--t) var(--ease);
+  white-space: nowrap; line-height: 1;
+}
+.btn-navy { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(27,54,93,0.35); }
+.btn-navy:hover { background: var(--navy-mid); box-shadow: 0 6px 20px rgba(27,54,93,0.5); transform: translateY(-1px); }
+.btn-gold { background: linear-gradient(135deg, var(--gold-muted), var(--gold)); color: #1B365D; font-weight: 700; box-shadow: var(--glow-gold); }
+.btn-gold:hover { background: linear-gradient(135deg, var(--gold), var(--gold-bright)); box-shadow: 0 6px 20px rgba(212,175,55,0.5); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text-2); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--bg-hover); color: var(--text-1); border-color: var(--border-strong); }
+.btn-glass { background: rgba(212,175,55,0.15); color: var(--navy); border: 1px solid rgba(212,175,55,0.3); }
+.btn-glass:hover { background: rgba(212,175,55,0.25); }
+.btn-danger { background: var(--red); color: #fff; }
+.btn-danger:hover { background: #b91c1c; }
+.btn-success { background: var(--emerald); color: #fff; }
+.btn-success:hover { background: #059669; }
+
+/* ─── BADGES ──────────────────────────────────────────────────────────────── */
+.badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
+.badge-emerald { background: var(--emerald-bg); color: #047857; }
+.badge-amber   { background: var(--amber-bg);   color: #b45309; }
+.badge-red     { background: var(--red-bg);     color: #b91c1c; }
+.badge-blue    { background: var(--blue-bg);    color: #1e40af; }
+.badge-teal    { background: var(--teal-bg);    color: #0e7490; }
+.badge-navy    { background: var(--navy-faint); color: var(--navy); }
+.badge-gold    { background: var(--gold-light); color: var(--gold-muted); }
+
+/* ─── NAV ─────────────────────────────────────────────────────────────────── */
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px; margin: 1px 8px; border-radius: 8px;
+  font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,0.62);
+  cursor: pointer; transition: all var(--t) var(--ease);
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: rgba(212,175,55,0.14); color: var(--gold-bright); }
+.sub-nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 20px 8px 46px; font-size: 12.5px; font-weight: 500; color: rgba(255,255,255,0.45);
+  cursor: pointer; transition: all var(--t) var(--ease);
+}
+.sub-nav-item:hover { color: #fff; }
+.sub-nav-item.active { color: var(--gold-bright); font-weight: 600; }
+
+/* ─── SHARED PRIMITIVES (master §4.3) ────────────────────────────────────── */
+.pill-filter {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 9999px;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em;
+  background: var(--bg-surface); color: var(--text-2);
+  border: 1px solid var(--border-strong); cursor: pointer;
+  transition: all var(--t) var(--ease); white-space: nowrap;
+}
+.pill-filter:hover { border-color: var(--navy-light); color: var(--navy); background: var(--navy-faint); }
+.pill-filter.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.pill-filter.active:hover { background: var(--navy-mid); }
+
+.agree-disagree { display: inline-flex; gap: 8px; flex-wrap: wrap; }
+.agree-disagree button {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: var(--radius-sm);
+  font-size: 12.5px; font-weight: 600; cursor: pointer;
+  background: var(--bg-surface); color: var(--text-2);
+  border: 1.5px solid var(--border-strong); transition: all var(--t) var(--ease);
+}
+.agree-disagree button:hover { border-color: var(--navy-light); }
+.agree-disagree button.sel-agree     { background: var(--emerald-bg); border-color: var(--emerald); color: #047857; }
+.agree-disagree button.sel-partially { background: var(--amber-bg);   border-color: var(--amber);   color: #b45309; }
+.agree-disagree button.sel-disagree  { background: var(--red-bg);     border-color: var(--red);     color: #b91c1c; }
+
+.rag-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.rag-dot.critical { background: var(--red);     box-shadow: 0 0 0 3px var(--red-bg); }
+.rag-dot.attention{ background: var(--amber);   box-shadow: 0 0 0 3px var(--amber-bg); }
+.rag-dot.stable   { background: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-bg); }
+
+.module-tabbar { display: flex; align-items: center; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 22px; overflow-x: auto; }
+.module-tab {
+  padding: 11px 16px; font-size: 13.5px; font-weight: 600; color: var(--text-3);
+  cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap;
+  transition: color var(--t) var(--ease); background: none; border-top: none; border-left: none; border-right: none;
+}
+.module-tab:hover { color: var(--navy); }
+.module-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+
+.fab-ai {
+  position: fixed; bottom: 24px; right: 24px; z-index: 300;
+  width: 52px; height: 52px; border-radius: 50%; cursor: pointer; border: 2px solid var(--gold);
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  color: var(--gold); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(15,30,54,0.4); transition: all var(--t) var(--spring);
+}
+.fab-ai:hover { transform: scale(1.08); box-shadow: 0 10px 30px rgba(212,175,55,0.35); }
+
+/* ─── LANDING PAGE TILES ─────────────────────────────────────────────────── */
+.landing-tile:hover {
+  background: rgba(255,255,255,0.07) !important;
+  border-color: rgba(212,175,55,0.55) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,175,55,0.25);
+}
+
+.welcome-sidebar-logo-svg {
+  width: 3rem; height: 3rem; margin-left: 23px; flex-shrink: 0;
+  color: #e8c547; transition: opacity 0.15s;
+  filter: drop-shadow(0 0 6px rgba(212,175,55,0.45));
+}
+/* Per-column staggered shimmer/float — the 3 <path> groups are the 3 dot columns. */
+.welcome-sidebar-logo-svg path {
+  transform-box: fill-box; transform-origin: 50% 50%;
+  animation: 3.5s ease-in-out infinite left-panel-icon-effects;
+}
+.welcome-sidebar-logo-svg path:nth-of-type(1) { animation-delay: 0s; }
+.welcome-sidebar-logo-svg path:nth-of-type(2) { animation-delay: 0.28s; }
+.welcome-sidebar-logo-svg path:nth-of-type(3) { animation-delay: 0.56s; }
+@keyframes left-panel-icon-effects {
+  0%, 100% { opacity: 0.78; transform: translateY(0)     scale(1);    }
+  50%      { opacity: 1;    transform: translateY(-1.5px) scale(1.07); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome-sidebar-logo-svg path { animation: none; opacity: 0.95; }
+}
+
+/* ─── MODAL / POPUP ANIMATIONS ───────────────────────────────────────────── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes drawerSlideIn { from { transform: translateX(24px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* ─── HOME — skeleton loading blocks ─────────────────────────────────────── */
+.skel {
+  background: linear-gradient(90deg, var(--bg-hover) 25%, var(--border) 37%, var(--bg-hover) 63%);
+  background-size: 400% 100%;
+  animation: skeletonPulse 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes skeletonPulse { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+@media (prefers-reduced-motion: reduce) {
+  .skel { animation: none; }
+}
+
+/* ─── HOME — light theme, navy-bordered, glow-on-hover ───────────────────────
+   Page and evidence pop-up both stay light — navy is reserved for hover state.
+   Borders are navy, not grey; every hoverable card fills navy with a neon glow
+   and flips its text white — done by
+   re-pointing the SAME tokens (--text-1/2/3, --navy-faint) every band already
+   reads, on :hover, so it cascades into inline `color: var(--text-1)` children
+   without touching each band's markup. */
+.home-light-root {
+  --border:        rgba(27,54,93,0.35);
+  --border-strong: rgba(27,54,93,0.55);
+}
+.home-light-root .card,
+.home-light-root .card-clickable,
+.home-light-root .home-hover {
+  border-color: var(--border);
+}
+/* Universal hover-glow — every clickable surface in Home opts in via `.card-clickable`
+   (cards) or `.home-hover` (rows, cells, buttons that aren't full cards). Deliberately
+   loud per direct feedback ("bland and pale") — solid navy fill, bright gold ring,
+   layered glow, slight lift. Re-points the same tokens every band already reads
+   (--text-1/2/3, --navy-faint) so it cascades into inline `color: var(--text-1)`
+   children without touching each band's markup. `!important` because many of these
+   elements set background/border via inline `style`, which otherwise wins. */
+.home-light-root .card-clickable:hover,
+.home-light-root button.card-clickable:hover,
+.home-light-root .home-hover:hover,
+.home-light-root button.home-hover:hover {
+  background-color: #1B365D !important;
+  border-color: var(--gold) !important;
+  box-shadow:
+    0 0 0 1.5px var(--gold),
+    0 0 18px rgba(212,175,55,0.55),
+    0 0 42px rgba(27,54,93,0.65),
+    0 10px 30px rgba(13,26,46,0.35) !important;
+  transform: translateY(-2px);
+  /* every literal `var(--navy)`-colored icon/text inside a hovered card inverts too */
+  --navy: #ffffff;
+  --text-1: #ffffff;
+  --text-2: rgba(255,255,255,0.9);
+  --text-3: rgba(255,255,255,0.7);
+  --navy-faint: rgba(255,255,255,0.15);
+  --navy-subtle: rgba(255,255,255,0.22);
+  --gold-light: rgba(212,175,55,0.25);
+  --border: rgba(255,255,255,0.25);
+}
+.home-light-root .card-clickable,
+.home-light-root .home-hover {
+  transition: background-color 200ms ease, box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease, color 200ms ease;
+}
+
+/* Cards that sit ON the dark navy Executive-Insight hero (top-priority & recent-
+   signal cards). The loud navy-fill hover above makes a navy card vanish into a
+   navy background — the reported "hover bug". These stay WHITE with a gold ring +
+   lift instead, so text never inverts and the card never blends away. */
+.home-light-root .hero-card-hover {
+  cursor: pointer;
+  transition: box-shadow 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+.home-light-root .hero-card-hover:hover {
+  background-color: #ffffff !important;
+  border-color: var(--gold) !important;
+  box-shadow:
+    0 0 0 1.5px var(--gold),
+    0 0 18px rgba(212,175,55,0.45),
+    0 10px 28px rgba(13,26,46,0.28) !important;
+  transform: translateY(-2px);
+}
+
+/* Container-only hover — for cards that hold their OWN independently-clickable
+   children (rows, chips, chains). Unlike .card-clickable / .home-hover above,
+   this does NOT re-point the --text-1, --text-2, --text-3, --navy custom
+   properties: those cascade to ALL descendants via normal CSS inheritance, so
+   a container-level override would invert text color on child rows that keep
+   their own light background (and on literal var(--navy) decorative fills),
+   producing invisible white-on-white text. A border/shadow/lift hint is
+   enough for a container. */
+.home-light-root .home-panel,
+.home-light-root .home-glow {
+  cursor: pointer;
+  transition: box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+}
+/* Neon gold glow on hover — dichromatic (navy/gold only). Does NOT re-point
+   the --text or --navy custom properties, so child rows with their own light
+   background keep their dark text instead of inverting to invisible white. */
+.home-light-root .home-panel:hover {
+  border-color: var(--gold) !important;
+  box-shadow:
+    0 0 0 1.5px var(--gold),
+    0 0 20px rgba(212,175,55,0.55),
+    0 0 44px rgba(212,175,55,0.28),
+    0 10px 30px rgba(13,26,46,0.20) !important;
+  transform: translateY(-2px);
+}
+.home-light-root .home-glow:hover {
+  background-color: var(--gold-light);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1px var(--gold), 0 0 16px rgba(212,175,55,0.5);
+}
+
+/* ─── HOME — responsive band layout ──────────────────────────────────────── */
+.home-two-col { grid-template-columns: minmax(320px, 1.1fr) minmax(320px, 1fr); }
+.home-matrix-scroll { overflow-x: auto; }
+.home-kpi-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.home-exec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.home-heads-up-grid { grid-template-columns: repeat(3, 1fr); }
+/* Fixed 2- or 3-column card grids — deliberately NOT auto-fit/flex-grow, so a
+   short last row leaves empty cells instead of stretching one card full-width. */
+.hg-2, .hg-3 { display: grid; gap: 16px; align-items: stretch; }
+.hg-2 { grid-template-columns: repeat(2, 1fr); }
+.hg-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) {
+  .home-two-col { grid-template-columns: 1fr !important; }
+  .home-exec-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-heads-up-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .home-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hg-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .home-exec-grid { grid-template-columns: 1fr; }
+  .home-drawer-goodbad { grid-template-columns: 1fr !important; }
+  .home-heads-up-grid { grid-template-columns: 1fr !important; }
+  .home-kpi-grid { grid-template-columns: 1fr; }
+  .home-kpi-subgrid { grid-template-columns: 1fr !important; }
+}
+
+/* Clickable chart dots: persistent pulsing gold glow so they read as clickable,
+   plus a grow on hover. Hover no longer shows data — click opens the drawer. */
+@keyframes dotGlow {
+  0%, 100% { box-shadow: 0 0 0 1.5px rgba(212,175,55,0.6), 0 0 6px 1px rgba(212,175,55,0.45); }
+  50%      { box-shadow: 0 0 0 1.5px rgba(212,175,55,0.95), 0 0 12px 3px rgba(212,175,55,0.8); }
+}
+.dot-clickable {
+  cursor: pointer;
+  animation: dotGlow 2s ease-in-out infinite;
+  transition: transform 140ms ease;
+}
+.dot-clickable:hover { transform: scale(1.35); }
+/* SVG variant (radar vertices): box-shadow doesn't apply to SVG — use drop-shadow. */
+@keyframes dotGlowSvg {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(212,175,55,0.7)); }
+  50%      { filter: drop-shadow(0 0 5px rgba(212,175,55,1)); }
+}
+.dot-clickable-svg { animation: dotGlowSvg 2s ease-in-out infinite; }
+
+/* Gold neon glow for the dark KPI cards + their clickable sub-cards. */
+.home-light-root .kpi-glow {
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.home-light-root .kpi-glow:hover {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 1.5px var(--gold), 0 0 20px rgba(212,175,55,0.6), 0 14px 34px rgba(13,26,46,0.32) !important;
+  transform: translateY(-2px);
+}
+@media (max-width: 560px) {
+  /* keep media block valid */
+  .hg-2, .hg-3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .home-band-title { font-size: 22px !important; }
+}
