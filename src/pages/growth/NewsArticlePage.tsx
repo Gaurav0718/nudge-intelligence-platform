@@ -5,6 +5,23 @@ import { newsImageFor } from '../../data/newsImages'
 
 const STOP = new Set(['the', 'and', 'for', 'with', 'from', 'that', 'this', 'into', 'over', 'amid', 'ahead', 'after', 'its', 'new', 'plans', 'more', 'than', 'across', 'first', 'named', 'reports'])
 const words = (s: string) => (s || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(w => w.length > 3 && !STOP.has(w))
+const sentences = (s: string) => (s || '').split(/\.\s+/).map(x => x.trim().replace(/\.$/, '')).filter(Boolean)
+
+// Native <ul> markers are suppressed by Tailwind's preflight reset app-wide —
+// use a manual bullet dot (matches the pattern used elsewhere in this app).
+function Bullets({ text, fontSize = 15.5 }: { text: string; fontSize?: number }) {
+  const items = sentences(text)
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      {items.map((s, i) => (
+        <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)', flexShrink: 0, marginTop: 8 }} />
+          <span style={{ fontSize, color: 'var(--text-2)', lineHeight: 1.8 }}>{s}.</span>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export default function NewsArticlePage() {
   const { id } = useParams()
@@ -38,7 +55,7 @@ export default function NewsArticlePage() {
             <p style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '0.1em', color: 'var(--brand)', textTransform: 'uppercase', marginBottom: 10 }}>{feedLabel} · {article.date}</p>
             <h1 style={{ fontSize: 27, fontWeight: 800, margin: '0 0 16px', fontFamily: 'Sora, sans-serif', color: 'var(--text-1)', lineHeight: 1.25 }}>{article.title}</h1>
             <div style={{ height: 2, width: 80, background: 'var(--gold)', marginBottom: 20, borderRadius: 2 }} />
-            <p style={{ fontSize: 15.5, color: 'var(--text-2)', lineHeight: 1.8, margin: 0 }}>{article.body}</p>
+            <Bullets text={article.body} />
           </div>
         </div>
 

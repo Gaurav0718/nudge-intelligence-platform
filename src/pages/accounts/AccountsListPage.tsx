@@ -140,10 +140,24 @@ function AccountTable({ onOpen }: { onOpen: (id: string) => void }) {
 function AccountRow({ a, onOpen }: { a: any; onOpen: () => void }) {
   const p = posture(a)
   const [saved, setSaved] = useState(false)
+  const bullets = (text: string) => {
+    const items = sentences(text)
+    if (items.length === 0) return 'N/A'
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {items.map((s, i) => (
+          <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+            <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--text-3)', flexShrink: 0, marginTop: 7 }} />
+            <span>{s}.</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
   const cols: { label: string; value: React.ReactNode }[] = [
-    { label: 'Strategic Posture', value: a.strategicPosture || 'N/A' },
-    { label: 'Investment Direction', value: a.investmentDirection || 'N/A' },
-    { label: 'Pressure Vectors', value: a.pressureVectors || 'N/A' },
+    { label: 'Strategic Posture', value: bullets(a.strategicPosture) },
+    { label: 'Investment Direction', value: bullets(a.investmentDirection) },
+    { label: 'Pressure Vectors', value: bullets(a.pressureVectors) },
     { label: 'Executives Mapped', value: <span style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)' }}>{a.executivesMapped ?? 'N/A'}</span> },
   ]
   const btn: React.CSSProperties = { fontSize: 11, fontWeight: 700, letterSpacing: '0.05em', padding: '8px 16px' }
