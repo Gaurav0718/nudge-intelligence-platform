@@ -41,7 +41,7 @@ export default function ExecutiveSummaryPage({ section = 'internal' }: { section
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 20 }}>
           {news.map(item => (
-            <div key={item.id} className="card card-clickable" onClick={() => nav(`/executive-summary/news/${item.id}`)}
+            <div key={item.id} className="card card-clickable news-row" onClick={() => nav(`/executive-summary/news/${item.id}`)}
               style={{ display: 'flex', padding: 0, overflow: 'hidden', alignItems: 'stretch' }}>
               <div style={{ width: 230, flexShrink: 0, background: 'var(--bg-raised)' }}>
                 <img src={newsImageFor(item)} alt="" loading="lazy"
@@ -65,7 +65,7 @@ export default function ExecutiveSummaryPage({ section = 'internal' }: { section
       {/* Insight Cards + Pipeline/Financial CTAs — Internal News section only */}
       {!isExternal && (
         <>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, marginBottom: 16 }}>
+          <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16, marginBottom: 16 }}>
             {INSIGHT_CARDS.map(card => {
               const Icon = ICONS[card.icon]
               return (
@@ -87,7 +87,7 @@ export default function ExecutiveSummaryPage({ section = 'internal' }: { section
             })}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {[
               { tag: 'PIPELINE INSIGHTS', icon: GitBranch, text: 'Explore pipeline trends by Business Unit and Service Line, with drilldowns and filters.', cta: 'View full pipeline insights', path: '/executive-summary/pipeline-insights' },
               { tag: 'FINANCIAL INSIGHTS', icon: DollarSign, text: 'Track revenue signals, spend themes, and budget posture across key accounts and quarters.', cta: 'View financial insights', path: '/executive-summary/financial-insights' },

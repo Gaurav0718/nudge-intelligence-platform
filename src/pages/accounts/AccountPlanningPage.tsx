@@ -423,7 +423,7 @@ function EmergingPipelineView({ planData, publishedData, onChange }: { planData:
       <div style={{ padding:'14px 18px', background:'var(--bg-raised)', borderRadius:10, border:'1px solid var(--border)', fontSize:14.5, color:'var(--text-2)', lineHeight:1.7, marginBottom:22, boxShadow:'var(--glow-card)' }}>
         {planData?.emergingPipeline?.target||'No target data.'}
       </div>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:18 }}>
+      <div className="grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:18 }}>
         {[{color:'var(--navy)',label:'What worked?',val:worked,set:(v:string)=>{setWorked(v);upd(v,didnt)},bg:'var(--navy-faint)'},{color:'var(--navy)',label:"What didn't work?",val:didnt,set:(v:string)=>{setDidnt(v);upd(worked,v)},bg:'var(--navy-faint)'}].map(c=>(
           <div key={c.label}>
             <div style={{ fontSize:14.5, fontWeight:800, color:c.color, marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
@@ -461,7 +461,7 @@ function PowerCentresView({ planData, publishedData, onChange }: { planData:any;
           <Plus size={13}/> Add Person
         </button>
       </div>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
+      <div className="grid-3" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
         {rows.map((row, i) => {
           const sc = getColor(row.relationship)
           const av = AVATARS[i%AVATARS.length]
@@ -1350,7 +1350,7 @@ function BusinessHealthView({ accountId, publishedData, onChange }: { accountId:
       <div style={{ fontFamily:'Playfair Display,serif', fontSize:14, fontWeight:700, color:'#1B365D', paddingBottom:12, borderBottom:'1px solid var(--border)' }}>{account?.name} — Business Health</div>
 
       {/* Bookings + Revenues (read-only) */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:20 }}>
+      <div className="grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:20 }}>
         <ReadNumTable title="Bookings" rows={d.bookings}/>
         <ReadNumTable title="Revenues" rows={d.revenues}/>
       </div>

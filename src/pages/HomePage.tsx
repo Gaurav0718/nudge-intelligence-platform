@@ -315,7 +315,7 @@ export default function HomePage() {
   const backToTop = useCallback(() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), [])
 
   return (
-    <div className="home-light-root" style={{ margin: '-24px -28px -48px', padding: '24px 28px 56px', minHeight: 'calc(100vh - var(--topbar-h))' }}>
+    <div className="home-light-root" style={{ margin: 'calc(var(--page-pad-y) * -1) calc(var(--page-pad-x) * -1) calc(var(--page-pad-b) * -1)', padding: 'var(--page-pad-y) var(--page-pad-x) 56px', minHeight: 'calc(100vh - var(--topbar-h))' }}>
       {/* Header */}
       <div ref={topRef} style={{ maxWidth: 820, marginBottom: 20, scrollMarginTop: 'calc(var(--topbar-h) + 16px)' }}>
         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--brand)', marginBottom: 6 }}>THE COMPANY INTELLIGENCE · EXECUTIVE WAR ROOM</p>

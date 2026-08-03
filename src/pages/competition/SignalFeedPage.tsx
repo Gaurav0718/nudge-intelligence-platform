@@ -95,7 +95,7 @@ export default function SignalFeedPage() {
 
       {/* ── Chronological feed + receipt ───────────────────────────────────── */}
       <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--brand)', marginBottom: 12 }}>Signal Timeline</div>
-      <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
+      <div className="feed-layout" style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
         <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
           {filtered.length === 0 ? (
             <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--text-3)', fontSize: 14, background: 'var(--bg-raised)', borderRadius: 12, border: '1px dashed var(--border)' }}>
@@ -119,7 +119,7 @@ export default function SignalFeedPage() {
         </div>
 
         {active && (
-          <div style={{ width: 380, flexShrink: 0, position: 'sticky', top: 76 }}>
+          <div className="feed-receipt" style={{ width: 380, flexShrink: 0, position: 'sticky', top: 76 }}>
             <Card style={{ padding: 20 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--brand)' }}>

@@ -1092,8 +1092,8 @@ export default function AccountInfoPage() {
           </span>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '270px 1fr', gap: 16, alignItems: 'start' }}>
-          <div className="card" style={{ width: 270, minWidth: 270, flexShrink: 0, padding: 0, position: 'sticky', top: 16, boxShadow: 'var(--shadow-xs)', maxHeight: 'calc(100vh - 60px)', overflowY: 'auto', overflowX: 'hidden' }}>
+        <div className="account-brief-layout" style={{ display: 'grid', gridTemplateColumns: '270px 1fr', gap: 16, alignItems: 'start' }}>
+          <div className="account-brief-rail card" style={{ width: 270, minWidth: 270, flexShrink: 0, padding: 0, position: 'sticky', top: 16, boxShadow: 'var(--shadow-xs)', maxHeight: 'calc(100vh - 60px)', overflowY: 'auto', overflowX: 'hidden' }}>
             <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <div style={{ width: 28, height: 28, borderRadius: 6, background: 'linear-gradient(135deg,#D4AF37,#b89428)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, flexShrink: 0 }}>✦</div>

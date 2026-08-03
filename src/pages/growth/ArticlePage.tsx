@@ -38,7 +38,7 @@ export default function ArticlePage() {
   return (
     <div>
       <button onClick={() => nav('/executive-summary')} style={{ background:'none',border:'none',cursor:'pointer',fontSize:19,color:'var(--text-3)',marginBottom:20,fontFamily:'inherit',display:'flex',alignItems:'center',gap:5 }}>← Back to Executive Summary</button>
-      <div style={{ display:'grid',gridTemplateColumns:'210px 1fr 260px',gap:20,alignItems:'start' }}>
+      <div className="article-layout" style={{ display:'grid',gridTemplateColumns:'210px 1fr 260px',gap:20,alignItems:'start' }}>
         <div className="card" style={{ padding:18,position:'sticky',top:80 }}>
           <div style={{ fontSize:16,fontWeight:700,color:'var(--text-1)',marginBottom:10,textTransform:'uppercase',letterSpacing:'0.06em' }}>Overarching Signal</div>
           <p style={{ fontSize:19,color:'var(--text-2)',lineHeight:1.7,margin:0 }}>{article.signal}</p>

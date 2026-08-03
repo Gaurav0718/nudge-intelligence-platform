@@ -127,11 +127,11 @@ export function QuarterLineChart({ facet, evidenceById, openEvidence, bare = fal
   if (bare) return body
 
   return (
-    <div className="card card-clickable" style={{ padding: '14px 16px', width: 300, flex: '0 0 300px' }}>
+    <div className="card card-clickable" style={{ padding: '14px 16px', width: '100%', minWidth: 0, maxWidth: 320 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 8 }}>
         <span style={{ width: 8, height: 8, borderRadius: 2, background: facet.accentColor, flexShrink: 0 }} />
-        <span style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--text-1)' }}>{facet.accountName}</span>
-        <span style={{ fontSize: 10.5, color: 'var(--text-3)', marginLeft: 'auto' }}>{facet.currency} / quarter</span>
+        <span style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--text-1)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{facet.accountName}</span>
+        <span style={{ fontSize: 10.5, color: 'var(--text-3)', marginLeft: 'auto', flexShrink: 0 }}>{facet.currency} / quarter</span>
       </div>
       {body}
     </div>

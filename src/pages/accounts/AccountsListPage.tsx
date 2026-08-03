@@ -35,7 +35,7 @@ export default function AccountsListPage() {
       </div>
 
       {view === 'card' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 22, alignItems: 'stretch' }}>
+        <div className="grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 22, alignItems: 'stretch' }}>
           {ACCOUNTS_LIST.map(a => <AccountCard key={a.id} a={a} onOpen={() => nav(`/accounts/${a.id}`)} />)}
         </div>
       ) : (
@@ -163,7 +163,7 @@ function AccountRow({ a, onOpen }: { a: any; onOpen: () => void }) {
         </div>
         <div style={{ height: 1, background: 'var(--border)', margin: '16px 0 18px' }} />
         {/* 4-column detail grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 24 }}>
+        <div className="grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 24 }}>
           {cols.map((c, i) => (
             <div key={i} style={{ minWidth: 0 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)', marginBottom: 12 }}>{c.label}</div>

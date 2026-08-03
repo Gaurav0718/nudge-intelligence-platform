@@ -1345,9 +1345,9 @@ export default function ExecDetailPage() {
       </div>
 
       {/* Body: sidebar + content */}
-      <div style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap:16, alignItems:'start' }}>
+      <div className="detail-sidebar-layout" style={{ display:'grid', gridTemplateColumns:'220px 1fr', gap:16, alignItems:'start' }}>
         {/* Sidebar */}
-        <div className="card" style={{ padding:'10px 6px', position:'sticky', top:16 }}>
+        <div className="detail-sidebar-rail card" style={{ padding:'10px 6px', position:'sticky', top:16 }}>
           <div style={{ padding:'0 10px 8px', fontSize:9.5, fontWeight:700, letterSpacing:'0.12em', color:'var(--text-3)', textTransform:'uppercase' }}>Profile Category</div>
           {CATEGORIES.map(c => (
             <button key={c} onClick={()=>setCat(c)} style={{ display:'block', width:'100%', textAlign:'left', padding:'8px 12px', borderRadius:7, border:'none', background:cat===c?'var(--navy)':'transparent', color:cat===c?'#fff':'var(--text-2)', fontSize:13, fontWeight:cat===c?700:400, fontFamily:'Source Sans 3,sans-serif', cursor:'pointer', transition:'all 150ms', borderLeft:cat===c?'3px solid #D4AF37':'3px solid transparent' }}

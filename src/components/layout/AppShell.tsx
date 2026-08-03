@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X, Sparkles, Home } from 'lucide-react'
 import Sidebar from './Sidebar'
 import ModuleTabBar from '../shared/ModuleTabBar'
 import { GROWTH_TABS } from '../../pages/growth/growthTabs'
+import { useMediaQuery, isMobileQuery } from '../../hooks/useMediaQuery'
 
 // The Sales & Growth module spans the Executive Summary (news) pages and the
 // account sections (Account Info / Exec Capital / Account Planning). Show the
@@ -54,7 +55,18 @@ function getTitle(p: string) {
 export default function AppShell() {
   const loc = useLocation()
   const nav = useNavigate()
+  const isMobile = useMediaQuery(isMobileQuery)
   const [sidebarOpen, setSidebarOpen] = useState(true)
+
+  // On mobile the sidebar is an off-canvas drawer: default closed, and it must
+  // close whenever the route changes (a nav tap inside it) or the screen crosses
+  // the breakpoint. On desktop it stays as the persistent rail.
+  useEffect(() => {
+    if (isMobile) setSidebarOpen(false)
+  }, [isMobile])
+  useEffect(() => {
+    if (isMobile) setSidebarOpen(false)
+  }, [loc.pathname, isMobile])
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
@@ -62,31 +74,37 @@ export default function AppShell() {
         <Sidebar />
       </div>
 
+      {/* Mobile backdrop — closes the drawer; only rendered on small screens. */}
+      {isMobile && sidebarOpen && (
+        <div onClick={() => setSidebarOpen(false)} aria-hidden
+          style={{ position: 'fixed', inset: 0, zIndex: 150, background: 'rgba(15,30,54,0.45)', backdropFilter: 'blur(2px)' }} />
+      )}
+
       <div className={`main-area${sidebarOpen ? '' : ' sidebar-hidden'}`}
-        style={{ marginLeft: sidebarOpen ? 'var(--sb-w)' : 0, flex: 1, minWidth: 0 }}>
+        style={{ marginLeft: isMobile ? 0 : (sidebarOpen ? 'var(--sb-w)' : 0), flex: 1, minWidth: 0 }}>
         <header className="topbar">
           <button onClick={() => setSidebarOpen(s => !s)}
             style={{ width: 34, height: 34, borderRadius: 8, border: '1px solid var(--border)', background: 'var(--bg-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)', transition: 'all 180ms', flexShrink: 0 }}>
-            {sidebarOpen ? <X size={15} /> : <Menu size={15} />}
+            {sidebarOpen && isMobile ? <X size={15} /> : <Menu size={15} />}
           </button>
           <button onClick={() => nav('/')} title="Home" aria-label="Home"
             style={{ width: 34, height: 34, borderRadius: 8, border: '1px solid var(--border)', background: 'var(--bg-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--text-2)', transition: 'all 180ms', flexShrink: 0 }}>
             <Home size={15} />
           </button>
           <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
-          <span style={{ fontSize: 16, fontWeight: 600, color: 'var(--navy)' }}>{getTitle(loc.pathname)}</span>
+          <span className="topbar-title" style={{ fontSize: 16, fontWeight: 600, color: 'var(--navy)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{getTitle(loc.pathname)}</span>
           <div style={{ flex: 1 }} />
-          <button onClick={() => nav('/')} style={{ fontSize: 13, color: 'var(--text-3)', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>
+          <button onClick={() => nav('/')} className="topbar-crumb" style={{ fontSize: 13, color: 'var(--text-3)', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>
             {loc.pathname === '/'
               ? <span style={{ color: 'var(--navy)', fontWeight: 600 }}>Home</span>
               : <><span style={{ color: 'var(--navy)', fontWeight: 600 }}>Home</span> / {getTitle(loc.pathname)}</>}
           </button>
           <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
           <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 13, fontWeight: 700, flexShrink: 0, border: '2px solid var(--gold)' }}>RD</div>
-          <span style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--navy)' }}>Ritesh Dogra</span>
+          <span className="topbar-user" style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--navy)' }}>Ritesh Dogra</span>
         </header>
 
-        <main className="page-enter" style={{ padding: '24px 28px 48px', background: 'var(--bg-base)', minHeight: 'calc(100vh - var(--topbar-h))', flex: 1 }}>
+        <main className="page-enter" style={{ padding: 'var(--page-pad-y) var(--page-pad-x) var(--page-pad-b)', background: 'var(--bg-base)', minHeight: 'calc(100vh - var(--topbar-h))', flex: 1 }}>
           {isGrowthModule(loc.pathname) && <ModuleTabBar tabs={GROWTH_TABS} />}
           <Outlet />
         </main>

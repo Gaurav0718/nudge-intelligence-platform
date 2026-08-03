@@ -27,7 +27,7 @@ export default function PipelineInsightsPage() {
         ))}
       </div>
 
-      <div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,marginBottom:16 }}>
+      <div className="grid-2" style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,marginBottom:16 }}>
         <div className="card" style={{ padding:20 }}>
           <div className="label" style={{ marginBottom:12 }}>PIPELINE OVERVIEW ({metric})</div>
           <div style={{ display:'flex',gap:8,marginBottom:12 }}>
@@ -85,7 +85,7 @@ export default function PipelineInsightsPage() {
             <select className="select" value={dealStage} onChange={e=>setDealStage(e.target.value)}>{STAGES.map(s=><option key={s}>{s}</option>)}</select>
           </div>
         </div>
-        <div style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14 }}>
+        <div className="grid-3" style={{ display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14 }}>
           {MARQUEE_DEALS.map(deal => (
             <div key={deal.id} style={{ borderLeft:'3px solid var(--brand)',background:'var(--bg-raised)',borderRadius:'0 12px 12px 0',padding:'14px 16px',border:'1px solid var(--border)',borderLeftWidth:3,borderLeftColor:'var(--brand)' }}>
               <div style={{ display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:8 }}>

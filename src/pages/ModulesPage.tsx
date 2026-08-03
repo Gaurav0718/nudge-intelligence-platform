@@ -13,7 +13,7 @@ export default function ModulesPage() {
         <h1 style={{ fontSize: 28, color: 'var(--text-1)' }}>Choose your Module</h1>
         <p style={{ fontSize: 14.5, color: 'var(--text-2)', marginTop: 6 }}>Select a module to access specialised analytical deep-dives and real-time performance metrics.</p>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+      <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
         {MODULES.map(mod => {
           const Icon = ICONS[mod.icon]
           const active = mod.status === 'active'

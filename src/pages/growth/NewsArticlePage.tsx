@@ -30,7 +30,7 @@ export default function NewsArticlePage() {
         <ArrowLeft size={15} /> Back to {feedLabel}
       </button>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 340px', gap: 22, alignItems: 'start' }}>
+      <div className="news-layout" style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) 340px', gap: 22, alignItems: 'start' }}>
         {/* Main story */}
         <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
           <img src={newsImageFor(article)} alt="" loading="lazy" style={{ width: '100%', height: 260, objectFit: 'cover', display: 'block' }} onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none' }} />
