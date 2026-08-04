@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { Menu, X, Sparkles, Home } from 'lucide-react'
+import { Menu, X, Home } from 'lucide-react'
 import Sidebar from './Sidebar'
+import ChatAssistant from '../chat/ChatAssistant'
 import ModuleTabBar from '../shared/ModuleTabBar'
 import { GROWTH_TABS } from '../../pages/growth/growthTabs'
 import { useMediaQuery, isMobileQuery } from '../../hooks/useMediaQuery'
@@ -110,10 +111,9 @@ export default function AppShell() {
         </main>
       </div>
 
-      {/* Global floating AI-assistant launcher — decorative stub (master §5) */}
-      <button className="fab-ai" title="AI assistant (coming soon)" aria-label="AI assistant">
-        <Sparkles size={22} />
-      </button>
+      {/* Global floating AI-assistant launcher — keyword chat that navigates to
+          accounts, modules and documents (master §5). */}
+      <ChatAssistant />
     </div>
   )
 }
