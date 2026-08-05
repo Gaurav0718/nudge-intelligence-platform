@@ -112,7 +112,7 @@ const ACC = (k: string) => ACCOUNTS.find(a => a.key === k)!
 const TOTALS = { criticalThreats: 3, revenueAtRisk: 12.4, riskDeltaPct: 18, opportunities: 4, opportunityValue: 8.7, execActions: 2, portfolioThreat: 81, currentRevenue: 58.2, netExposure: -3.7 }
 const HEADLINE = [
   'Portfolio remains growth-rich, but client-side AI adoption, portfolio restructuring and aggressive R&D investment are changing where services demand will emerge.',
-  'Company flags immediate expansion around AI-enabled R&D, commercialization and launch support, while surfacing where internal client capability may reduce traditional outsourcing demand.'
+  'NUDGE flags immediate expansion around AI-enabled R&D, commercialization and launch support, while surfacing where internal client capability may reduce traditional outsourcing demand.'
 ]
 
 const RADAR = [
