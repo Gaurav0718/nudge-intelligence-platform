@@ -4,6 +4,30 @@ import { ArrowRight, LayoutGrid, List as ListIcon, Sparkles, Bookmark, DollarSig
 import { ACCOUNTS_LIST, ACCOUNT_INFO } from '../../data/growthIndex'
 
 const sentences = (s: string) => (s || '').split(/\.\s+/).map(x => x.trim().replace(/\.$/, '')).filter(Boolean)
+
+// Command Center: keep only value-adding sentences. Strip "white space" territory
+// wording, non-claims ("Zero Company penetration", "No confirmed Company
+// relationship") and posture labels already shown as the pill on the card.
+const stripLowValue = (s: string) => s
+  .replace(/\b(true|pure|clean|zero|confirmed|current)\s+white[\s-]*space\b/gi, '')
+  .replace(/\bwhite[\s-]*space\b/gi, '')
+  .replace(/(?:zero|no)\s+(?:confirmed\s+)?Company\s+(?:penetration|relationship)\b/gi, '')
+  .replace(/^\s*(?:Key Account|Strategic Priority Account|White Space Key Account)\s*[—–]\s*/i, '')
+  .replace(/\s*[—–]\s*$/, '')
+  .replace(/\s{2,}/g, ' ')
+  .replace(/[\s,]+\.?$/g, '')
+  .replace(/\.$/, '')
+  .trim()
+
+const lowValueSentence = (s: string) =>
+  !s ||
+  /^(?:key account|strategic priority account|white space key account|zero company penetration|no confirmed company relationship)\.?$/i.test(s) ||
+  /no confirmed company relationship/i.test(s) ||
+  /zero company penetration/i.test(s)
+
+const valuableSentences = (raw: string) => sentences(raw).map(stripLowValue).filter(s => !lowValueSentence(s))
+const clean = (s: string) => stripLowValue(s || '')
+
 function posture(a: any) {
   const label = (ACCOUNT_INFO[a.id]?.posture?.label) || (/priorit|strategic/i.test(a.strategicPosture || '') ? 'STRATEGIC PRIORITY' : 'FOCUSED GROWTH')
   // Uniform navy accent — no alternate colours between accounts/postures.
@@ -70,8 +94,8 @@ function AccountCard({ a, onOpen }: { a: any; onOpen: () => void }) {
   const p = posture(a)
   const rev = a.revenues || {}
   const [saved, setSaved] = useState(false)
-  const chips: string[] = (ACCOUNT_INFO[a.id]?.strategicPriorities || []).slice(0, 3).map((x: any) => x.title).filter(Boolean)
-  const risk = sentences(a.pressureVectors)[0]
+  const chips: string[] = (ACCOUNT_INFO[a.id]?.strategicPriorities || []).slice(0, 3).map((x: any) => clean(x.title)).filter(Boolean)
+  const risk = valuableSentences(a.pressureVectors)[0]
   const riskShort = risk ? (risk.length > 46 ? risk.slice(0, 44) + '…' : risk) : ''
   const clip = (s: string, n = 34) => (s && s.length > n ? s.slice(0, n - 1) + '…' : s)
 
@@ -104,7 +128,7 @@ function AccountCard({ a, onOpen }: { a: any; onOpen: () => void }) {
         </div>
 
         {/* Description — clamped to 2 lines */}
-        <p style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.55, margin: 0, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.strategicPosture}</p>
+        <p style={{ fontSize: 12.5, color: 'var(--text-2)', lineHeight: 1.55, margin: 0, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{valuableSentences(a.strategicPosture).join('. ')}</p>
 
         {/* Tag chips */}
         {chips.length > 0 && (
@@ -140,8 +164,8 @@ function AccountTable({ onOpen }: { onOpen: (id: string) => void }) {
 function AccountRow({ a, onOpen }: { a: any; onOpen: () => void }) {
   const p = posture(a)
   const [saved, setSaved] = useState(false)
-  const bullets = (text: string) => {
-    const items = sentences(text)
+  const bullets = (raw: string) => {
+    const items = valuableSentences(raw)
     if (items.length === 0) return 'N/A'
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
